@@ -24,9 +24,85 @@ namespace Machia.Input
         {
             asset = InputActionAsset.FromJson(@"{
     ""name"": ""MachiaInputActionMap"",
-    ""maps"": [],
+    ""maps"": [
+        {
+            ""name"": ""MinigameInput"",
+            ""id"": ""8a8f2eb1-2f1f-4f1c-9433-4ff631597c85"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""1996ee38-1d5f-4ec0-acf9-50a1fa07bf32"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""4b187fdf-4717-4db0-90e7-1bbac65a3441"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2eaa3406-5b9b-4974-baa3-637e5683270e"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""665fe496-ac91-4e51-add9-527b8333fc45"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5fe8e74d-b62f-4b0a-a8e4-469dcfccef91"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4b452e2c-4514-4b21-860e-8a8eb6f2253d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        }
+    ],
     ""controlSchemes"": []
 }");
+            // MinigameInput
+            m_MinigameInput = asset.FindActionMap("MinigameInput", throwIfNotFound: true);
+            m_MinigameInput_Move = m_MinigameInput.FindAction("Move", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -81,6 +157,43 @@ namespace Machia.Input
         public int FindBinding(InputBinding bindingMask, out InputAction action)
         {
             return asset.FindBinding(bindingMask, out action);
+        }
+
+        // MinigameInput
+        private readonly InputActionMap m_MinigameInput;
+        private IMinigameInputActions m_MinigameInputActionsCallbackInterface;
+        private readonly InputAction m_MinigameInput_Move;
+        public struct MinigameInputActions
+        {
+            private @MachiaInputActions m_Wrapper;
+            public MinigameInputActions(@MachiaInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_MinigameInput_Move;
+            public InputActionMap Get() { return m_Wrapper.m_MinigameInput; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(MinigameInputActions set) { return set.Get(); }
+            public void SetCallbacks(IMinigameInputActions instance)
+            {
+                if (m_Wrapper.m_MinigameInputActionsCallbackInterface != null)
+                {
+                    @Move.started -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnMove;
+                }
+                m_Wrapper.m_MinigameInputActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                }
+            }
+        }
+        public MinigameInputActions @MinigameInput => new MinigameInputActions(this);
+        public interface IMinigameInputActions
+        {
+            void OnMove(InputAction.CallbackContext context);
         }
     }
 }
