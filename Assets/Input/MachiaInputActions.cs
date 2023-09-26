@@ -37,6 +37,15 @@ namespace Machia.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""125f9404-8c60-4469-bf7f-1e641d1676cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -94,6 +103,17 @@ namespace Machia.Input
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56930578-3669-42ae-8e4f-9903ed3fe567"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -103,6 +123,7 @@ namespace Machia.Input
             // MinigameInput
             m_MinigameInput = asset.FindActionMap("MinigameInput", throwIfNotFound: true);
             m_MinigameInput_Move = m_MinigameInput.FindAction("Move", throwIfNotFound: true);
+            m_MinigameInput_Dash = m_MinigameInput.FindAction("Dash", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -163,11 +184,13 @@ namespace Machia.Input
         private readonly InputActionMap m_MinigameInput;
         private IMinigameInputActions m_MinigameInputActionsCallbackInterface;
         private readonly InputAction m_MinigameInput_Move;
+        private readonly InputAction m_MinigameInput_Dash;
         public struct MinigameInputActions
         {
             private @MachiaInputActions m_Wrapper;
             public MinigameInputActions(@MachiaInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_MinigameInput_Move;
+            public InputAction @Dash => m_Wrapper.m_MinigameInput_Dash;
             public InputActionMap Get() { return m_Wrapper.m_MinigameInput; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -180,6 +203,9 @@ namespace Machia.Input
                     @Move.started -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnMove;
+                    @Dash.started -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnDash;
+                    @Dash.performed -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnDash;
+                    @Dash.canceled -= m_Wrapper.m_MinigameInputActionsCallbackInterface.OnDash;
                 }
                 m_Wrapper.m_MinigameInputActionsCallbackInterface = instance;
                 if (instance != null)
@@ -187,6 +213,9 @@ namespace Machia.Input
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Dash.started += instance.OnDash;
+                    @Dash.performed += instance.OnDash;
+                    @Dash.canceled += instance.OnDash;
                 }
             }
         }
@@ -194,6 +223,7 @@ namespace Machia.Input
         public interface IMinigameInputActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
         }
     }
 }
