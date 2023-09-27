@@ -17,7 +17,7 @@ namespace Machia.Player
         //}
 
 
-        void LateUpdate()
+        void FixedUpdate()
         {
             //Vector3 dp = player.position - this.transform.position;
             float cz = this.transform.position.z;
