@@ -33,7 +33,6 @@ namespace Machia.Player
         {
             rb = this.GetComponent<Rigidbody2D>();
             InitializeInput();
-
         }
 
         void Update()
