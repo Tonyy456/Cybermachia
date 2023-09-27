@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+
+/* Author: Anthony D'Alesandro
+ * 
+ * Unity helper method that moves anchor points of UI elements.
+ * 
+ * shift + q = move corners and anchors to parent's corners.
+ * shift + / = move anchors to corners of image.
+ */
 namespace Machia.UI
 {
     public class UIAnchorMovement : MonoBehaviour
