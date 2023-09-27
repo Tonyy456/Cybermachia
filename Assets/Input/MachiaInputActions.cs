@@ -138,6 +138,142 @@ namespace Machia.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MenuTraversal"",
+            ""id"": ""d22e576f-23a7-44b7-8e7b-45fb8ea9a45b"",
+            ""actions"": [
+                {
+                    ""name"": ""TraverseUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""19c5672b-4428-4fd5-878c-64c05f25b639"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TraverseDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""5617fe10-4879-451c-97ec-ec24e175dc55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""72e4c1c2-f55b-436f-8e15-669f7d425e8f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7d94966-7ba6-46e9-9373-cce70b5cf229"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5aa75766-253a-4da3-ac7d-214796d0f0b6"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4fd11af4-d210-4991-b93e-690fc98a2fc5"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6a5962e-74e8-4637-bfb3-a204347a8faa"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9274c5e6-c0e6-4338-b51a-b33980336008"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32f8e074-8e95-481c-be70-0d5070d3c589"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3654c968-b944-4730-883f-a9b4349b6599"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02e615f7-09b1-4508-9914-b975741a37f5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1852af39-c91c-41fa-90b4-f52d4f472acc"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TraverseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -146,6 +282,10 @@ namespace Machia.Input
             m_MinigameInput = asset.FindActionMap("MinigameInput", throwIfNotFound: true);
             m_MinigameInput_Move = m_MinigameInput.FindAction("Move", throwIfNotFound: true);
             m_MinigameInput_Dash = m_MinigameInput.FindAction("Dash", throwIfNotFound: true);
+            // MenuTraversal
+            m_MenuTraversal = asset.FindActionMap("MenuTraversal", throwIfNotFound: true);
+            m_MenuTraversal_TraverseUp = m_MenuTraversal.FindAction("TraverseUp", throwIfNotFound: true);
+            m_MenuTraversal_TraverseDown = m_MenuTraversal.FindAction("TraverseDown", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -242,10 +382,56 @@ namespace Machia.Input
             }
         }
         public MinigameInputActions @MinigameInput => new MinigameInputActions(this);
+
+        // MenuTraversal
+        private readonly InputActionMap m_MenuTraversal;
+        private IMenuTraversalActions m_MenuTraversalActionsCallbackInterface;
+        private readonly InputAction m_MenuTraversal_TraverseUp;
+        private readonly InputAction m_MenuTraversal_TraverseDown;
+        public struct MenuTraversalActions
+        {
+            private @MachiaInputActions m_Wrapper;
+            public MenuTraversalActions(@MachiaInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @TraverseUp => m_Wrapper.m_MenuTraversal_TraverseUp;
+            public InputAction @TraverseDown => m_Wrapper.m_MenuTraversal_TraverseDown;
+            public InputActionMap Get() { return m_Wrapper.m_MenuTraversal; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(MenuTraversalActions set) { return set.Get(); }
+            public void SetCallbacks(IMenuTraversalActions instance)
+            {
+                if (m_Wrapper.m_MenuTraversalActionsCallbackInterface != null)
+                {
+                    @TraverseUp.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseUp;
+                    @TraverseUp.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseUp;
+                    @TraverseUp.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseUp;
+                    @TraverseDown.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseDown;
+                    @TraverseDown.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseDown;
+                    @TraverseDown.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseDown;
+                }
+                m_Wrapper.m_MenuTraversalActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @TraverseUp.started += instance.OnTraverseUp;
+                    @TraverseUp.performed += instance.OnTraverseUp;
+                    @TraverseUp.canceled += instance.OnTraverseUp;
+                    @TraverseDown.started += instance.OnTraverseDown;
+                    @TraverseDown.performed += instance.OnTraverseDown;
+                    @TraverseDown.canceled += instance.OnTraverseDown;
+                }
+            }
+        }
+        public MenuTraversalActions @MenuTraversal => new MenuTraversalActions(this);
         public interface IMinigameInputActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
+        }
+        public interface IMenuTraversalActions
+        {
+            void OnTraverseUp(InputAction.CallbackContext context);
+            void OnTraverseDown(InputAction.CallbackContext context);
         }
     }
 }
