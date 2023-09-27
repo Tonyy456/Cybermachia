@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour
+namespace Machia.Helper
 {
-    public void Load(string name)
+    public class LoadScene : MonoBehaviour
     {
-        SceneManager.LoadScene(name, LoadSceneMode.Single);
+        public void Load(string name)
+        {
+            SceneManager.LoadScene(name, LoadSceneMode.Single);
+        }
     }
 }
