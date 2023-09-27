@@ -13,7 +13,7 @@ namespace Machia.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private InputManager input;
+        private LocalPlayerInputManager input;
 
         [SerializeField] private float speed = 1500f;
         [SerializeField] private float dashSpeed = 3000f;
@@ -32,12 +32,11 @@ namespace Machia.Player
         void Start()
         {
             rb = this.GetComponent<Rigidbody2D>();
-            InitializeInput();
         }
 
         void Update()
         {
-            if (dashRoutine == null)
+            if (dashRoutine == null && input)
             {
                 Move(input.MoveDir);
             }
@@ -47,8 +46,10 @@ namespace Machia.Player
          * 
          * Initialize input for player.
          */
-        void InitializeInput()
+        public void InitializeInput(LocalPlayerInputManager input)
         {
+            this.input = input;
+            input.EnableMinigameInput();
             input.EnableDash();
             input.EnableMove();
             input.DashAction.performed += Dash;
