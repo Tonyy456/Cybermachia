@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8347161174827796511}
   - component: {fileID: -4926555669922777698}
   m_Layer: 0
-  m_Name: UIMenuPlayer
+  m_Name: UIMenuPlayer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
