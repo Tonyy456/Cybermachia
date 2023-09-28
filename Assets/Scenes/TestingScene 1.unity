@@ -384,8 +384,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1829674872}
-  - component: {fileID: 1829674871}
   - component: {fileID: 1829674873}
+  - component: {fileID: 1829674874}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -393,19 +393,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1829674871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829674870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40e674ba44f64f8795440c1c991954e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputManager: {fileID: 1829674873}
 --- !u!4 &1829674872
 Transform:
   m_ObjectHideFlags: 0
@@ -465,3 +452,17 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &1829674874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829674870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcac282341034764db5e20a114d9d5f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useAlreadyConnectedPlayers: 0
+  unityPlayerManager: {fileID: 1829674873}

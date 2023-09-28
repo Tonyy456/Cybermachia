@@ -17,6 +17,11 @@ namespace Machia.Input
             if (!useAlreadyConnectedPlayers)
             {
                 unityPlayerManager.onPlayerJoined += OnPlayerJoin;
+            } else
+            {
+                //donotdestroyonload script GamePlayers will probably be in scene. check if it is and load players this way.
+                //handle if controllers are not connected anymore for some reason
+                //handle on controller leave etc.
             }
         }
         public void OnPlayerJoin(PlayerInput action)
@@ -27,8 +32,9 @@ namespace Machia.Input
             SubPlayerInputManager inputManager = player.GetComponent<SubPlayerInputManager>();
             if (inputManager == null)
             {
-                player.AddComponent<SubPlayerInputManager>();
+                inputManager = player.AddComponent<SubPlayerInputManager>();
             }
+            //input manager gets player input module
             inputManager.ConnectInput(action);
 
             // give input manager to all scripts that need it.
