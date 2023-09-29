@@ -1,18 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Machia.Input;
 using UnityEngine.InputSystem;
 
-/* Author: Anthony D'Alesandro
- * 
- * Handles player actions and input.
- */
 namespace Machia.Player
 {
+    /* Author: Anthony D'Alesandro
+     * 
+     * Handles player actions and input.
+     */
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
+        // DASH control variables
         [SerializeField] private float speed = 1500f;
         [SerializeField] private float dashSpeed = 3000f;
         [SerializeField] private float dashDistance = 5f;
@@ -24,16 +23,29 @@ namespace Machia.Player
         private InputAction move;
         private bool inputInitialized = false;
 
+
+        /* Author: Anthony D'Alesandro
+         * 
+         * Called when script is added onto game object.
+         */
         private void Awake()
         {
-            lastDashTime = Time.time;
+            lastDashTime = Time.time - dashDelay;
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Called before first Update() frame.
+         */
         void Start()
         {
             rb = this.GetComponent<Rigidbody2D>();
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Handle movement of camera and lerped towards player
+         */
         void Update()
         {
             if (dashRoutine == null)
@@ -42,11 +54,19 @@ namespace Machia.Player
             }
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Binds InputAction to dash functionality.
+         */
         public void InitializeDash(InputAction action)
         {
             action.performed += Dash;
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Binds InputAction to move functionality.
+         */
         public void InitializeMove(InputAction action)
         {
             this.move = action;
@@ -69,7 +89,7 @@ namespace Machia.Player
 
         /* Author: Anthony D'Alesandro
          * 
-         * Handle input of dash key bind. 
+         * Preforms coroutine for dash if allowed.
          */
         private void Dash(InputAction.CallbackContext context)
         {

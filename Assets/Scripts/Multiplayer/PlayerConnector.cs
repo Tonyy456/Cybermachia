@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 namespace Machia.Input
 {
+    /* Author: Anthony D'Alesandro
+     * 
+     * Passes data around when a player is connected. Manages already connected players.
+     */
     public class PlayerConnector : MonoBehaviour
     {
         [SerializeField] private bool useAlreadyConnectedPlayers = false; //allow players to join using button
@@ -24,6 +26,11 @@ namespace Machia.Input
                 //handle on controller leave etc.
             }
         }
+
+        /* Author: Anthony D'Alesandro
+         * 
+         * Communicates the connected player to IPlayerConnectorHandlers and IInputActors.
+         */
         public void OnPlayerJoin(PlayerInput action)
         {
             GameObject player = action.gameObject;
@@ -38,8 +45,6 @@ namespace Machia.Input
                 handler.Initialize(action);
             }
 
-
-            // give input manager to all scripts that ask for it.
             IInputActor[] actors = player.GetComponents<IInputActor>();
             foreach (var actor in actors)
             {

@@ -1,21 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.UI;
-using Machia.Input;
-using UnityEngine.EventSystems;
-using System;
 
-namespace Machia.UI
+namespace Machia.Input
 {
+    /* Author: Anthony D'Alesandro
+     * 
+     * Handles a controller joining in the character select menu.
+     */
     public class MenuPlayerConnectorHandler : MonoBehaviour, IPlayerConnectorHandler
     {
         [SerializeField] private List<PlayerSlotController> playerUnits;
+
+        /* Author: Anthony D'Alesandro
+         * 
+         * Called when OnPlayerJoin is triggered from PlayerInputManager. Referenced in PlayerConnector
+         */
         public void Initialize(PlayerInput inputManager)
         {
-            Debug.Log(inputManager.playerIndex);
+            Debug.Log("New player: " + inputManager.playerIndex);
             playerUnits[inputManager.playerIndex].AssignToPlayer(inputManager);
         }
     }

@@ -21,7 +21,6 @@ namespace Machia.Player
          */
         void FixedUpdate()
         {
-            //Vector3 dp = player.position - this.transform.position;
             float cz = this.transform.position.z;
             Vector3 new_position = Vector3.Lerp(this.transform.position, player.position, lerp_speed);
             new_position.z = cz;

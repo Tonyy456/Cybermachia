@@ -1,13 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.EventSystems;
 
-namespace Machia.UI
+namespace Machia.Input
 {
+    /* Author: Anthony D'Alesandro
+     * 
+     * Controls button highlights and selection code for player selection menu.
+     */
     public class UIButtonController
     {
         private List<Selectable> buttons;
@@ -20,23 +21,40 @@ namespace Machia.UI
             current = controlButtons[startButton];
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Connects OnUp function to the InputAction.
+         */
         public void InitializeUp(InputAction action)
         {
             action.Enable();
             action.performed += OnUp;
         }
+
+        /* Author: Anthony D'Alesandro
+         * 
+         * Connects OnDown function to InputAction.
+         */
         public void InitializeDown(InputAction action)
         {
             action.Enable();
             action.performed += OnDown;
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Connects OnConfirm function to InputAction.
+         */
         public void InitializeConfirm(InputAction action)
         {
             action.Enable();
             action.performed += OnConfirm;
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Handles "Confirm" action for player when button is selected.
+         */
         public void OnConfirm(InputAction.CallbackContext e)
         {
             Button btn = current as Button;
@@ -47,6 +65,10 @@ namespace Machia.UI
             }
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Handles "Up" action for player when player tries moving around the UI elements.
+         */
         public void OnUp(InputAction.CallbackContext e)
         {
             var up_selectable = current.FindSelectableOnUp();
@@ -56,6 +78,10 @@ namespace Machia.UI
             }
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Handles "Down" action for player when player tries moving around the UI elements.
+         */
         public void OnDown(InputAction.CallbackContext e)
         {
             var down_selectable = current.FindSelectableOnDown();
@@ -65,6 +91,10 @@ namespace Machia.UI
             }
         }
 
+        /* Author: Anthony D'Alesandro
+         * 
+         * Handles "Select" action for player when they press the corresponding button.
+         */
         private void SelectButton(Selectable button)
         {
             var item = current.GetComponentInChildren<TMPro.TMP_Text>();
