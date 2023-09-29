@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3480314292303337646}
   - component: {fileID: 3480314292303337641}
-  - component: {fileID: 3480314292303337647}
   - component: {fileID: 3480314292303337644}
   - component: {fileID: 1563743782909553336}
   - component: {fileID: 5392431838268736323}
+  - component: {fileID: 7394156924146616641}
   m_Layer: 0
   m_Name: Player_TEST
   m_TagString: Untagged
@@ -88,22 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3480314292303337647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3480314292303337640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ad79be34bc541feb7242216c7fef5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  dashSpeed: 30
-  dashDistance: 4
-  dashDelay: 1
 --- !u!50 &3480314292303337644
 Rigidbody2D:
   serializedVersion: 4
@@ -167,3 +151,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10337d07a24884713815f2c475bf2415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7394156924146616641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480314292303337640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e023cb25e643e4f37a16667e8b1ccaf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  dashSpeed: 30
+  dashDistance: 4
+  dashDelay: 1

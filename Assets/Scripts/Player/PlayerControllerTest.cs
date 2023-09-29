@@ -13,7 +13,10 @@ namespace Machia.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerControllerTest : MonoBehaviour, IInputActor
     {
-        private SubPlayerInputManager input;
+        private PlayerInput input;
+        private InputAction dash;
+        private InputAction move;
+        private Vector2 MoveDir { get => move.ReadValue<Vector2>(); }
 
         [SerializeField] private float speed = 1500f;
         [SerializeField] private float dashSpeed = 3000f;
@@ -29,14 +32,18 @@ namespace Machia.Player
             lastDashTime = Time.time;
         }
 
-        public void Initialize(SubPlayerInputManager inputManager)
+        public void Initialize(PlayerInput inputManager)
         {
             input = inputManager;
-            input.EnableAction("Dash");
-            input.EnableAction("Move");
-            input.GetAction("Dash")?.performed += Dash();
-        }
+            input.currentActionMap.Enable();
 
+            dash = input.currentActionMap.FindAction("Dash");
+            dash.Enable();
+            dash.performed += Dash;
+
+            move = input.currentActionMap.FindAction("Move");
+            move.Enable();
+        }
 
         void Start()
         {
@@ -47,21 +54,8 @@ namespace Machia.Player
         {
             if (dashRoutine == null && input)
             {
-                Move(input.MoveDir);
+                Move(MoveDir);
             }
-        }
-
-        /* Author: Anthony D'Alesandro
-         * 
-         * Initialize input for player.
-         */
-        public void InitializeInput(LocalPlayerInputManager input)
-        {
-            this.input = input;
-            input.EnableMinigameInput();
-            input.EnableDash();
-            input.EnableMove();
-            input.DashAction.performed += Dash;
         }
 
         /* Author: Anthony D'Alesandro
@@ -85,7 +79,7 @@ namespace Machia.Player
             float time = Time.time;
             if (dashRoutine == null && time - lastDashTime >= dashDelay)
             {
-                dashRoutine = StartCoroutine(DashRoutine(input.MoveDir));
+                dashRoutine = StartCoroutine(DashRoutine(MoveDir));
             }
         }
 

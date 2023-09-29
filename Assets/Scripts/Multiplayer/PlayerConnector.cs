@@ -28,20 +28,20 @@ namespace Machia.Input
         {
             GameObject player = action.gameObject;
 
-            // ensure prefab has input manager on it
-            SubPlayerInputManager inputManager = player.GetComponent<SubPlayerInputManager>();
-            if (inputManager == null)
-            {
-                inputManager = player.AddComponent<SubPlayerInputManager>();
-            }
-            //input manager gets player input module
-            inputManager.ConnectInput(action);
+            //// ensure prefab has input manager on it
+            //SubPlayerInputManager inputManager = player.GetComponent<SubPlayerInputManager>();
+            //if (inputManager == null)
+            //{
+            //    inputManager = player.AddComponent<SubPlayerInputManager>();
+            //}
+            ////input manager gets player input module
+            //inputManager.ConnectInput(action);
 
             // give input manager to all scripts that need it.
             IInputActor[] actors = player.GetComponents<IInputActor>();
             foreach (var actor in actors)
             {
-                actor.Initialize(inputManager);
+                actor.Initialize(action);
             }
 
         }
