@@ -60,6 +60,7 @@ namespace Machia.Player
          */
         public void InitializeDash(InputAction action)
         {
+            Debug.Log("bound dash");
             action.performed += Dash;
         }
 
@@ -69,6 +70,7 @@ namespace Machia.Player
          */
         public void InitializeMove(InputAction action)
         {
+            Debug.Log("bound move: " + action);
             this.move = action;
         }
 
@@ -78,6 +80,7 @@ namespace Machia.Player
          */
         private void Move()
         {
+            Debug.Log(move == null);
             if (move == null) return;
 
             float dt = Time.deltaTime;
@@ -110,11 +113,12 @@ namespace Machia.Player
         private IEnumerator DashRoutine(Vector2 key_vector)
         {
             Vector3 start = transform.position;
+            if (key_vector.magnitude == 0) yield return null;
             while((transform.position - start).magnitude < dashDistance)
             {
                 Vector2 keyForce = key_vector * dashSpeed * Time.deltaTime * 1000;
                 Vector3 force = new Vector3(keyForce.x, keyForce.y, 0);
-                rb.AddForce(force);
+                if(rb) rb.AddForce(force);
                 yield return new WaitForEndOfFrame();
             }
             lastDashTime = Time.time;

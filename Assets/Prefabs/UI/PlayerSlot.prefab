@@ -715,7 +715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unassigned
+  m_text: Press Button To Join!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.05
+  m_fontSize: 31.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -918,8 +918,10 @@ MonoBehaviour:
   - {fileID: 8837766418354227739}
   - {fileID: 8837766418773780108}
   - {fileID: 8837766419845258590}
-  playerNum: 1
+  playerIndex: 1
   playerTitle: {fileID: 8837766418961912449}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
+  readyColor: {r: 0.11534512, g: 0.1981132, b: 0.10559807, a: 1}
 --- !u!1 &8837766419845258584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,4 +1043,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8837766418761107670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8837766419714402117}
+        m_TargetAssemblyTypeName: Machia.Input.PlayerSlotController, Assembly-CSharp
+        m_MethodName: ToggleReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

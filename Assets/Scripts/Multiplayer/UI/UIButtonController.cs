@@ -19,6 +19,7 @@ namespace Machia.Input
             buttons = controlButtons;
             this.selectedColor = selectedColor;
             current = controlButtons[startButton];
+            SelectButton(current);
         }
 
         /* Author: Anthony D'Alesandro
