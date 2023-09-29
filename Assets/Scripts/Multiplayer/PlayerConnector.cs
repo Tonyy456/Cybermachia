@@ -9,7 +9,6 @@ namespace Machia.Input
     public class PlayerConnector : MonoBehaviour
     {
         [SerializeField] private bool useAlreadyConnectedPlayers = false; //allow players to join using button
-
         [SerializeField] private PlayerInputManager unityPlayerManager;
 
         public void Start()
@@ -28,16 +27,14 @@ namespace Machia.Input
         {
             GameObject player = action.gameObject;
 
-            //// ensure prefab has input manager on it
-            //SubPlayerInputManager inputManager = player.GetComponent<SubPlayerInputManager>();
-            //if (inputManager == null)
-            //{
-            //    inputManager = player.AddComponent<SubPlayerInputManager>();
-            //}
-            ////input manager gets player input module
-            //inputManager.ConnectInput(action);
+            IPlayerConnectorHandler[] handlers = this.gameObject.GetComponents<IPlayerConnectorHandler>();
+            foreach(var handler in handlers)
+            {
+                handler.Initialize(action);
+            }
 
-            // give input manager to all scripts that need it.
+
+            // give input manager to all scripts that ask for it.
             IInputActor[] actors = player.GetComponents<IInputActor>();
             foreach (var actor in actors)
             {

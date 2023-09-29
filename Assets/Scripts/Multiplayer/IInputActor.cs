@@ -9,4 +9,8 @@ namespace Machia.Input
     {
         public void Initialize(PlayerInput inputManager);
     }
+    public interface IPlayerConnectorHandler
+    {
+        public void Initialize(PlayerInput input);
+    }
 }

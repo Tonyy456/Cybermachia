@@ -13,8 +13,6 @@ namespace Machia.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
-        private LocalPlayerInputManager input;
-
         [SerializeField] private float speed = 1500f;
         [SerializeField] private float dashSpeed = 3000f;
         [SerializeField] private float dashDistance = 5f;
@@ -23,6 +21,8 @@ namespace Machia.Player
         private Coroutine dashRoutine;
 
         private Rigidbody2D rb;
+        private InputAction move;
+        private bool inputInitialized = false;
 
         private void Awake()
         {
@@ -36,32 +36,32 @@ namespace Machia.Player
 
         void Update()
         {
-            if (dashRoutine == null && input)
+            if (dashRoutine == null)
             {
-                Move(input.MoveDir);
+                Move();
             }
         }
 
-        /* Author: Anthony D'Alesandro
-         * 
-         * Initialize input for player.
-         */
-        public void InitializeInput(LocalPlayerInputManager input)
+        public void InitializeDash(InputAction action)
         {
-            this.input = input;
-            input.EnableMinigameInput();
-            input.EnableDash();
-            input.EnableMove();
-            input.DashAction.performed += Dash;
+            action.performed += Dash;
+        }
+
+        public void InitializeMove(InputAction action)
+        {
+            this.move = action;
         }
 
         /* Author: Anthony D'Alesandro
          * 
          * Handle movement vector from keys. Preformed every frame.
          */
-        private void Move(Vector2 key_vector)
+        private void Move()
         {
+            if (move == null) return;
+
             float dt = Time.deltaTime;
+            Vector2 key_vector = move.ReadValue<Vector2>();
             Vector2 v = key_vector * speed * dt * 1000;
             Vector3 velocity = new Vector3(v.x, v.y, 0);
             rb.AddForce(velocity);
@@ -73,10 +73,12 @@ namespace Machia.Player
          */
         private void Dash(InputAction.CallbackContext context)
         {
+            if (move == null) return;
+
             float time = Time.time;
             if (dashRoutine == null && time - lastDashTime >= dashDelay)
             {
-                dashRoutine = StartCoroutine(DashRoutine(input.MoveDir));
+                dashRoutine = StartCoroutine(DashRoutine(move.ReadValue<Vector2>()));
             }
         }
 
