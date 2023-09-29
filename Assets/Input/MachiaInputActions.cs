@@ -160,6 +160,15 @@ namespace Machia.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""a17fd080-3864-4fdb-9d8b-708430047767"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -272,6 +281,28 @@ namespace Machia.Input
                     ""action"": ""TraverseDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84ab6a95-32dd-457c-a1f9-0f96a1c44e5c"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3fb8a6a-fc71-47ce-b02c-c1d591405da8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -286,6 +317,7 @@ namespace Machia.Input
             m_MenuTraversal = asset.FindActionMap("MenuTraversal", throwIfNotFound: true);
             m_MenuTraversal_TraverseUp = m_MenuTraversal.FindAction("TraverseUp", throwIfNotFound: true);
             m_MenuTraversal_TraverseDown = m_MenuTraversal.FindAction("TraverseDown", throwIfNotFound: true);
+            m_MenuTraversal_Confirm = m_MenuTraversal.FindAction("Confirm", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -388,12 +420,14 @@ namespace Machia.Input
         private IMenuTraversalActions m_MenuTraversalActionsCallbackInterface;
         private readonly InputAction m_MenuTraversal_TraverseUp;
         private readonly InputAction m_MenuTraversal_TraverseDown;
+        private readonly InputAction m_MenuTraversal_Confirm;
         public struct MenuTraversalActions
         {
             private @MachiaInputActions m_Wrapper;
             public MenuTraversalActions(@MachiaInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @TraverseUp => m_Wrapper.m_MenuTraversal_TraverseUp;
             public InputAction @TraverseDown => m_Wrapper.m_MenuTraversal_TraverseDown;
+            public InputAction @Confirm => m_Wrapper.m_MenuTraversal_Confirm;
             public InputActionMap Get() { return m_Wrapper.m_MenuTraversal; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -409,6 +443,9 @@ namespace Machia.Input
                     @TraverseDown.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseDown;
                     @TraverseDown.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseDown;
                     @TraverseDown.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnTraverseDown;
+                    @Confirm.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnConfirm;
+                    @Confirm.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnConfirm;
+                    @Confirm.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnConfirm;
                 }
                 m_Wrapper.m_MenuTraversalActionsCallbackInterface = instance;
                 if (instance != null)
@@ -419,6 +456,9 @@ namespace Machia.Input
                     @TraverseDown.started += instance.OnTraverseDown;
                     @TraverseDown.performed += instance.OnTraverseDown;
                     @TraverseDown.canceled += instance.OnTraverseDown;
+                    @Confirm.started += instance.OnConfirm;
+                    @Confirm.performed += instance.OnConfirm;
+                    @Confirm.canceled += instance.OnConfirm;
                 }
             }
         }
@@ -432,6 +472,7 @@ namespace Machia.Input
         {
             void OnTraverseUp(InputAction.CallbackContext context);
             void OnTraverseDown(InputAction.CallbackContext context);
+            void OnConfirm(InputAction.CallbackContext context);
         }
     }
 }
