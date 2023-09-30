@@ -74,7 +74,6 @@ namespace Machia.Input
          */
         public void ToggleReady()
         {
-            Debug.Log(ready);
             ready = !ready;
             if (input == null) return;
             if (ready) {
@@ -92,7 +91,7 @@ namespace Machia.Input
                 input.currentActionMap.FindAction("CancelReady").Disable();
             }
 
-            var readyManager = GameObject.FindObjectOfType<ReadyManager>();
+            var readyManager = GameObject.FindObjectOfType<ReadyManager>(true);
             if (readyManager != null)
             {
                 readyManager.SetPlayerReadyStatus(playerIndex, ready);

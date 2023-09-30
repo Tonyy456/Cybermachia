@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Machia.Player;
+using Machia.Events;
 
 namespace Machia.Input
 {
@@ -11,7 +12,7 @@ namespace Machia.Input
      * Handles the core player movement. Manages the Dash and Move command.
      * TODO: Rename when move action maps get passed around for different minigames?
      */
-    public class MachiaInputManager : MonoBehaviour, IInputActor
+    public class MachiaInputManager : MonoBehaviour, IPlayerConnectedHandler
     {
         [SerializeField] private PlayerController playerController;
 
@@ -19,9 +20,9 @@ namespace Machia.Input
          * 
          * Initializes InputAction to controllers.
          */
-        public void Initialize(PlayerInput inputManager)
+        public void Initialize(PlayerInput player)
         {
-            var map = inputManager.currentActionMap;
+            var map = player.currentActionMap;
             var dash = map.FindAction("Dash");
             dash.Enable();
             var move = map.FindAction("Move");

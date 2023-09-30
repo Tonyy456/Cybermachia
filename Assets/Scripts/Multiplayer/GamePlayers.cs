@@ -1,4 +1,8 @@
+using Machia.Events;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Machia.Input
 {
@@ -8,6 +12,21 @@ namespace Machia.Input
      */
     public class GamePlayers : MonoBehaviour
     {
-        //Save Player Data?
+        [SerializeField] private PlayerEvent onPlayerJoin;
+         public List<int> devices { get; set; } = new List<int>();
+        public void Awake()
+        {
+            if (onPlayerJoin != null) onPlayerJoin.subscription += playerJoined;
+            DontDestroyOnLoad(this);
+        }
+
+        private void playerJoined(PlayerInput input)
+        {
+            InputDevice connected_to = input.devices.First();
+            if (connected_to != null)
+            {
+                devices.Add(connected_to.deviceId);
+            }
+        }
     }
 }

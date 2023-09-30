@@ -17,7 +17,7 @@ namespace Machia.Player
         [SerializeField] private float dashDistance = 5f;
         [SerializeField] private float dashDelay = 3f;
         private float lastDashTime;
-        private Coroutine dashRoutine;
+        private Coroutine dashRoutine = null;
 
         private Rigidbody2D rb;
         private InputAction move;
@@ -60,7 +60,6 @@ namespace Machia.Player
          */
         public void InitializeDash(InputAction action)
         {
-            Debug.Log("bound dash");
             action.performed += Dash;
         }
 
@@ -70,7 +69,6 @@ namespace Machia.Player
          */
         public void InitializeMove(InputAction action)
         {
-            Debug.Log("bound move: " + action);
             this.move = action;
         }
 
@@ -80,7 +78,6 @@ namespace Machia.Player
          */
         private void Move()
         {
-            Debug.Log(move == null);
             if (move == null) return;
 
             float dt = Time.deltaTime;
@@ -99,9 +96,10 @@ namespace Machia.Player
             if (move == null) return;
 
             float time = Time.time;
-            if (dashRoutine == null && time - lastDashTime >= dashDelay)
+            Vector2 moveDir = move.ReadValue<Vector2>();
+            if (dashRoutine == null && time - lastDashTime >= dashDelay && moveDir.magnitude > 0.1f)
             {
-                dashRoutine = StartCoroutine(DashRoutine(move.ReadValue<Vector2>()));
+                dashRoutine = StartCoroutine(DashRoutine(moveDir));
             }
         }
 
@@ -113,7 +111,6 @@ namespace Machia.Player
         private IEnumerator DashRoutine(Vector2 key_vector)
         {
             Vector3 start = transform.position;
-            if (key_vector.magnitude == 0) yield return null;
             while((transform.position - start).magnitude < dashDistance)
             {
                 Vector2 keyForce = key_vector * dashSpeed * Time.deltaTime * 1000;

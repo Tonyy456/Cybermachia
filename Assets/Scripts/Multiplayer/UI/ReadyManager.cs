@@ -1,3 +1,4 @@
+using Machia.Events;
 using Machia.Helper;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace Machia.Input
      * 
      * Controls button highlights and selection code for player selection menu.
      */
-    public class ReadyManager : MonoBehaviour, IPlayerConnectorHandler
+    public class ReadyManager : MonoBehaviour
     {
         [SerializeField] private string scene_to_connect_to = "";
-
-        private int numPlayers = 0;
-        private List<bool> statuses = new List<bool>();
+        [SerializeField] private PlayerEvent onPlayerJoin;
+        [SerializeField] private int numPlayers = 0;
+        [SerializeField] private List<bool> statuses = new List<bool>();
 
         /* Author: Anthony D'Alesandro
          * 
@@ -23,6 +24,12 @@ namespace Machia.Input
          */
         void Start()
         {
+            onPlayerJoin.subscription += Initialize; 
+        }
+
+        private void OnDestroy()
+        {
+            onPlayerJoin.subscription -= Initialize;
         }
 
         /* Author: Anthony D'Alesandro
@@ -33,7 +40,6 @@ namespace Machia.Input
         {
             statuses[playerIndex] = status;
             var list_of_ready = statuses.FindAll(x => x == true);
-            Debug.Log($"Num ready: ${list_of_ready.Count}");
             if (list_of_ready.Count > 1 && numPlayers == list_of_ready.Count)
             {
                 LoadScene.LoadSceneFromName(scene_to_connect_to);

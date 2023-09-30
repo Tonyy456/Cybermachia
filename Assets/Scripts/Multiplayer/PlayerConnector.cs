@@ -1,3 +1,4 @@
+using Machia.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ namespace Machia.Input
         [SerializeField] private bool useAlreadyConnectedPlayers = false; //allow players to join using button
         [SerializeField] private PlayerInputManager unityPlayerManager;
         [SerializeField] private Transform playerParent = null;
+        [SerializeField] private PlayerEvent onPlayerJoinEvent;
 
         public void Start()
         {
@@ -21,7 +23,7 @@ namespace Machia.Input
                 unityPlayerManager.onPlayerJoined += OnPlayerJoin;
             } else
             {
-                //donotdestroyonload script GamePlayers will probably be in scene. check if it is and load players this way.
+               // unityPlayerManager.JoinPlayer(playerIndex: -1, splitScreenIndex: -1, controlScheme: null, pairWithDevice: null);
                 //handle if controllers are not connected anymore for some reason
                 //handle on controller leave etc.
             }
@@ -31,26 +33,21 @@ namespace Machia.Input
          * 
          * Communicates the connected player to IPlayerConnectorHandlers and IInputActors.
          */
-        public void OnPlayerJoin(PlayerInput action)
+        public void OnPlayerJoin(PlayerInput player)
         {
-            GameObject player = action.gameObject;
+            GameObject go = player.gameObject;
             if (playerParent)
             {
-                player.transform.parent = playerParent;
+                go.transform.parent = playerParent;
             }
 
-            IPlayerConnectorHandler[] handlers = this.gameObject.GetComponents<IPlayerConnectorHandler>();
-            foreach(var handler in handlers)
+            onPlayerJoinEvent?.Trigger(player);
+
+            //Gameobject is freshly spawned so can not really subscribe to the event and get its input initialized. Best way to do this.
+            foreach(var handler in go.GetComponentsInChildren<IPlayerConnectedHandler>())
             {
-                handler.Initialize(action);
+                handler.Initialize(player);
             }
-
-            IInputActor[] actors = player.GetComponents<IInputActor>();
-            foreach (var actor in actors)
-            {
-                actor.Initialize(action);
-            }
-
         }
 
     }

@@ -3,7 +3,10 @@ guid: bcac282341034764db5e20a114d9d5f1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - unityPlayerManager: {instanceID: 0}
+  - playerParent: {instanceID: 0}
+  - onPlayerJoinEvent: {fileID: 11400000, guid: fef6d2c576ccc544c9ff77d91a467220, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
