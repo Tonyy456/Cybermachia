@@ -59,6 +59,7 @@ namespace Machia.Input
         public void OnConfirm(InputAction.CallbackContext e)
         {
             Button btn = current as Button;
+            Debug.Log("Ready");
             if (btn)
             {
                 btn.onClick?.Invoke();

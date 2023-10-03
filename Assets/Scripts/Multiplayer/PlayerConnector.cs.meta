@@ -7,6 +7,7 @@ MonoImporter:
   - unityPlayerManager: {instanceID: 0}
   - playerParent: {instanceID: 0}
   - onPlayerJoinEvent: {fileID: 11400000, guid: fef6d2c576ccc544c9ff77d91a467220, type: 2}
+  - onPlayerQuitAction: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

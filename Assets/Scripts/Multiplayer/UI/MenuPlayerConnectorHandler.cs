@@ -13,6 +13,7 @@ namespace Machia.Input
     {
         [SerializeField] private List<PlayerSlotController> playerUnits;
         [SerializeField] private PlayerEvent onPlayerJoin;
+        [SerializeField] private PlayerEvent onPlayerQuitAction;
 
         /* Author: Anthony D'Alesandro
          * 
@@ -20,11 +21,13 @@ namespace Machia.Input
          */
         private void Awake()
         {
+            onPlayerQuitAction.subscription += RemovePlayer;
             onPlayerJoin.subscription += Initialize;
         }
 
         private void OnDestroy()
         {
+            onPlayerQuitAction.subscription -= RemovePlayer;
             onPlayerJoin.subscription -= Initialize;
         }
 
@@ -35,7 +38,13 @@ namespace Machia.Input
         public void Initialize(PlayerInput inputManager)
         {
             Debug.Log("New player: " + inputManager.playerIndex);
-            playerUnits[inputManager.playerIndex].AssignToPlayer(inputManager);
+            playerUnits[inputManager.playerIndex].AssignToPlayer(inputManager, onPlayerQuitAction);
         }
+
+        public void RemovePlayer(PlayerInput player)
+        {
+
+        }
+
     }
 }

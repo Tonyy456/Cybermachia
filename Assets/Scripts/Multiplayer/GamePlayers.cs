@@ -13,7 +13,8 @@ namespace Machia.Input
     public class GamePlayers : MonoBehaviour
     {
         [SerializeField] private PlayerEvent onPlayerJoin;
-         public List<int> devices { get; set; } = new List<int>();
+        public List<InputDevice> Devices { get; private set; } = new List<InputDevice>();
+
         public void Awake()
         {
             if (onPlayerJoin != null) onPlayerJoin.subscription += playerJoined;
@@ -25,7 +26,7 @@ namespace Machia.Input
             InputDevice connected_to = input.devices.First();
             if (connected_to != null)
             {
-                devices.Add(connected_to.deviceId);
+                Devices.Add(connected_to);
             }
         }
     }

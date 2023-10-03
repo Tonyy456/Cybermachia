@@ -171,7 +171,7 @@ namespace Machia.Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CancelReady"",
+                    ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""2b46ad98-9e33-4869-a0d0-d1292c0dfc28"",
                     ""expectedControlType"": ""Button"",
@@ -320,7 +320,7 @@ namespace Machia.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CancelReady"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -331,7 +331,7 @@ namespace Machia.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CancelReady"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -342,7 +342,7 @@ namespace Machia.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CancelReady"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -360,7 +360,7 @@ namespace Machia.Input
             m_MenuTraversal_TraverseUp = m_MenuTraversal.FindAction("TraverseUp", throwIfNotFound: true);
             m_MenuTraversal_TraverseDown = m_MenuTraversal.FindAction("TraverseDown", throwIfNotFound: true);
             m_MenuTraversal_Confirm = m_MenuTraversal.FindAction("Confirm", throwIfNotFound: true);
-            m_MenuTraversal_CancelReady = m_MenuTraversal.FindAction("CancelReady", throwIfNotFound: true);
+            m_MenuTraversal_Cancel = m_MenuTraversal.FindAction("Cancel", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -464,7 +464,7 @@ namespace Machia.Input
         private readonly InputAction m_MenuTraversal_TraverseUp;
         private readonly InputAction m_MenuTraversal_TraverseDown;
         private readonly InputAction m_MenuTraversal_Confirm;
-        private readonly InputAction m_MenuTraversal_CancelReady;
+        private readonly InputAction m_MenuTraversal_Cancel;
         public struct MenuTraversalActions
         {
             private @MachiaInputActions m_Wrapper;
@@ -472,7 +472,7 @@ namespace Machia.Input
             public InputAction @TraverseUp => m_Wrapper.m_MenuTraversal_TraverseUp;
             public InputAction @TraverseDown => m_Wrapper.m_MenuTraversal_TraverseDown;
             public InputAction @Confirm => m_Wrapper.m_MenuTraversal_Confirm;
-            public InputAction @CancelReady => m_Wrapper.m_MenuTraversal_CancelReady;
+            public InputAction @Cancel => m_Wrapper.m_MenuTraversal_Cancel;
             public InputActionMap Get() { return m_Wrapper.m_MenuTraversal; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -491,9 +491,9 @@ namespace Machia.Input
                     @Confirm.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnConfirm;
                     @Confirm.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnConfirm;
                     @Confirm.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnConfirm;
-                    @CancelReady.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnCancelReady;
-                    @CancelReady.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnCancelReady;
-                    @CancelReady.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnCancelReady;
+                    @Cancel.started -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnCancel;
+                    @Cancel.performed -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnCancel;
+                    @Cancel.canceled -= m_Wrapper.m_MenuTraversalActionsCallbackInterface.OnCancel;
                 }
                 m_Wrapper.m_MenuTraversalActionsCallbackInterface = instance;
                 if (instance != null)
@@ -507,9 +507,9 @@ namespace Machia.Input
                     @Confirm.started += instance.OnConfirm;
                     @Confirm.performed += instance.OnConfirm;
                     @Confirm.canceled += instance.OnConfirm;
-                    @CancelReady.started += instance.OnCancelReady;
-                    @CancelReady.performed += instance.OnCancelReady;
-                    @CancelReady.canceled += instance.OnCancelReady;
+                    @Cancel.started += instance.OnCancel;
+                    @Cancel.performed += instance.OnCancel;
+                    @Cancel.canceled += instance.OnCancel;
                 }
             }
         }
@@ -524,7 +524,7 @@ namespace Machia.Input
             void OnTraverseUp(InputAction.CallbackContext context);
             void OnTraverseDown(InputAction.CallbackContext context);
             void OnConfirm(InputAction.CallbackContext context);
-            void OnCancelReady(InputAction.CallbackContext context);
+            void OnCancel(InputAction.CallbackContext context);
         }
     }
 }

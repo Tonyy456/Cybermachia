@@ -417,6 +417,18 @@ PrefabInstance:
       propertyPath: playerParent
       value: 
       objectReference: {fileID: 361499934}
+    - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+      propertyPath: defaultJoinMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+      propertyPath: onPlayerQuitAction
+      value: 
+      objectReference: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
+    - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+      propertyPath: useAlreadyConnectedPlayers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4936863799161878371, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
       propertyPath: m_RootOrder
       value: 3
