@@ -15,8 +15,10 @@ namespace Machia.Input
     {
         [SerializeField] private string scene_to_connect_to = "";
         [SerializeField] private PlayerEvent onPlayerJoin;
-        [SerializeField] private int numPlayers = 0;
-        [SerializeField] private List<bool> statuses = new List<bool>();
+        [SerializeField] private PlayerEvent onPlayerLeave;
+        [SerializeField] private List<PlayerInput> player = new List<PlayerInput>();
+        [SerializeField] private List<bool> ready_status = new List<bool>();
+
 
         /* Author: Anthony D'Alesandro
          * 
@@ -24,12 +26,14 @@ namespace Machia.Input
          */
         void Start()
         {
-            onPlayerJoin.subscription += Initialize; 
+            onPlayerLeave.subscription += OnPlayerLeave;
+            onPlayerJoin.subscription += OnPlayerJoin; 
         }
 
         private void OnDestroy()
         {
-            onPlayerJoin.subscription -= Initialize;
+            onPlayerLeave.subscription -= OnPlayerLeave;
+            onPlayerJoin.subscription -= OnPlayerJoin;
         }
 
         /* Author: Anthony D'Alesandro
@@ -38,9 +42,11 @@ namespace Machia.Input
          */
         public void SetPlayerReadyStatus(int playerIndex, bool status)
         {
-            statuses[playerIndex] = status;
-            var list_of_ready = statuses.FindAll(x => x == true);
-            if (list_of_ready.Count > 1 && numPlayers == list_of_ready.Count)
+            var player_index = player.FindIndex(x => x.playerIndex == playerIndex);
+            ready_status[player_index] = status;
+            int unready_count = ready_status.FindAll(x => x == false).Count;
+
+            if (unready_count == 0)
             {
                 LoadScene.LoadSceneFromName(scene_to_connect_to);
             }
@@ -50,10 +56,17 @@ namespace Machia.Input
          * 
          * Controls button highlights and selection code for player selection menu.
          */
-        public void Initialize(PlayerInput input)
+        public void OnPlayerJoin(PlayerInput input)
         {
-            numPlayers += 1;
-            statuses.Add(false);
+            player.Add(input);
+            ready_status.Add(false);
+        }
+
+        public void OnPlayerLeave(PlayerInput input)
+        {
+            var player_index = player.IndexOf(input);
+            player.RemoveAt(player_index);
+            ready_status.RemoveAt(player_index);
         }
     }
 }

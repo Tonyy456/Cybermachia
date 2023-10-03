@@ -26,30 +26,53 @@ namespace Machia.Input
          * 
          * Connects OnUp function to the InputAction.
          */
-        public void InitializeUp(InputAction action)
+        public void InitializeUp(InputAction action, bool remove = false)
         {
-            action.Enable();
-            action.performed += OnUp;
+            if (!remove)
+            {
+                action.Enable();
+                action.performed += OnUp;
+            } else
+            {
+                action.Disable();
+                action.performed -= OnUp;
+            }
         }
 
         /* Author: Anthony D'Alesandro
          * 
          * Connects OnDown function to InputAction.
          */
-        public void InitializeDown(InputAction action)
+        public void InitializeDown(InputAction action, bool remove = false)
         {
-            action.Enable();
-            action.performed += OnDown;
+            if (!remove)
+            {
+                action.Enable();
+                action.performed += OnDown;
+            }
+            else
+            {
+                action.Disable();
+                action.performed -= OnDown;
+            }
         }
 
         /* Author: Anthony D'Alesandro
          * 
          * Connects OnConfirm function to InputAction.
          */
-        public void InitializeConfirm(InputAction action)
+        public void InitializeConfirm(InputAction action, bool remove = false)
         {
-            action.Enable();
-            action.performed += OnConfirm;
+            if (!remove)
+            {
+                action.Enable();
+                action.performed += OnConfirm;
+            }
+            else
+            {
+                action.Disable();
+                action.performed -= OnConfirm;
+            }
         }
 
         /* Author: Anthony D'Alesandro
@@ -59,7 +82,6 @@ namespace Machia.Input
         public void OnConfirm(InputAction.CallbackContext e)
         {
             Button btn = current as Button;
-            Debug.Log("Ready");
             if (btn)
             {
                 btn.onClick?.Invoke();
@@ -89,6 +111,15 @@ namespace Machia.Input
             if (down_selectable)
             {
                 SelectButton(down_selectable);
+            }
+        }
+
+        public void Clear()
+        {
+            foreach(var button in buttons)
+            {
+                var item = button.GetComponentInChildren<TMPro.TMP_Text>();
+                if (item) item.color = Color.white;
             }
         }
 

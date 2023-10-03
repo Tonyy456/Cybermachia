@@ -20,6 +20,8 @@ namespace Machia.Input
         [SerializeField] private Color selectedColor = Color.red;
         [SerializeField] private Color readyColor;
 
+        public bool assigned { get; private set; } = false;
+
         private UIButtonController traversal;
         private PlayerInput input;
         private PlayerEvent onPlayerQuit;
@@ -44,7 +46,7 @@ namespace Machia.Input
          * 
          * Assigns this slot to a player. Initialize input and allows traversal through buttons.
          */
-        public void AssignToPlayer(PlayerInput input, PlayerEvent onPlayerQuit)
+        public void AssignToPlayer(PlayerInput input, PlayerEvent onPlayerQuit, string playerName)
         {
             this.input = input;
             this.onPlayerQuit = onPlayerQuit;
@@ -56,11 +58,12 @@ namespace Machia.Input
             playerIndex = input.playerIndex;
             if (playerTitle)
             {
-                playerTitle.text = $"Player {input.playerIndex + 1}";
+                playerTitle.text = $"{playerName}";
             }
             InputAction cancel = input.currentActionMap.FindAction("Cancel");
             cancel.performed += OnCancelReady;
             cancel.Enable();
+            assigned = true;
         }
 
         /* Author: Anthony D'Alesandro
@@ -69,10 +72,7 @@ namespace Machia.Input
          */
         public void PlayerDisconnect()
         {
-            if (playerTitle)
-            {
-                playerTitle.text = $"Unassigned";
-            }
+            ClearData();
             onPlayerQuit?.Trigger(this.input);
         }
 
@@ -89,13 +89,12 @@ namespace Machia.Input
             SetInputAction(input.currentActionMap.FindAction("TraverseUp"), !ready);
             SetInputAction(input.currentActionMap.FindAction("TraverseDown"), !ready);
             SetInputAction(input.currentActionMap.FindAction("Confirm"), !ready);
-            SetInputAction(input.currentActionMap.FindAction("Cancel"), ready);
 
             // alert manager that you are ready
             var readyManager = GameObject.FindObjectOfType<ReadyManager>(true);
             if (readyManager != null)
             {
-                readyManager.SetPlayerReadyStatus(playerIndex, ready);
+                readyManager.SetPlayerReadyStatus(input.playerIndex, ready);
             }
         }
 
@@ -124,5 +123,22 @@ namespace Machia.Input
             else action.Disable();
         }
 
+        public void ClearData()
+        {
+            if (playerTitle)
+            {
+                playerTitle.text = $"Press Button To Join!";
+            }
+            playerIndex = 0;
+            assigned = false;
+            this.gameObject.GetComponent<Image>().color = defaultReadyColor;
+            traversal.InitializeUp(input.currentActionMap.FindAction("TraverseUp"), true);
+            traversal.InitializeDown(input.currentActionMap.FindAction("TraverseDown"), true);
+            traversal.InitializeConfirm(input.currentActionMap.FindAction("Confirm"), true);
+            traversal.Clear();
+            InputAction cancel = input.currentActionMap.FindAction("Cancel");
+            cancel.performed -= OnCancelReady;
+            cancel.Disable();
+        }
     }
 }

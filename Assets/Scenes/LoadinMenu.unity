@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlayerJoin: {fileID: 11400000, guid: fef6d2c576ccc544c9ff77d91a467220, type: 2}
+  onPlayerQuit: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
 --- !u!1001 &300104254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,7 +177,19 @@ PrefabInstance:
     m_TransformParent: {fileID: 1411399773}
     m_Modifications:
     - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 300104259}
+    - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+      propertyPath: playerJoinEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: fef6d2c576ccc544c9ff77d91a467220, type: 2}
+    - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
       propertyPath: onPlayerQuitAction
+      value: 
+      objectReference: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
+    - target: {fileID: 4936863799161878369, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+      propertyPath: playerTriggeredLeave
       value: 
       objectReference: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
     - target: {fileID: 4936863799161878370, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
@@ -262,6 +275,17 @@ MonoBehaviour:
   - {fileID: 1031331028}
   onPlayerJoin: {fileID: 11400000, guid: fef6d2c576ccc544c9ff77d91a467220, type: 2}
   onPlayerQuitAction: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
+--- !u!114 &300104259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4936863799161878370, guid: 7e19f491af37aee42b917adda198aa05, type: 3}
+  m_PrefabInstance: {fileID: 300104254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300104256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &554175836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,8 +586,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene_to_connect_to: TestingScene
   onPlayerJoin: {fileID: 11400000, guid: fef6d2c576ccc544c9ff77d91a467220, type: 2}
-  numPlayers: 0
-  statuses: 
+  onPlayerLeave: {fileID: 11400000, guid: 83e5c4f3cb7b54fab98fd570212b9019, type: 2}
+  player: []
+  ready_status: 
 --- !u!1001 &841259856
 PrefabInstance:
   m_ObjectHideFlags: 0

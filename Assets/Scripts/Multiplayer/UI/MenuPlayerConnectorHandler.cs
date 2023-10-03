@@ -15,6 +15,8 @@ namespace Machia.Input
         [SerializeField] private PlayerEvent onPlayerJoin;
         [SerializeField] private PlayerEvent onPlayerQuitAction;
 
+        private List<PlayerInput> connectedOrder = new List<PlayerInput>();
+
         /* Author: Anthony D'Alesandro
          * 
          * Subscribe to onPlayerJoin event to initialize slot to player.
@@ -37,13 +39,23 @@ namespace Machia.Input
          */
         public void Initialize(PlayerInput inputManager)
         {
-            Debug.Log("New player: " + inputManager.playerIndex);
-            playerUnits[inputManager.playerIndex].AssignToPlayer(inputManager, onPlayerQuitAction);
+            connectedOrder.Add(inputManager);
+            PlayerSlotController unassigned = playerUnits.Find(x => !x.assigned);
+            unassigned.AssignToPlayer(inputManager, onPlayerQuitAction, $"Player {connectedOrder.Count}");
         }
 
         public void RemovePlayer(PlayerInput player)
         {
-
+            foreach (var s in playerUnits)
+            {
+                if (s.assigned) s.ClearData();
+            }
+            connectedOrder.Remove(player);
+            for(int i = 0; i < connectedOrder.Count; i++)
+            {
+                PlayerInput toAssign = connectedOrder[i];
+                playerUnits[i].AssignToPlayer(toAssign, onPlayerQuitAction, $"Player {connectedOrder.IndexOf(toAssign) + 1}");
+            }
         }
 
     }
