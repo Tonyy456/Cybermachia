@@ -6,7 +6,7 @@ using Machia.Input;
 
 namespace Machia.Helper
 {
-    public static class Helper 
+    public static class MachiaHelper 
     {
 
         /* Author: Anthony D'Alesandro

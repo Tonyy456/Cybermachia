@@ -6,11 +6,11 @@ namespace Machia.Helper
      * 
      * Simple interface to allow quitting application.
      */
-    public class QuitApp : MonoBehaviour
+    public class QuitAppBehaviour : MonoBehaviour
     {
         public void Quit()
         {
-            Helper.Quit();
+            MachiaHelper.Quit();
         }
     }
 }

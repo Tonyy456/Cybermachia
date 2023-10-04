@@ -6,7 +6,7 @@ using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using Machia.Input;
+using Machia.PlayerManagement;
 
 public abstract class ButtonAdder : Editor
 {

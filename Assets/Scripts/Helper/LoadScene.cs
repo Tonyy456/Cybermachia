@@ -7,11 +7,11 @@ namespace Machia.Helper
      * 
      * Simple interface to allow loading scene from the scene name.
      */
-    public class LoadScene : MonoBehaviour
+    public class LoadSceneBehaviour : MonoBehaviour
     {
         public void Load(string name)
         {
-            Helper.LoadScene(name);
+            MachiaHelper.LoadScene(name);
         }
     }
 }
