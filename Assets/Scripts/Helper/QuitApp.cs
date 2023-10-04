@@ -8,18 +8,9 @@ namespace Machia.Helper
      */
     public class QuitApp : MonoBehaviour
     {
-        public static void QuitApplication()
-        {
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
-        }
-
         public void Quit()
         {
-            QuitApp.QuitApplication();
+            Helper.Quit();
         }
     }
 }

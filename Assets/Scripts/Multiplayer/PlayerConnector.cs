@@ -34,6 +34,11 @@ namespace Machia.Input
 
         public int NumPlayersConnected { get; private set; } = 0;
 
+        private void OnValidate()
+        {
+            if (inputManager == null) inputManager = this.GetComponent<PlayerInputManager>();
+        }
+
         private void Start()
         {
             inputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;

@@ -9,13 +9,9 @@ namespace Machia.Helper
      */
     public class LoadScene : MonoBehaviour
     {
-        public static void LoadSceneFromName(string name)
-        {
-            SceneManager.LoadScene(name, LoadSceneMode.Single);
-        }
         public void Load(string name)
         {
-            LoadScene.LoadSceneFromName(name);
+            Helper.LoadScene(name);
         }
     }
 }
