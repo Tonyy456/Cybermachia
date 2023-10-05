@@ -53,7 +53,11 @@ namespace Machia.Player
             this.input = input;
             this.imageDefaultColor = imageToChange.color;
 
-            if (playerTitle)  playerTitle.text = $"{playerName}";
+            //Set name to type of device if possible.
+            //TODO: have a counter of each type of device and set name to that device + index;
+            InputControl device = input.devices.Count > 0 ? input.devices[0] : null;
+            if (playerTitle)  playerTitle.text = device != null ? $"{device.displayName}" : $"{playerName}";
+
             InitializeInput(input);
             EnableInput();
             SelectButton(selected);
