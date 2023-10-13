@@ -10,7 +10,7 @@ namespace Machia.Helper
     {
         public void Quit()
         {
-            MachiaHelper.Quit();
+            TonyHelper.Quit();
         }
     }
 }

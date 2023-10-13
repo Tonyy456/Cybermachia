@@ -11,7 +11,7 @@ namespace Machia.Helper
     {
         public void Load(string name)
         {
-            MachiaHelper.LoadScene(name);
+            TonyHelper.LoadScene(name);
         }
     }
 }
