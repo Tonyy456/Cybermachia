@@ -1,0 +1,5 @@
+﻿TODO
+- add interface for player connecter to call InitPlayer()
+- add documentation to tony helper for each file
+- add read me that describes functionality of things
+- add readme.md to each folder
