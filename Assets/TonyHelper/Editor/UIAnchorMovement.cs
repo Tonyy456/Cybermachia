@@ -8,14 +8,12 @@ using UnityEngine;
  * 
  * Unity helper method that moves anchor points of UI elements.
  * 
- * shift + q = move corners and anchors to parent's corners.
- * shift + / = move anchors to corners of image.
  */
 namespace Machia.UI
 {
     public class UIAnchorMovement : MonoBehaviour
     {
-        [MenuItem("uGUI/Stretch To Parent #q")]
+        [MenuItem("uGUI/Stretch To Parent")]
         static void StretchToParent()
         {
             foreach (Transform transform in Selection.transforms)
@@ -30,7 +28,7 @@ namespace Machia.UI
             }
         }
 
-        [MenuItem("uGUI/Stretch To AnchorsP #/")]
+        [MenuItem("uGUI/Anchors to Corners")]
         static void StretchAnchors()
         {
             foreach (Transform transform in Selection.transforms)
@@ -38,11 +36,10 @@ namespace Machia.UI
                 RectTransform t = transform as RectTransform;
                 RectTransform tp = transform.parent.GetComponent<RectTransform>();
                 if (t == null || tp == null) return;
-
-                Debug.Log($"Old values:\n anchorMin:{t.anchorMin} anchorMax: {t.anchorMax}");
                 t.anchorMin += t.offsetMin / tp.rect.size;
                 t.anchorMax += (t.offsetMax / tp.rect.size);
                 t.offsetMin = t.offsetMax = new Vector2(0, 0);
+                //Debug.Log($"Old values:\n anchorMin:{t.anchorMin} anchorMax: {t.anchorMax}");
             }
         }
     }

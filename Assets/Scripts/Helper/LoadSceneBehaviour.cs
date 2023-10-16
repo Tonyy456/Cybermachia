@@ -1,17 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Tony;
 
-namespace Machia.Helper
+/* Author: Anthony D'Alesandro
+    * 
+    * Simple interface to allow loading scene from the scene name.
+    */
+public class LoadSceneBehaviour : MonoBehaviour
 {
-    /* Author: Anthony D'Alesandro
-     * 
-     * Simple interface to allow loading scene from the scene name.
-     */
-    public class LoadSceneBehaviour : MonoBehaviour
+    public void Load(string name)
     {
-        public void Load(string name)
-        {
-            TonyHelper.LoadScene(name);
-        }
+        Helper.LoadScene(name);
     }
 }
+

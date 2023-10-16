@@ -1,51 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tony
 {
-    public abstract class State
-    {
-        protected abstract void Enter();
-        protected abstract void Exit();
-        public abstract void Tick();
-    }
-
-    //https://stackoverflow.com/questions/5923767/simple-state-machine-example-in-c
-    public enum StateTrigger
-    {
-        Begin, 
-        End,
-        Pause,
-        Resume,
-        Exit
-    }
-
-    public abstract class DefaultFSM : FiniteStateMachine<State, StateTrigger>
-    {
-        protected DefaultFSM(State initialState) : base(initialState)
-        {
-        }
-    }
-
-    [CreateAssetMenu(fileName = "FSM", menuName = "FSM/FiniteStateMachine")]
-    public class FiniteStateMachineSO : ScriptableObject
-    {
-
-    }
-
-    [CreateAssetMenu(fileName = "FSM", menuName = "FSM/State")]
-    public class StateSO : ScriptableObject
-    {
-
-    }
-
-    /*
-     *  FSM ScriptableObject
-     *  State ScriptableObject
-     *  - have subscription to on enter etc.
-     */
-
     public abstract class FiniteStateMachine<TState, TTrigger>
     {
         private Dictionary<TState, Dictionary<TTrigger, TState>> transitions;
@@ -84,6 +43,30 @@ namespace Tony
 
         protected abstract void OnTransition(TState fromState, TState toState, TTrigger trigger);
         protected abstract void OnInvalidTransition(TState currentState, TTrigger trigger);
+    }
+
+    public abstract class State
+    {
+        protected abstract void Enter();
+        protected abstract void Exit();
+        public abstract void Tick();
+    }
+
+    //https://stackoverflow.com/questions/5923767/simple-state-machine-example-in-c
+    public enum StateTrigger
+    {
+        Begin,
+        End,
+        Pause,
+        Resume,
+        Exit
+    }
+
+    public abstract class DefaultFSM : FiniteStateMachine<State, StateTrigger>
+    {
+        protected DefaultFSM(State initialState) : base(initialState)
+        {
+        }
     }
 }
 
