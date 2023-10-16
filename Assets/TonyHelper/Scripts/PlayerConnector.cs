@@ -64,6 +64,7 @@ namespace Tony
 
         [SerializeField] private int minimumPlayerCount = 0;
         [SerializeField] private bool clearConnectedPlayers = false;
+        [SerializeField] private Transform playerParent;
         public UnityEvent onGameReady;
         public UnityEvent onPlayerGained;
 
@@ -86,17 +87,22 @@ namespace Tony
 
             // allow for individual scene testing.
             if (ConnectedPlayerHolder.Instance.connectedPlayers.Count < minimumPlayerCount)
-                manager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
+                manager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
+            else
+                onGameReady?.Invoke();
+
         }
 
         private void onPlayerJoined(PlayerInput input)
         {
             if (input == null) return; //just in case.
             onPlayerGained?.Invoke();
-            if(ConnectedPlayerHolder.Instance.connectedPlayers.Count >= minimumPlayerCount)
+            if(manager.joinBehavior == PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed &&
+                ConnectedPlayerHolder.Instance.connectedPlayers.Count >= minimumPlayerCount)
             {
                 onGameReady?.Invoke();
             }
+            if (playerParent != null) input.gameObject.transform.SetParent(playerParent);
             AddPlayerToSingleton(input);
         }
 
