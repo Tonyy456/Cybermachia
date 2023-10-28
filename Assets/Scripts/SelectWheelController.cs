@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SelectWheelController : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class SelectWheelController : MonoBehaviour
     [SerializeField] private float spinSpeed = 10f;
     [SerializeField] private float deaccelerationConst = 10f;
 
-    private Minigame selected;
+    [SerializeField] private UnityEvent onWheelDone;
+
+    public Minigame selected { get; private set; }
 
     public void Start()
     {
@@ -76,6 +79,7 @@ public class SelectWheelController : MonoBehaviour
 
             yield return new WaitForSeconds((1 + (i / numItems) * deaccelerationConst) / spinSpeed);
         }
+        onWheelDone?.Invoke();
         yield return null;
     }
 }
