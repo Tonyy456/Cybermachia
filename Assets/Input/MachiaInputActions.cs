@@ -158,7 +158,7 @@ namespace Machia.Input
                 {
                     ""name"": """",
                     ""id"": ""0b328aaf-d9c5-40db-8386-391ccac5c674"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
