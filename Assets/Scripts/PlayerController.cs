@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float dashSpeed = 30f;
     [SerializeField] private float dashLength = 1f;
+    [SerializeField] private float dashDelay = 1f;
     [SerializeField] private bool canMoveInDash = false;
 
     //Control
     private bool inDash = false;
     private Vector2 lastMoveDir = Vector2.zero;
+    private float lastDash;
 
     //Input Actions
     private PlayerInput input;
@@ -23,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private InputAction dash;
     private InputAction a1;
     private InputAction attack;
+
+    public void Awake()
+    {
+        lastDash = Time.time - 1f;
+    }
 
     public void Start()
     {
@@ -65,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     private void DashHandler(InputAction.CallbackContext callback)
     {
+        if ((Time.time - lastDash) < dashDelay) return;
+        lastDash = Time.time;
         lastMoveDir = move.ReadValue<Vector2>();
         StartCoroutine(DashRoutine());
     }

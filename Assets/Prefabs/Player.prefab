@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  dashSpeed: 30
-  dashLength: 0.2
+  dashSpeed: 25
+  dashLength: 0.3
+  dashDelay: 1
   canMoveInDash: 0
