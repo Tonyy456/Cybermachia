@@ -103,6 +103,8 @@ namespace Tony
                 onGameReady?.Invoke();
             }
             if (playerParent != null) input.gameObject.transform.SetParent(playerParent);
+            IPlayerConnectedHandler[] devices = Object.FindObjectsOfType<IPlayerConnectedHandler>();
+            foreach (var i in devices) i.ConnectPlayer(input);
             AddPlayerToSingleton(input);
         }
 
