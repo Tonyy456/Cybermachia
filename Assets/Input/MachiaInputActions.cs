@@ -37,6 +37,33 @@ namespace Machia.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ActionOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""02a798c2-885a-4b53-bfb6-505fc3d64684"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""144e1c12-692e-4fd1-b611-2fb7b8fdfeee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""7cdfc92c-1b34-477b-8350-580f440ebfa1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -105,6 +132,72 @@ namespace Machia.Input
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76b7296f-0846-41ca-83a7-9263acbc2577"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ActionOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7aef25d1-a591-48b9-bd99-2480aeb9cb40"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PS4Controller"",
+                    ""action"": ""ActionOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b328aaf-d9c5-40db-8386-391ccac5c674"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ActionTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0e7fbc5-e32f-4417-9fe0-87b7689f584c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PS4Controller"",
+                    ""action"": ""ActionTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bf5e336-420f-4e65-b297-7035ac5010a8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4eb0384a-4ff1-469b-b32b-d7aca3fd4cee"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PS4Controller"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -212,6 +305,9 @@ namespace Machia.Input
             // DefaultGameplay
             m_DefaultGameplay = asset.FindActionMap("DefaultGameplay", throwIfNotFound: true);
             m_DefaultGameplay_Move = m_DefaultGameplay.FindAction("Move", throwIfNotFound: true);
+            m_DefaultGameplay_ActionOne = m_DefaultGameplay.FindAction("ActionOne", throwIfNotFound: true);
+            m_DefaultGameplay_ActionTwo = m_DefaultGameplay.FindAction("ActionTwo", throwIfNotFound: true);
+            m_DefaultGameplay_Attack = m_DefaultGameplay.FindAction("Attack", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
             m_Menu_Confirm = m_Menu.FindAction("Confirm", throwIfNotFound: true);
@@ -276,11 +372,17 @@ namespace Machia.Input
         private readonly InputActionMap m_DefaultGameplay;
         private IDefaultGameplayActions m_DefaultGameplayActionsCallbackInterface;
         private readonly InputAction m_DefaultGameplay_Move;
+        private readonly InputAction m_DefaultGameplay_ActionOne;
+        private readonly InputAction m_DefaultGameplay_ActionTwo;
+        private readonly InputAction m_DefaultGameplay_Attack;
         public struct DefaultGameplayActions
         {
             private @MachiaInputActions m_Wrapper;
             public DefaultGameplayActions(@MachiaInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_DefaultGameplay_Move;
+            public InputAction @ActionOne => m_Wrapper.m_DefaultGameplay_ActionOne;
+            public InputAction @ActionTwo => m_Wrapper.m_DefaultGameplay_ActionTwo;
+            public InputAction @Attack => m_Wrapper.m_DefaultGameplay_Attack;
             public InputActionMap Get() { return m_Wrapper.m_DefaultGameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -293,6 +395,15 @@ namespace Machia.Input
                     @Move.started -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnMove;
+                    @ActionOne.started -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnActionOne;
+                    @ActionOne.performed -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnActionOne;
+                    @ActionOne.canceled -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnActionOne;
+                    @ActionTwo.started -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnActionTwo;
+                    @ActionTwo.performed -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnActionTwo;
+                    @ActionTwo.canceled -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnActionTwo;
+                    @Attack.started -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAttack;
+                    @Attack.performed -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAttack;
+                    @Attack.canceled -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAttack;
                 }
                 m_Wrapper.m_DefaultGameplayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -300,6 +411,15 @@ namespace Machia.Input
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @ActionOne.started += instance.OnActionOne;
+                    @ActionOne.performed += instance.OnActionOne;
+                    @ActionOne.canceled += instance.OnActionOne;
+                    @ActionTwo.started += instance.OnActionTwo;
+                    @ActionTwo.performed += instance.OnActionTwo;
+                    @ActionTwo.canceled += instance.OnActionTwo;
+                    @Attack.started += instance.OnAttack;
+                    @Attack.performed += instance.OnAttack;
+                    @Attack.canceled += instance.OnAttack;
                 }
             }
         }
@@ -366,6 +486,9 @@ namespace Machia.Input
         public interface IDefaultGameplayActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnActionOne(InputAction.CallbackContext context);
+            void OnActionTwo(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
         }
         public interface IMenuActions
         {
