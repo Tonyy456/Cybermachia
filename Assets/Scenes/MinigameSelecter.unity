@@ -721,6 +721,7 @@ GameObject:
   - component: {fileID: 1818715492}
   - component: {fileID: 1818715491}
   - component: {fileID: 1818715493}
+  - component: {fileID: 1818715494}
   m_Layer: 5
   m_Name: SelectWheelMenu
   m_TagString: Untagged
@@ -812,6 +813,34 @@ MonoBehaviour:
   upperBoundOfItems: 20
   spinSpeed: 2.5
   deaccelerationConst: 1
+  onWheelDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1818715494}
+        m_TargetAssemblyTypeName: OnWheelDone, Assembly-CSharp
+        m_MethodName: StartMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1818715493}
+          m_ObjectArgumentAssemblyTypeName: SelectWheelController, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1818715494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818715489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aa441b86f8c443cbfda7c623fe7a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTillLoad: 2
 --- !u!1 &1929876729
 GameObject:
   m_ObjectHideFlags: 0
