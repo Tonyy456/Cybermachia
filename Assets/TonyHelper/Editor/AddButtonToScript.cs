@@ -42,7 +42,7 @@ namespace Tony
 
         protected Dictionary<string, Action> buttonActionsDictionary = new Dictionary<string, Action>();
 
-        protected T script;
+        protected T item;
 
 
         public override void OnInspectorGUI()
@@ -59,7 +59,7 @@ namespace Tony
         protected virtual void OnEnable()
         {
             InitializeButtons();
-            script = (T)target;
+            item = (T)target;
         }
 
         // Call AddButton() as needed.
