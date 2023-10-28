@@ -64,6 +64,15 @@ namespace Machia.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""74921a25-0925-48d0-9d2b-f504adb825f7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,28 @@ namespace Machia.Input
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc46e104-de9e-4380-b669-5ed67dc8a74a"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab6d6d2c-de3c-4c6b-8dde-aa291f5c6fb3"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PS4Controller"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -308,6 +339,7 @@ namespace Machia.Input
             m_DefaultGameplay_ActionOne = m_DefaultGameplay.FindAction("ActionOne", throwIfNotFound: true);
             m_DefaultGameplay_ActionTwo = m_DefaultGameplay.FindAction("ActionTwo", throwIfNotFound: true);
             m_DefaultGameplay_Attack = m_DefaultGameplay.FindAction("Attack", throwIfNotFound: true);
+            m_DefaultGameplay_Aim = m_DefaultGameplay.FindAction("Aim", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
             m_Menu_Confirm = m_Menu.FindAction("Confirm", throwIfNotFound: true);
@@ -375,6 +407,7 @@ namespace Machia.Input
         private readonly InputAction m_DefaultGameplay_ActionOne;
         private readonly InputAction m_DefaultGameplay_ActionTwo;
         private readonly InputAction m_DefaultGameplay_Attack;
+        private readonly InputAction m_DefaultGameplay_Aim;
         public struct DefaultGameplayActions
         {
             private @MachiaInputActions m_Wrapper;
@@ -383,6 +416,7 @@ namespace Machia.Input
             public InputAction @ActionOne => m_Wrapper.m_DefaultGameplay_ActionOne;
             public InputAction @ActionTwo => m_Wrapper.m_DefaultGameplay_ActionTwo;
             public InputAction @Attack => m_Wrapper.m_DefaultGameplay_Attack;
+            public InputAction @Aim => m_Wrapper.m_DefaultGameplay_Aim;
             public InputActionMap Get() { return m_Wrapper.m_DefaultGameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -404,6 +438,9 @@ namespace Machia.Input
                     @Attack.started -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAttack;
                     @Attack.performed -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAttack;
                     @Attack.canceled -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAttack;
+                    @Aim.started -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAim;
+                    @Aim.performed -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAim;
+                    @Aim.canceled -= m_Wrapper.m_DefaultGameplayActionsCallbackInterface.OnAim;
                 }
                 m_Wrapper.m_DefaultGameplayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -420,6 +457,9 @@ namespace Machia.Input
                     @Attack.started += instance.OnAttack;
                     @Attack.performed += instance.OnAttack;
                     @Attack.canceled += instance.OnAttack;
+                    @Aim.started += instance.OnAim;
+                    @Aim.performed += instance.OnAim;
+                    @Aim.canceled += instance.OnAim;
                 }
             }
         }
@@ -489,6 +529,7 @@ namespace Machia.Input
             void OnActionOne(InputAction.CallbackContext context);
             void OnActionTwo(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
         }
         public interface IMenuActions
         {

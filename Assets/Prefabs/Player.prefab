@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 4217515169378795417}
   - component: {fileID: 4217515169378795416}
   - component: {fileID: -1139150527232537659}
-  - component: {fileID: 7378225331602351034}
+  - component: {fileID: 4952430025374633311}
+  - component: {fileID: 4876078225511967548}
+  - component: {fileID: 6573365496969403536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -116,7 +118,7 @@ MonoBehaviour:
   m_DefaultActionMap: DefaultGameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7378225331602351034
+--- !u!114 &4952430025374633311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +127,93 @@ MonoBehaviour:
   m_GameObject: {fileID: 4217515169378795419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b35e414a1a0c450180d70b011ad7371, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e646e937ea1d4d57be6193d9ccab152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 3222017936251721125, guid: 9763b220a24234796b9b326835d1f2fd, type: 3}
+  fireDelay: 0.1
+--- !u!114 &4876078225511967548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217515169378795419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0210ff4147214ecf9760792653fef00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  dashSpeed: 25
+  dashSpeed: 30
   dashLength: 0.3
-  dashDelay: 1
+  dashDelay: 0.75
   canMoveInDash: 0
+  onDash:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6573365496969403536}
+        m_TargetAssemblyTypeName: PlayerState, Assembly-CSharp
+        m_MethodName: set_Invulnerable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4952430025374633311}
+        m_TargetAssemblyTypeName: PlayerAttackController, Assembly-CSharp
+        m_MethodName: set_AllowedToShoot
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDashEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6573365496969403536}
+        m_TargetAssemblyTypeName: PlayerState, Assembly-CSharp
+        m_MethodName: set_Invulnerable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4952430025374633311}
+        m_TargetAssemblyTypeName: PlayerAttackController, Assembly-CSharp
+        m_MethodName: set_AllowedToShoot
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &6573365496969403536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217515169378795419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea5012354f5224a438e637fc749c8958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invincible: 0
