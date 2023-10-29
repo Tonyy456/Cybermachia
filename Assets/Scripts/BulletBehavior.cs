@@ -12,7 +12,7 @@ public class BulletBehavior : MonoBehaviour
 
     private Rigidbody2D rb;
     private IEnumerator routine;
-    private GameObject spawnedFrom;
+    public GameObject spawnedFrom { get; set; }
     private float spawnedTime;
 
     public void Initialize(Vector2 movementDirection, GameObject spawnedFrom)
@@ -28,18 +28,9 @@ public class BulletBehavior : MonoBehaviour
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject == spawnedFrom) return;
-
-        // Is a player
-        PlayerController state = collision.gameObject.GetComponent<PlayerController>();
-        if(state)
-        {
-            state.DamagePlayer(3);
-            Explode();
-            return;
-        }
        
         // Just a random object.
-        if ((Time.time - spawnedTime) > minTimeAlive) 
+        if (collision.tag != "Player" && (Time.time - spawnedTime) > minTimeAlive) 
         {     
             Explode();
         }

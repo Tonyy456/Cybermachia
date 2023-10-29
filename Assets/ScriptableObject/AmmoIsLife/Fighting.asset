@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: fighting
   Transitions:
-  - trigger: next
+  - trigger: summary
     state: {fileID: 11400000, guid: 94ad608ee50b9449fa8945bf43119cc2, type: 2}
+  behaviour: {fileID: 0}

@@ -12,7 +12,6 @@ namespace Tony
         public Action OnEnter;
         public Action OnExit;
         public FSMBehaviour behaviour;
-        //we
     }
 }
 

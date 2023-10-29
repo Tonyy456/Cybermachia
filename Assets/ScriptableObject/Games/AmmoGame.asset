@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c0681fc13f34c3b9507debfc4e7e84, type: 3}
   m_Name: AmmoGame
   m_EditorClassIdentifier: 
-  sceneName: Thing
-  minigameName: Ammo Game
+  sceneName: AmmoIsLife
+  minigameName: Ammo Is Life
   displayColor: {r: 1, g: 0.5613208, b: 0.5613208, a: 1}

@@ -8,15 +8,26 @@ using UnityEngine;
 public class FSMBehaviour : MonoBehaviour
 {
     [SerializeField] private FiniteStateMachineSO fsm;
+    [SerializeField] private List<StateSOUnityEventWrapper> events;
+
+    [Header("Dont Change. Debug Purposes Only")]
     [SerializeField] private string currentState;
     private SimpleFSM result;
 
     private void Awake()
     {
         if (fsm == null) Destroy(this.gameObject);
+
+        //Wire up state events
+        foreach(var item in events)
+        {
+            item.State.OnEnter += () => { item.OnEnter?.Invoke(); };
+        }
+
+        // Wire up fsm representation
         result = convertStateMachine(fsm);
         currentState = result.CurrentState.Name;
-        result.OnNewState += () =>
+        result.OnStateTransition += () =>
         {
             currentState = result.CurrentState.Name;
             result.CurrentState.behaviour = this;
@@ -67,7 +78,7 @@ public class FSMBehaviour : MonoBehaviour
 
 public class SimpleFSM : FiniteStateMachine<StateSO, string>
 {
-    public Action OnNewState;
+    
     public SimpleFSM(StateSO initialState) : base(initialState) { }
 
     protected override void OnInvalidTransition(StateSO currentState, string trigger)
@@ -77,9 +88,15 @@ public class SimpleFSM : FiniteStateMachine<StateSO, string>
 
     protected override void OnTransition(StateSO fromState, StateSO toState, string trigger)
     {
-        OnNewState?.Invoke();
         fromState.OnExit?.Invoke();
         fromState.behaviour = null;
         toState.OnEnter?.Invoke();
     }
+}
+
+[Serializable]
+public class StateSOUnityEventWrapper
+{
+    public StateSO State;
+    public UnityEngine.Events.UnityEvent OnEnter; 
 }

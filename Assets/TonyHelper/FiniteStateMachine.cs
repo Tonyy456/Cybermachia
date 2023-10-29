@@ -11,6 +11,7 @@ namespace Tony
         private Dictionary<TTrigger, TState> anyTransitions;
 
         public TState CurrentState { get; protected set; }
+        public Action OnStateTransition { get; set; }
 
         protected FiniteStateMachine(TState initialState)
         {
@@ -42,12 +43,14 @@ namespace Tony
                 TState nextState = anyTransitions[trigger];
                 OnTransition(CurrentState, nextState, trigger);
                 CurrentState = nextState;
+                OnStateTransition?.Invoke();
             }
             else if (transitions.ContainsKey(CurrentState) && transitions[CurrentState].ContainsKey(trigger))
             {
                 TState nextState = transitions[CurrentState][trigger];
                 OnTransition(CurrentState, nextState, trigger);
                 CurrentState = nextState;
+                OnStateTransition?.Invoke();
             }
             else
             {

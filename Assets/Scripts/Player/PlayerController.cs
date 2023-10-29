@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer playerImage;
 
     private PlayerInput input;
-
     public PlayerAmmoUIController AmmoUIController { get; set; }
 
     public void InitializePlayerData(PlayerAmmoUIController controller, Color playerColor)
@@ -84,6 +83,23 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        var blt = collision.GetComponent<BulletBehavior>();
+        if(blt != null && blt.spawnedFrom != this.gameObject)
+        {
+            int damage = 2;
+            if (state.Health <= damage)
+            {
+                ScoreHandler handler = GameObject.FindObjectOfType<ScoreHandler>();
+                int playerIndex = this.GetComponent<PlayerInput>().playerIndex;
+                handler.PlayerKilled(playerIndex, blt.spawnedFrom.GetComponent<PlayerInput>().playerIndex);
+            }
+            this.DamagePlayer(damage);
+            blt.Explode();
+        }
+    }
+
     public void HandleDeath()
     {
         //reset health.
@@ -107,5 +123,4 @@ public class PlayerController : MonoBehaviour
         var item = GameObject.FindObjectOfType<PlayerSpawnHandler>();
         item.SpawnPlayer(input);
     }
-
 }
