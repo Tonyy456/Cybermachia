@@ -7,25 +7,27 @@ public class PlayerState : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private bool invincible;
+    [SerializeField] private GameObject textPopUpPrefab;
 
     public int Health { get; private set; }
     public bool Invulnerable { get; set; } = false;
     public bool CanShoot { get; set; } = true;
+    public bool Paused { get; set; } = false;
 
     public void Awake()
     {
         Health = maxHealth;
     }
 
-    public void Damage(int damage)
+    public void ResetHealth()
     {
-        if (invincible || Invulnerable) return;
-
-        Health -= Mathf.Clamp(damage, 0, int.MaxValue);
+        Health = maxHealth;
     }
 
-    public void Heal(int effect)
+    public bool TryDamage(int damage)
     {
-        Health += Mathf.Clamp(effect, 0, int.MaxValue);
+        if (invincible || Invulnerable) return false;
+        Health -= Mathf.Clamp(damage, 0, int.MaxValue);
+        return true;
     }
 }

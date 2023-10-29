@@ -42,13 +42,13 @@ namespace Tony
 
         protected Dictionary<string, Action> buttonActionsDictionary = new Dictionary<string, Action>();
 
-        protected T item;
-
+        protected T script;
 
         public override void OnInspectorGUI()
         {
             foreach (var buttonAction in buttonActions)
             {
+                //Debug.Log(buttonAction.Item1);
                 if (GUILayout.Button(buttonAction.Item1))
                 {
                     buttonAction.Item2?.Invoke();
@@ -58,8 +58,8 @@ namespace Tony
         }
         protected virtual void OnEnable()
         {
+            script = (T)target;
             InitializeButtons();
-            item = (T)target;
         }
 
         // Call AddButton() as needed.

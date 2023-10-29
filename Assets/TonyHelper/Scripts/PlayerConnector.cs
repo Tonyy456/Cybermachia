@@ -96,6 +96,7 @@ namespace Tony
         private void onPlayerJoined(PlayerInput input)
         {
             if (input == null) return; //just in case.
+            AddPlayerToSingleton(input);
             onPlayerGained?.Invoke();
             if(manager.joinBehavior == PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed &&
                 ConnectedPlayerHolder.Instance.connectedPlayers.Count >= minimumPlayerCount)
@@ -105,7 +106,6 @@ namespace Tony
             if (playerParent != null) input.gameObject.transform.SetParent(playerParent);
             IPlayerConnectedHandler[] devices = Object.FindObjectsOfType<IPlayerConnectedHandler>();
             foreach (var i in devices) i.ConnectPlayer(input);
-            AddPlayerToSingleton(input);
         }
 
         private void AddPlayerToSingleton(PlayerInput input)

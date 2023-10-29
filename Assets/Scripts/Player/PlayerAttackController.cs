@@ -51,7 +51,7 @@ public class PlayerAttackController : MonoBehaviour
         //spawn projectile, set position, set rotation, get script
         GameObject bullet = GameObject.Instantiate(bulletPrefab);
         bullet.transform.position = this.transform.position; //modify later?
-        bullet.GetComponent<BulletBehavior>().Initialize(aimDir);
+        bullet.GetComponent<BulletBehavior>().Initialize(aimDir, this.gameObject);
     }
 
     private void InitializeAim(InputAction action)

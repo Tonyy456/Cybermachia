@@ -46,11 +46,11 @@ namespace Tony
         private bool TryStateTransition(string message)
         {
             if (CurrentState == null) return false;
-
             StateTransition match = CurrentState.Transitions.Find(x => x.trigger == message);
             if (match != null)
             {
-                return TryTransition(match.state);
+                var result = TryTransition(match.state);
+                return result;
             }
             return false;
 
@@ -65,6 +65,9 @@ namespace Tony
         {
             if (CurrentState.name != state.name)
             {
+                CurrentState.OnExit?.Invoke();
+                CurrentState = state;
+                CurrentState.OnEnter?.Invoke();
                 return true;
             }
             else
