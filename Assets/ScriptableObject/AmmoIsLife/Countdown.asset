@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: countdown
   Transitions:
-  - trigger: next
+  - trigger: ready
     state: {fileID: 11400000, guid: 117f480e8821743998f4a3484b1c5829, type: 2}

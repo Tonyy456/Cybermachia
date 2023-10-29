@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class AmmoIsLifeInitializer : MonoBehaviour
 {
-    [SerializeField] private FiniteStateMachineSO FSM;
+    [SerializeField] private FSMBehaviour FSM;
     [SerializeField] private ClampScreenBehavior CameraClamper;
 
     public void Start()
@@ -22,6 +22,6 @@ public class AmmoIsLifeInitializer : MonoBehaviour
 
         // Figure out map... generate it?
 
-        FSM.Fire("next"); // transition to next state... if not already done.
+        FSM.Fire("initialized"); // transition to next state... if not already done.
     }
 }

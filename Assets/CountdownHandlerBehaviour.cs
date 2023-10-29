@@ -6,7 +6,7 @@ using Tony;
 
 public class CountdownHandlerBehaviour : MonoBehaviour
 {
-    [SerializeField] private FiniteStateMachineSO fsm;
+    [SerializeField] private FSMBehaviour fsm;
     [SerializeField] private StateSO countdownState;
 
     [SerializeField] private GameObject panel;
@@ -24,6 +24,7 @@ public class CountdownHandlerBehaviour : MonoBehaviour
     {
         if (currentRoutine == null)
         {
+            panel.gameObject.SetActive(true);
             currentRoutine = countdownRoutine(cdTime);
             StartCoroutine(currentRoutine);
         } 
@@ -36,10 +37,12 @@ public class CountdownHandlerBehaviour : MonoBehaviour
         while(remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
             SetText(remainingTime);
         }
         currentRoutine = null;
-        //fsm.Fire(next);
+        fsm.Fire("ready");
+        panel.SetActive(false);
         yield return null;
     }
 

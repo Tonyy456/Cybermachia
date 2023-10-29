@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,10 +13,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerState state;
 
     [SerializeField] private GameObject turnOffOnDeath;
-
     [SerializeField] private GameObject textPrefab;
+    [SerializeField] private SpriteRenderer playerImage;
 
     private PlayerInput input;
+
+    public PlayerAmmoUIController AmmoUIController { get; set; }
+
+    public void InitializePlayerData(PlayerAmmoUIController controller, Color playerColor)
+    {
+        AmmoUIController = controller;
+        AmmoUIController.SetAmmo(state.Health);
+        AmmoUIController.gameObject.SetActive(true);
+        AmmoUIController.SetColor(playerColor);
+        playerImage.color = playerColor;
+    }
+
 
     public void OnValidate()
     {
@@ -24,21 +38,32 @@ public class PlayerController : MonoBehaviour
         if (state == null) state = this.GetComponent<PlayerState>();
     }
 
-    public void Start()
+    public void Awake()
     {
         input = this.GetComponent<PlayerInput>();
     }
 
+    public void Start()
+    {
+        if (AmmoUIController) AmmoUIController.SetAmmo(state.Health);
+        if(state.Paused)
+        {} else{EnablePlayer(); // ensure player movement is enabled
+        }
+    }
+
     public void PausePlayer()
     {
+        state.Paused = true;
+        if (input == null) input = this.GetComponent<PlayerInput>();
         foreach (var i in input.currentActionMap.actions) i.Disable();
         state.Invulnerable = true;
         if (box) box.enabled = false;
-
     }
 
     public void EnablePlayer()
     {
+        state.Paused = false;
+        if (input == null) input = this.GetComponent<PlayerInput>();
         foreach (var i in input.currentActionMap.actions) i.Enable();
         state.Invulnerable = false;
         if (box) box.enabled = true;
@@ -48,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (state.TryDamage(damage))
         {
+            AmmoUIController.SetAmmo(state.Health);
             var textPfb = GameObject.Instantiate(textPrefab);
             var behavior = textPfb.GetComponent<TextPopUpBehaviour>();
             behavior.Initialize($"-{damage}", this.transform.position);
@@ -62,15 +88,24 @@ public class PlayerController : MonoBehaviour
     {
         //reset health.
         turnOffOnDeath.SetActive(false);
-        state.ResetHealth();
         PausePlayer();
+        StartCoroutine(WaitToRespawn(3f));
     }
 
-    public void HandleRespawn(Vector2 newLocation)
+    public IEnumerator WaitToRespawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HandleRespawn();
+    }
+
+    public void HandleRespawn()
     {
         turnOffOnDeath.SetActive(true);
+        state.ResetHealth();
+        AmmoUIController.SetAmmo(state.Health);
         EnablePlayer();
-        // to implement
+        var item = GameObject.FindObjectOfType<PlayerSpawnHandler>();
+        item.SpawnPlayer(input);
     }
 
 }

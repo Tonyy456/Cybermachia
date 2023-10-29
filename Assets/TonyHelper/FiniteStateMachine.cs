@@ -8,6 +8,7 @@ namespace Tony
     public abstract class FiniteStateMachine<TState, TTrigger>
     {
         private Dictionary<TState, Dictionary<TTrigger, TState>> transitions;
+        private Dictionary<TTrigger, TState> anyTransitions;
 
         public TState CurrentState { get; protected set; }
 
@@ -15,6 +16,13 @@ namespace Tony
         {
             CurrentState = initialState;
             transitions = new Dictionary<TState, Dictionary<TTrigger, TState>>();
+            anyTransitions = new Dictionary<TTrigger, TState>();
+        }
+
+        public void AddAnyTransition(TTrigger trigger, TState toState)
+        {
+            if (!anyTransitions.ContainsKey(trigger))
+                anyTransitions.Add(trigger, toState);
         }
 
         public void AddTransition(TState fromState, TTrigger trigger, TState toState)
@@ -29,7 +37,13 @@ namespace Tony
 
         public void Fire(TTrigger trigger)
         {
-            if (transitions.ContainsKey(CurrentState) && transitions[CurrentState].ContainsKey(trigger))
+            if (anyTransitions.ContainsKey(trigger))
+            {
+                TState nextState = anyTransitions[trigger];
+                OnTransition(CurrentState, nextState, trigger);
+                CurrentState = nextState;
+            }
+            else if (transitions.ContainsKey(CurrentState) && transitions[CurrentState].ContainsKey(trigger))
             {
                 TState nextState = transitions[CurrentState][trigger];
                 OnTransition(CurrentState, nextState, trigger);
@@ -62,9 +76,9 @@ namespace Tony
         Exit
     }
 
-    public abstract class DefaultFSM : FiniteStateMachine<State, StateTrigger>
+    public abstract class ActiveFSM : FiniteStateMachine<State, StateTrigger>
     {
-        protected DefaultFSM(State initialState) : base(initialState)
+        protected ActiveFSM(State initialState) : base(initialState)
         {
         }
     }

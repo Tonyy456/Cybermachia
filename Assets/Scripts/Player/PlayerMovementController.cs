@@ -83,13 +83,13 @@ public class PlayerMovementController : MonoBehaviour
     private void InitializeDash(InputAction action)
     {
         dash = action;
-        dash.Enable();
+        //dash.Enable();
         dash.performed += DashHandler;
     }
 
     private void InitializeMove(InputAction action)
     {
         move = action;
-        move.Enable();
+        //move.Enable();
     }
 }

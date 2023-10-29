@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Initialization
   Transitions:
-  - trigger: next
+  - trigger: initialized
     state: {fileID: 11400000, guid: 21734a53b5e7445fd96a0539cd9b4679, type: 2}

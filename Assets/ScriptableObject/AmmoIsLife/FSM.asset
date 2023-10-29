@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: FSM
   m_EditorClassIdentifier: 
   Name: AmmoIsLife_FSM
-  CurrentState: {fileID: 11400000, guid: 4e1bba25e5fc04370950d52a71c452f9, type: 2}
+  StartState: {fileID: 11400000, guid: 4e1bba25e5fc04370950d52a71c452f9, type: 2}
   AnyStateTransitions: []
+  currentState: {fileID: 11400000, guid: 4e1bba25e5fc04370950d52a71c452f9, type: 2}

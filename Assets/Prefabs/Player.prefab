@@ -180,6 +180,7 @@ MonoBehaviour:
   state: {fileID: 6573365496969403536}
   turnOffOnDeath: {fileID: 7442435968478057505}
   textPrefab: {fileID: 1566078538420074684, guid: be3da74cd638b4cc993d7bd09d8762eb, type: 3}
+  playerImage: {fileID: 2455897621834078495}
 --- !u!1 &7442435968478057505
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,8 +9,10 @@ namespace Tony
     {
         public string Name;
         public List<StateTransition> Transitions;
-        public Action OnEnter { get; set; }
-        public Action OnExit { get; set; }
+        public Action OnEnter;
+        public Action OnExit;
+        public FSMBehaviour behaviour;
+        //we
     }
 }
 

@@ -57,13 +57,13 @@ public class PlayerAttackController : MonoBehaviour
     private void InitializeAim(InputAction action)
     {
         aim = action;
-        aim.Enable();
+        //aim.Enable();
     }
 
     private void InitializeAttack(InputAction action)
     {
         attack = action;
-        attack.Enable();
+        //attack.Enable();
         attack.performed += ShootHandler;
     }
 }
