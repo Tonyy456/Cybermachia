@@ -1293,7 +1293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &776602577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2917,6 +2917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015596574}
+  - component: {fileID: 2015596575}
   m_Layer: 0
   m_Name: CountdownHandler
   m_TagString: Untagged
@@ -2939,6 +2940,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015596575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015596573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6d4c00ee068149aab0823f70b0b1755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 776602576}
+  text: {fileID: 1259116010}
+  cdTime: 5
 --- !u!1 &2051874930
 GameObject:
   m_ObjectHideFlags: 0

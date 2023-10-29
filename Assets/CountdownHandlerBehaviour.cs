@@ -2,14 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tony;
 
 public class CountdownHandlerBehaviour : MonoBehaviour
 {
+    [SerializeField] private FiniteStateMachineSO fsm;
+    [SerializeField] private StateSO countdownState;
+
     [SerializeField] private GameObject panel;
     [SerializeField] private TMPro.TMP_Text text;
     [SerializeField] private float cdTime = 5f;
 
     private IEnumerator currentRoutine;
+
+    public void Start()
+    {
+        countdownState.OnEnter += StartCountdown;
+    }
 
     public void StartCountdown()
     {
@@ -30,6 +39,7 @@ public class CountdownHandlerBehaviour : MonoBehaviour
             SetText(remainingTime);
         }
         currentRoutine = null;
+        //fsm.Fire(next);
         yield return null;
     }
 
