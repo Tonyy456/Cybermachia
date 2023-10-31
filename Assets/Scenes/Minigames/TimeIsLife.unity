@@ -2789,7 +2789,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fsm: {fileID: 11400000, guid: 712e009ee2a0a45368b039052e83d1ef, type: 2}
-  events: []
+  events:
+  - State: {fileID: 11400000, guid: 1587fec751f4941e6b0de2f2eec46cec, type: 2}
+    OnEnter:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2015596575}
+          m_TargetAssemblyTypeName: CountdownHandlerBehaviour, Assembly-CSharp
+          m_MethodName: Start
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   currentState: 
 --- !u!4 &790074556
 Transform:
