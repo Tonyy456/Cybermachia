@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tony;
 
 public class TIL_FSMController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private FSMBehaviour FSMScript;
+    [SerializeField] private StateSO countdownState;
+    [SerializeField] private StateSO fightingState;
+    [SerializeField] private StateSO summaryState;
+    [SerializeField] private StateSO endState;
 
-    // Update is called once per frame
-    void Update()
+    public void Awake()
     {
-        
     }
 }
