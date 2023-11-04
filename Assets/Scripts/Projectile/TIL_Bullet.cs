@@ -11,15 +11,17 @@ public class TIL_Bullet : MonoBehaviour
 
     public GameObject SpawnedFrom { get; set; }
 
+    private TIL_BulletManager manager;
     private Rigidbody2D rb;
     private IEnumerator routine;
     private float spawnedTime;
 
-    public void Initialize(GameObject spawnedFrom, Vector2 movementDirection)
+    public void Initialize(GameObject spawnedFrom, Vector2 movementDirection, TIL_BulletManager manager)
     {
+        this.manager = manager;
         this.SpawnedFrom = spawnedFrom;
-        spawnedTime = Time.time;
-        rb = this.GetComponent<Rigidbody2D>();
+        this.spawnedTime = Time.time;
+        this.rb = this.GetComponent<Rigidbody2D>();
 
         rb.AddForce(movementDirection.normalized * speed);
         routine = DestroyInSeconds(aliveTime);
@@ -29,9 +31,15 @@ public class TIL_Bullet : MonoBehaviour
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject == SpawnedFrom) return;
-        if (collision.tag != "Player" && (Time.time - spawnedTime) > minTimeAlive)
+        if (collision.tag == "Player")
+        {
+            manager.BulletCollides(this, collision.gameObject);
+            return;
+        }
+        if ((Time.time - spawnedTime) > minTimeAlive)
         {
             Explode();
+            return;
         }
     }
 

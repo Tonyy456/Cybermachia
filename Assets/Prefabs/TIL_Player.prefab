@@ -316,10 +316,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 90
   minHealth: 0
+  iFrameTime: 0.5
   ui: {fileID: 8529823992022152282}
+  health: 0
   OnHealthOut:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8512646795102395134}
+        m_TargetAssemblyTypeName: TIL_PlayerController, Assembly-CSharp
+        m_MethodName: EnableAllInput
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7050105564424446235}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7015143248550200604
 GameObject:
   m_ObjectHideFlags: 0

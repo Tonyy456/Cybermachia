@@ -58,8 +58,6 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
 
         TIL_BulletManager manager = GameObject.FindObjectOfType<TIL_BulletManager>();
         manager?.FireBullet(this.gameObject, aimDir, Vector2.zero);
-        TextPopupManager manager2 = GameObject.FindObjectOfType<TextPopupManager>();
-        manager2.HandlePopup("*BAM*", this.transform.position);
     }
 
     private void InitializeAim(InputAction action)

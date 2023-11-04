@@ -9,7 +9,6 @@ public class TIL_PlayerController : MonoBehaviour
     [SerializeField] private TIL_MovementController movement;
     [SerializeField] private TIL_HealthController health;
 
-
     void Start()
     {
         if(enableInput)
