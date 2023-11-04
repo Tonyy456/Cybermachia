@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452dbff02b356486faf8b59e3c6f679e, type: 3}
   m_Name: TIL
   m_EditorClassIdentifier: 
-  Name: 
-  StartState: {fileID: 0}
+  Name: TimeIsLife
+  StartState: {fileID: 11400000, guid: 9b4285e8e6c1b4837bc206ee53378482, type: 2}
   AnyStateTransitions: []

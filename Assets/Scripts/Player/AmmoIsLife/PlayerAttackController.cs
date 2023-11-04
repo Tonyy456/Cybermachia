@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput), typeof(PlayerState))]
@@ -11,6 +12,7 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] private float fireDelay = 0.1f;
 
     //Control
+    public UnityEvent OnAmmoChange { get; set; }
     private float lastFire;
     private bool isKeyboard = false;
 
@@ -21,6 +23,7 @@ public class PlayerAttackController : MonoBehaviour
 
     //State
     private PlayerState state;
+    private PlayerController controller;
 
     public void Awake()
     {
@@ -31,6 +34,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         state = this.GetComponent<PlayerState>();
         input = this.GetComponent<PlayerInput>();
+        controller = this.GetComponent<PlayerController>();
         isKeyboard = input.currentControlScheme.Contains("Keyboard");
         InitializeAttack(input.currentActionMap.FindAction("Attack"));
         InitializeAim(input.currentActionMap.FindAction("Aim"));
@@ -52,18 +56,17 @@ public class PlayerAttackController : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab);
         bullet.transform.position = this.transform.position; //modify later?
         bullet.GetComponent<BulletBehavior>().Initialize(aimDir, this.gameObject);
+        controller.DamagePlayer(1);
     }
 
     private void InitializeAim(InputAction action)
     {
         aim = action;
-        //aim.Enable();
     }
 
     private void InitializeAttack(InputAction action)
     {
         attack = action;
-        //attack.Enable();
         attack.performed += ShootHandler;
     }
 }

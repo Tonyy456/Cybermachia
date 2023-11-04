@@ -69,7 +69,7 @@ namespace Tony
         public UnityEvent onPlayerGained;
 
         private PlayerInputManager manager;
-
+        private bool readyToInvoke = false;
         private void Awake()
         {
             if (clearConnectedPlayers) ConnectedPlayerHolder.Instance.Reset();
@@ -86,11 +86,18 @@ namespace Tony
             }
 
             // allow for individual scene testing.
+            
             if (ConnectedPlayerHolder.Instance.connectedPlayers.Count < minimumPlayerCount)
                 manager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
-            else
-                onGameReady?.Invoke();
+            else {
+                readyToInvoke = true;
+            }
+        }
 
+        private void Start()
+        {
+            if(readyToInvoke)
+                onGameReady?.Invoke();
         }
 
         private void onPlayerJoined(PlayerInput input)

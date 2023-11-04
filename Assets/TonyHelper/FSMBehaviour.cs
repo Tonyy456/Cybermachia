@@ -79,7 +79,9 @@ public class FSMBehaviour : MonoBehaviour
 public class SimpleFSM : FiniteStateMachine<StateSO, string>
 {
     
-    public SimpleFSM(StateSO initialState) : base(initialState) { }
+    public SimpleFSM(StateSO initialState) : base(initialState) {
+        initialState.OnEnter?.Invoke();
+    }
 
     protected override void OnInvalidTransition(StateSO currentState, string trigger)
     {
