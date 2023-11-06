@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c0681fc13f34c3b9507debfc4e7e84, type: 3}
   m_Name: BombGame
   m_EditorClassIdentifier: 
-  sceneName: b
-  minigameName: Bomb Game
+  sceneName: AmmoIsLife
+  minigameName: Time Is Life
   displayColor: {r: 0.5235849, g: 0.6616371, b: 1, a: 1}

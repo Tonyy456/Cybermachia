@@ -2,25 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
-[RequireComponent(typeof(PlayerInput), typeof(PlayerState))]
-public class PlayerAttackController : MonoBehaviour
+public class TIL_AttackController : MonoBehaviour, PlayerInputScript
 {
-    [Header("ATTACK")]
-    [SerializeField] private GameObject bulletPrefab;
+    [Header("Needs a TIL_BulletManager")]
     [SerializeField] private float fireDelay = 0.1f;
 
-    //Control
+    public bool Enabled { get; set; } = false;
+
     private float lastFire;
     private bool isKeyboard = false;
-
-    //Input Actions
     private PlayerInput input;
     private InputAction attack;
     private InputAction aim;
-
-    //State
-    private PlayerState state;
 
     public void Awake()
     {
@@ -29,41 +24,54 @@ public class PlayerAttackController : MonoBehaviour
 
     public void Start()
     {
-        state = this.GetComponent<PlayerState>();
         input = this.GetComponent<PlayerInput>();
         isKeyboard = input.currentControlScheme.Contains("Keyboard");
         InitializeAttack(input.currentActionMap.FindAction("Attack"));
         InitializeAim(input.currentActionMap.FindAction("Aim"));
     }
 
+    public void DisableInput()
+    {
+        Enabled = false;
+        if (attack == null || aim == null) return;
+        attack.Disable();
+        aim.Disable();
+    }
+
+    public void EnableInput()
+    {
+        Enabled = true;
+        if (attack == null || aim == null) return;
+        attack.Enable();
+        aim.Enable();
+    }
+
     private void ShootHandler(InputAction.CallbackContext callback)
     {
-        if (!state.CanShoot) return;
         if ((Time.time - lastFire) < fireDelay) return;
 
         //get aim dir
         Vector2 aimDir = aim.ReadValue<Vector2>();
         if (aimDir.magnitude <= 0.1) return;
         if (isKeyboard) aimDir = Camera.main.ScreenToWorldPoint(aimDir) - this.transform.position;
-
         lastFire = Time.time;
 
-        //spawn projectile, set position, set rotation, get script
-        GameObject bullet = GameObject.Instantiate(bulletPrefab);
-        bullet.transform.position = this.transform.position; //modify later?
-        bullet.GetComponent<BulletBehavior>().Initialize(aimDir, this.gameObject);
+        TIL_BulletManager manager = GameObject.FindObjectOfType<TIL_BulletManager>();
+        manager?.FireBullet(this.gameObject, aimDir, Vector2.zero);
     }
 
     private void InitializeAim(InputAction action)
     {
         aim = action;
-        //aim.Enable();
+        if (Enabled) aim.Enable();
+        else aim.Disable();
     }
 
     private void InitializeAttack(InputAction action)
     {
         attack = action;
-        //attack.Enable();
         attack.performed += ShootHandler;
+        if (Enabled) attack.Enable();
+        else attack.Disable();
     }
 }

@@ -29,6 +29,7 @@ public class PlayerHandleDebugger : IPlayerConnectedHandler
                 var color = playerColors[input.playerIndex];
                 controller.InitializePlayerData(sp, color);
                 controller.PausePlayer();
+                Debug.Log("paused player");
             } else
             {
                 Destroy(input.gameObject);

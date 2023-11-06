@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject turnOffOnDeath;
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private SpriteRenderer playerImage;
+    [SerializeField] private bool keepDisabled;
 
     private PlayerInput input;
     public PlayerAmmoUIController AmmoUIController { get; set; }
@@ -42,11 +43,12 @@ public class PlayerController : MonoBehaviour
         input = this.GetComponent<PlayerInput>();
     }
 
+
     public void Start()
     {
         if (AmmoUIController) AmmoUIController.SetAmmo(state.Health);
-        if(state.Paused)
-        {} else{EnablePlayer(); // ensure player movement is enabled
+        if(state.Paused || keepDisabled)
+        { PausePlayer(); } else{EnablePlayer(); // ensure player movement is enabled
         }
     }
 
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
         var blt = collision.GetComponent<BulletBehavior>();
         if(blt != null && blt.spawnedFrom != this.gameObject)
         {
-            int damage = 2;
+            int damage = blt.damage;
             if (state.Health <= damage)
             {
                 ScoreHandler handler = GameObject.FindObjectOfType<ScoreHandler>();

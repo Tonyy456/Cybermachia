@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c0681fc13f34c3b9507debfc4e7e84, type: 3}
-  m_Name: SwordGame
+  m_Script: {fileID: 11500000, guid: 0eec3af1dd0b4408fa2b63c820d1e051, type: 3}
+  m_Name: Initialization
   m_EditorClassIdentifier: 
-  sceneName: AmmoIsLife
-  minigameName: Healthbar Swords
-  displayColor: {r: 0.5935223, g: 1, b: 0.514151, a: 1}
+  Name: Initialization
+  Transitions:
+  - trigger: count
+    state: {fileID: 11400000, guid: 1587fec751f4941e6b0de2f2eec46cec, type: 2}
+  behaviour: {fileID: 0}

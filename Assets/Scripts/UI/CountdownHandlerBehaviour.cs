@@ -17,7 +17,7 @@ public class CountdownHandlerBehaviour : MonoBehaviour
 
     public void Start()
     {
-        countdownState.OnEnter += StartCountdown;
+        //countdownState.OnEnter += StartCountdown;
     }
 
     public void StartCountdown()
