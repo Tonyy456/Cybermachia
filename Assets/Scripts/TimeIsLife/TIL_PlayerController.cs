@@ -9,10 +9,16 @@ public class TIL_PlayerController : MonoBehaviour
     [SerializeField] private TIL_MovementController movement;
     [SerializeField] private TIL_HealthController health;
     [SerializeField] private float stayDeadForSeconds = 1f;
+    private SpawnHandler handler;
 
     void Start()
     {
-        if(enableInput)
+        handler = GameObject.FindObjectOfType<SpawnHandler>();
+        if (handler) {
+            Vector2 spawn = handler.GetSpawnLocation();
+            this.transform.position = new Vector3(spawn.x, spawn.y, this.transform.position.z);
+        } 
+        if (enableInput)
         {
             EnableAllInput();
         }
@@ -24,6 +30,11 @@ public class TIL_PlayerController : MonoBehaviour
         health.Reset();
         health.Enable();
         EnableAllInput(true);
+        if (handler)
+        {
+            Vector2 spawn = handler.GetSpawnLocation();
+            this.transform.position = new Vector3(spawn.x, spawn.y, this.transform.position.z);
+        }
     }
 
     public void PlayerDie(float deadTime)

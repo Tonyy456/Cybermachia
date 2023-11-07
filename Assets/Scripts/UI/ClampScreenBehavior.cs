@@ -6,6 +6,11 @@ public class ClampScreenBehavior : MonoBehaviour
 {
     [SerializeField] private float targetWidth;
     [SerializeField] private float targetHeight;
+    [SerializeField] private bool clampOnStart;
+    public void Start()
+    {
+        if (clampOnStart) ClampScreen();
+    }
     public void ClampScreen()
     {
         Camera cam = Camera.main;

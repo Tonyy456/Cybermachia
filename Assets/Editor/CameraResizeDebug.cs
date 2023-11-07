@@ -8,16 +8,24 @@ using System;
 [CustomEditor(typeof(ClampScreenBehavior))]
 public class CameraResizeDebug : ButtonScriptHandler<ClampScreenBehavior>
 {
-    //private override void InitializeButtons()
-    //{
-    //    AddButton("Resize", ((CameraKeepInView)target).AttemptResize);
-    //}
     protected override void InitializeButtons()
     {
         if (script)
         {
             AddButton("Resize", script.ClampScreen);
         } 
+    }
+}
+
+[CustomEditor(typeof(MaintainPlayerArea))]
+public class CameraPlayerMaintainDebug : ButtonScriptHandler<MaintainPlayerArea>
+{
+    protected override void InitializeButtons()
+    {
+        if (script)
+        {
+            AddButton("Resize", script.ClampScreen);
+        }
     }
 }
 

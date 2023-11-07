@@ -172,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 4365549596811587238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1619453308140775826}
@@ -273,7 +273,7 @@ MonoBehaviour:
   enableHealthTick: 1
   movement: {fileID: 8512646795102395129}
   health: {fileID: 404194332796797245}
-  stayDeadForSeconds: 1
+  stayDeadForSeconds: 3
 --- !u!114 &8512646795102395129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d897af325b5e244ba96be2744828e9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  dashSpeed: 30
+  speed: 3
+  dashSpeed: 10
   dashLength: 0.3
   dashDelay: 0.75
 --- !u!114 &8512646795102395135
