@@ -12,6 +12,7 @@ public class TIL_MovementController : MonoBehaviour, PlayerInputScript
     [SerializeField] private float dashSpeed = 30f;
     [SerializeField] private float dashLength = 1f;
     [SerializeField] private float dashDelay = 1f;
+    [SerializeField] private Animator animator;
 
     public bool Enabled { get; set; } = false;
     public UnityEvent OnDashStart { get; set; }
@@ -58,7 +59,35 @@ public class TIL_MovementController : MonoBehaviour, PlayerInputScript
         if (move == null || inDash) return;
         Vector2 dp = move.ReadValue<Vector2>();
         Vector3 updateP = new Vector3(dp.x, dp.y, 0);
+        SetMovementAnimation(dp);
         this.transform.position += (updateP * Time.deltaTime * speed);
+    }
+
+    private void SetMovementAnimation(Vector2 movementDir)
+    {
+        if (movementDir.x > 0.1)
+        {
+            animator.Play("WalkRight");
+        }
+        else if (movementDir.x < -0.1)
+        {
+            animator.Play("WalkLeft");
+        }
+        else
+        {
+            if (movementDir.y > 0.1)
+            {
+                animator.Play("WalkUp");
+            }
+            else if (movementDir.y < -0.1)
+            {
+                animator.Play("WalkDown");
+            }
+            else
+            {
+                animator.Play("Idle");
+            }
+        }
     }
 
     private IEnumerator DashRoutine()

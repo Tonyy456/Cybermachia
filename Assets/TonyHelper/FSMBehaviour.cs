@@ -29,6 +29,7 @@ public class FSMBehaviour : MonoBehaviour
         currentState = result.CurrentState.Name;
         result.OnStateTransition += () =>
         {
+            Debug.Log($"Transitioned to {result.CurrentState.Name}");
             currentState = result.CurrentState.Name;
             result.CurrentState.behaviour = this;
         };  
