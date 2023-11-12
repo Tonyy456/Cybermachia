@@ -269,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89989ffb4738d4f82ba63caae0906a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableInput: 0
-  enableHealthTick: 0
+  enableInput: 1
+  enableHealthTick: 1
   movement: {fileID: 8512646795102395129}
   health: {fileID: 404194332796797245}
   stayDeadForSeconds: 3
