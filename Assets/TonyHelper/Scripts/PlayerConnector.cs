@@ -44,7 +44,7 @@ namespace Tony
             public List<ConnectedPlayer> connectedPlayers { get; set; } = new List<ConnectedPlayer>();
             public void AddPlayer(ConnectedPlayer player)
             {
-                if(!PlayerIsConnected(player))
+                if (!PlayerIsConnected(player))
                     connectedPlayers.Add(player);
             }
             public void Reset()
@@ -70,6 +70,14 @@ namespace Tony
 
         private PlayerInputManager manager;
         private bool readyToInvoke = false;
+
+        public static int numPlayers
+        {
+            get
+            {
+                return ConnectedPlayerHolder.Instance.connectedPlayers.Count;
+            }
+        }
         private void Awake()
         {
             if (clearConnectedPlayers) ConnectedPlayerHolder.Instance.Reset();

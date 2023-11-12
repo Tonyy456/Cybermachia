@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,8 +25,14 @@ public class TIL_GameStatistics : MonoBehaviour
         return playerStats[index];
     }
 
+    public int getWinner()
+    {
+        return playerStats.Max(x => x.PlayersKilled);
+    }
+
     public void PlayerHitPlayer(PlayerInput shooter, PlayerInput shootee)
     {
+        Debug.Log("Player hit!!");
         TIL_PlayerStats stat_shooter = playerStats[shooter.playerIndex];
         stat_shooter.BulletsHit += 1;
 
@@ -34,6 +41,7 @@ public class TIL_GameStatistics : MonoBehaviour
 
     public void PlayerKilled(PlayerInput shooter, PlayerInput shootee)
     {
+        Debug.Log("Player Died!!");
         TIL_PlayerStats stat_shooter = playerStats[shooter.playerIndex];
         stat_shooter.PlayersKilled += 1;
 

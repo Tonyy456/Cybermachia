@@ -11,6 +11,21 @@ public class TIL_PlayerController : MonoBehaviour
     [SerializeField] private float stayDeadForSeconds = 1f;
     private SpawnHandler handler;
 
+    public float Health 
+    { 
+        get
+        {
+            return health.Health;
+        } 
+    }
+    public bool Damageable
+    {
+        get
+        {
+            return !health.InDamageCooldown && health.Enabled;
+        }
+    }
+
     void Start()
     {
         handler = GameObject.FindObjectOfType<SpawnHandler>();
@@ -45,6 +60,7 @@ public class TIL_PlayerController : MonoBehaviour
     public void PlayerDie(float deadTime)
     {
         EnableAllInput(false);
+        health.Disable();
         StartCoroutine(RespawnInTime(stayDeadForSeconds));
     }
 
