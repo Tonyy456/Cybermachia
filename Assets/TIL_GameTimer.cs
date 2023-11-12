@@ -3,27 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CountdownUI : MonoBehaviour
+public class TIL_GameTimer : MonoBehaviour
 {
-    [SerializeField] private float defaultTimeLength;
-    [SerializeField] private float startDelay;
-    [SerializeField] private TMPro.TMP_Text textToUpdate;
     [SerializeField] private UnityEvent onTimerDone;
+    [SerializeField] private TMPro.TMP_Text textToUpdate;
 
+    private bool active = true;
     private IEnumerator routine;
 
-    public void StartTimer()
+    public void ActivateTick(bool on = true)
     {
-        StartTimer(defaultTimeLength);
+        active = on;
     }
 
-    public void StartTimer(float time)
+    public void StartGameTimer(float seconds)
     {
-        if(routine != null) StopCoroutine(routine);
-        routine = textToUpdate == null ?
-            TimerRoutine(time) : TimerTextRoutine(time, startDelay);
 
-        StartCoroutine(routine);
     }
 
     public IEnumerator TimerTextRoutine(float lengthOfTime, float startDelay = 0f)
@@ -32,7 +27,7 @@ public class CountdownUI : MonoBehaviour
         yield return new WaitForSeconds(startDelay);
 
         float startTime = Time.time;
-        while((Time.time - startTime) < lengthOfTime)
+        while ((Time.time - startTime) < lengthOfTime)
         {
             //evaluate time left on timer
             textToUpdate.text = $"{FormatSecondsAsMMSS(lengthOfTime - (Time.time - startTime))}";
@@ -48,7 +43,6 @@ public class CountdownUI : MonoBehaviour
         onTimerDone?.Invoke();
         yield return null;
     }
-
     private string FormatSecondsAsMMSS(float totalSeconds)
     {
         int minutes = Mathf.FloorToInt(totalSeconds / 60f);

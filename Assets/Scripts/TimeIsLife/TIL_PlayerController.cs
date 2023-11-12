@@ -22,13 +22,18 @@ public class TIL_PlayerController : MonoBehaviour
         {
             EnableAllInput();
         }
-        if (enableHealthTick) health.Enable();
+        if (enableHealthTick) EnableHealthTick();
+    }
+
+    public void EnableHealthTick()
+    {
+        health.Enable();
     }
 
     public void PlayerRespawn()
     {
         health.Reset();
-        health.Enable();
+        EnableHealthTick();
         EnableAllInput(true);
         if (handler)
         {

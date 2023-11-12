@@ -10,6 +10,7 @@ public class TIL_Manager : MonoBehaviour
         foreach(var script in scripts)
         {
             script.EnableAllInput(enabled);
+            script.EnableHealthTick();
         }
     }
 }
