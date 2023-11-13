@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 452dbff02b356486faf8b59e3c6f679e, type: 3}
-  m_Name: FSM
+  m_Name: AIL
   m_EditorClassIdentifier: 
   Name: AmmoIsLife_FSM
   StartState: {fileID: 11400000, guid: 4e1bba25e5fc04370950d52a71c452f9, type: 2}

@@ -259,14 +259,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4217515169378795417}
   - component: {fileID: -1139150527232537659}
-  - component: {fileID: 4952430025374633311}
-  - component: {fileID: 4876078225511967548}
-  - component: {fileID: 6573365496969403536}
   - component: {fileID: -1745969345941524442}
   - component: {fileID: -560685975026784777}
-  - component: {fileID: 8895785809704332413}
+  - component: {fileID: -9161608534936788441}
   m_Layer: 0
-  m_Name: Player
+  m_Name: AIL_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,56 +312,10 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: DefaultGameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4952430025374633311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4217515169378795419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e646e937ea1d4d57be6193d9ccab152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3222017936251721125, guid: 9763b220a24234796b9b326835d1f2fd, type: 3}
-  fireDelay: 0.1
---- !u!114 &4876078225511967548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4217515169378795419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0210ff4147214ecf9760792653fef00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  dashSpeed: 10
-  dashLength: 0.3
-  dashDelay: 0.75
-  canMoveInDash: 0
---- !u!114 &6573365496969403536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4217515169378795419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5012354f5224a438e637fc749c8958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  invincible: 0
-  textPopUpPrefab: {fileID: 1566078538420074684, guid: be3da74cd638b4cc993d7bd09d8762eb, type: 3}
 --- !u!61 &-1745969345941524442
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -412,7 +363,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8895785809704332413
+--- !u!114 &-9161608534936788441
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -421,17 +372,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4217515169378795419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f44481fc06c5c4754b073535287c4edf, type: 3}
+  m_Script: {fileID: 11500000, guid: d897af325b5e244ba96be2744828e9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: -1745969345941524442}
-  attack: {fileID: 4952430025374633311}
-  move: {fileID: 4876078225511967548}
-  state: {fileID: 6573365496969403536}
-  turnOffOnDeath: {fileID: 7442435968478057505}
-  textPrefab: {fileID: 1566078538420074684, guid: be3da74cd638b4cc993d7bd09d8762eb, type: 3}
-  playerImage: {fileID: 2455897621834078495}
-  keepDisabled: 1
+  speed: 10
+  dashSpeed: 30
+  dashLength: 1
+  dashDelay: 1
+  animator: {fileID: 0}
 --- !u!1 &6445174366809630958
 GameObject:
   m_ObjectHideFlags: 0

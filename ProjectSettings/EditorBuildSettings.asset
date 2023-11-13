@@ -21,12 +21,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MinigameSelecter.unity
     guid: 08d1f0d4260af4e7fbc80522719b218b
   - enabled: 1
-    path: Assets/Scenes/Minigames/AmmoIsLife.unity
-    guid: 143fbeb0dd3a6412eb0103c39096eca2
-  - enabled: 1
     path: Assets/Scenes/Minigames/HealthbarSword.unity
     guid: 4300d1fbff1c04939a2cac333635d4bf
   - enabled: 1
     path: Assets/Scenes/Minigames/TimeIsLife.unity
     guid: c2b1ebe01d529406d8829a71cb74b7d4
+  - enabled: 1
+    path: Assets/Scenes/Minigames/AmmoIsLife.unity
+    guid: 9b68b5debdfe84a8cad037ba20e09f8c
   m_configObjects: {}

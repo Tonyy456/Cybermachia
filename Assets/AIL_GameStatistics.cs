@@ -4,23 +4,23 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TIL_GameStatistics : MonoBehaviour
+public class AIL_GameStatistics : MonoBehaviour
 {
-    public List<TIL_PlayerStats> playerStats { get; private set; }
+    public List<AIL_PlayerStats> playerStats { get; private set; }
 
     const int numPlayers = 4;
     public void Awake()
     {
-        playerStats = new List<TIL_PlayerStats>();
-        for (int i = 0; i < numPlayers; i++) playerStats.Add(new TIL_PlayerStats());
+        playerStats = new List<AIL_PlayerStats>();
+        for (int i = 0; i < numPlayers; i++) playerStats.Add(new AIL_PlayerStats());
     }
 
-    public TIL_PlayerStats GetStatistics(PlayerInput input)
+    public AIL_PlayerStats GetStatistics(PlayerInput input)
     {
         return playerStats[input.playerIndex];
     }
 
-    public TIL_PlayerStats GetStatistics(int index)
+    public AIL_PlayerStats GetStatistics(int index)
     {
         return playerStats[index];
     }
@@ -32,26 +32,26 @@ public class TIL_GameStatistics : MonoBehaviour
 
     public void PlayerHitPlayer(PlayerInput shooter, PlayerInput shootee)
     {
-        TIL_PlayerStats stat_shooter = playerStats[shooter.playerIndex];
+        AIL_PlayerStats stat_shooter = playerStats[shooter.playerIndex];
         stat_shooter.BulletsHit += 1;
 
-        //TIL_PlayerStats stat_shootee = playerStats[shootee.playerIndex];
+        //AIL_PlayerStats stat_shootee = playerStats[shootee.playerIndex];
     }
 
     public void PlayerKilled(PlayerInput shooter, PlayerInput shootee)
     {
-        TIL_PlayerStats stat_shooter = playerStats[shooter.playerIndex];
+        AIL_PlayerStats stat_shooter = playerStats[shooter.playerIndex];
         stat_shooter.PlayersKilled += 1;
 
-        //TIL_PlayerStats stat_shootee = playerStats[shootee.playerIndex];
+        //AIL_PlayerStats stat_shootee = playerStats[shootee.playerIndex];
     }
 }
 
-public class TIL_PlayerStats
+public class AIL_PlayerStats
 {
     public int BulletsHit { get; set; } = 0;
     public int PlayersKilled { get; set; } = 0;
-    public TIL_PlayerStats()
+    public AIL_PlayerStats()
     {
 
     }
