@@ -29,6 +29,7 @@ public class AIL_PlayerController : MonoBehaviour
 
     void Start()
     {
+        health.Reset();
         handler = GameObject.FindObjectOfType<SpawnHandler>();
         if (useSpawnPoints && handler)
         {

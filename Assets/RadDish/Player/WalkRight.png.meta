@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7ea3473dfff5342a293e18ddee9f2eef
+guid: e4881784c4bb74e4a815c3af63bf7d63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -108,10 +108,10 @@ TextureImporter:
       name: WalkRight_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 1
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90f0b8d0352fd403c89a91f04de715e8
-      internalID: -704858450
+      spriteID: 17e16123064684554b2a45e5766f6607
+      internalID: -1918145586
       vertices: []
       indices: 
       edges: []
@@ -129,10 +129,10 @@ TextureImporter:
       name: WalkRight_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 21
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f564690f2a5d849c688695573bfb3d97
-      internalID: 21129164
+      spriteID: 6ef09fb32806847bbade8aad31d8ecc8
+      internalID: -424019656
       vertices: []
       indices: 
       edges: []
@@ -150,10 +150,10 @@ TextureImporter:
       name: WalkRight_2
       rect:
         serializedVersion: 2
-        x: 43
+        x: 41
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aadc75d4491b6435383275699690aa48
-      internalID: -1921905424
+      spriteID: bfdfd17e722eb4759b03067b8b4673c6
+      internalID: 1778069941
       vertices: []
       indices: 
       edges: []
@@ -171,10 +171,10 @@ TextureImporter:
       name: WalkRight_3
       rect:
         serializedVersion: 2
-        x: 63
+        x: 61
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99464e943d46c468b9231f37ac23a213
-      internalID: -1922026485
+      spriteID: 28528f411c9564176973ebba6f7c2976
+      internalID: 1201851523
       vertices: []
       indices: 
       edges: []
@@ -192,10 +192,10 @@ TextureImporter:
       name: WalkRight_4
       rect:
         serializedVersion: 2
-        x: 83
+        x: 81
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fc522868ee0c413bb7d369ab78aebd2
-      internalID: 1665755264
+      spriteID: 413ed458909f54b419e9045cc444e95b
+      internalID: -1972140524
       vertices: []
       indices: 
       edges: []
@@ -213,10 +213,10 @@ TextureImporter:
       name: WalkRight_5
       rect:
         serializedVersion: 2
-        x: 103
+        x: 101
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38437da72105641359f731309663e881
-      internalID: -1474886083
+      spriteID: 0b3ddf81f75904d9c928ef1eeec57c78
+      internalID: 724961469
       vertices: []
       indices: 
       edges: []
@@ -234,10 +234,10 @@ TextureImporter:
       name: WalkRight_6
       rect:
         serializedVersion: 2
-        x: 123
+        x: 121
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1c84629907e24a768673b50293c64c3
-      internalID: 1084602515
+      spriteID: 5660f178bde51443ba64876a55702d37
+      internalID: 1255796496
       vertices: []
       indices: 
       edges: []
@@ -255,10 +255,10 @@ TextureImporter:
       name: WalkRight_7
       rect:
         serializedVersion: 2
-        x: 143
+        x: 141
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64ded7082c1d64ff18305eeddb103ca9
-      internalID: -1639885948
+      spriteID: cf817a2d038da41cd9ec8f276f470796
+      internalID: -1362371733
       vertices: []
       indices: 
       edges: []
@@ -276,10 +276,10 @@ TextureImporter:
       name: WalkRight_8
       rect:
         serializedVersion: 2
-        x: 163
+        x: 161
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e8e0d4d569b64756863b1c6738430c9
-      internalID: 1304494594
+      spriteID: 7067d4624bc6644b98c0fee52b8429ae
+      internalID: -1330042096
       vertices: []
       indices: 
       edges: []
@@ -297,10 +297,10 @@ TextureImporter:
       name: WalkRight_9
       rect:
         serializedVersion: 2
-        x: 183
+        x: 181
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,8 +308,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7813e609d15ba412d8ae22825103d00a
-      internalID: 432103858
+      spriteID: ce478d468f5514558b5305dde7e8238f
+      internalID: -999255454
       vertices: []
       indices: 
       edges: []
@@ -318,10 +318,10 @@ TextureImporter:
       name: WalkRight_10
       rect:
         serializedVersion: 2
-        x: 203
+        x: 201
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,8 +329,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56e1630af8c7942a7b9b39867a5a0003
-      internalID: 1032398154
+      spriteID: eba9933540c534311a3806b727b038db
+      internalID: -1745074387
       vertices: []
       indices: 
       edges: []
@@ -339,10 +339,10 @@ TextureImporter:
       name: WalkRight_11
       rect:
         serializedVersion: 2
-        x: 223
+        x: 221
         y: 0
-        width: 17
-        height: 21
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,8 +350,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34ba4ca14b3a145688e04f9c1a52342b
-      internalID: -553012974
+      spriteID: a76cf2c4ee5284a55b83d728b9cb163e
+      internalID: 1206065374
       vertices: []
       indices: 
       edges: []
@@ -367,18 +367,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WalkRight_2: -1921905424
-      WalkRight_11: -553012974
-      WalkRight_7: -1639885948
-      WalkRight_10: 1032398154
-      WalkRight_3: -1922026485
-      WalkRight_6: 1084602515
-      WalkRight_5: -1474886083
-      WalkRight_0: -704858450
-      WalkRight_8: 1304494594
-      WalkRight_4: 1665755264
-      WalkRight_1: 21129164
-      WalkRight_9: 432103858
+      WalkRight_2: 1778069941
+      WalkRight_11: 1206065374
+      WalkRight_7: -1362371733
+      WalkRight_10: -1745074387
+      WalkRight_3: 1201851523
+      WalkRight_6: 1255796496
+      WalkRight_5: 724961469
+      WalkRight_0: -1918145586
+      WalkRight_8: -1330042096
+      WalkRight_4: -1972140524
+      WalkRight_1: -424019656
+      WalkRight_9: -999255454
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

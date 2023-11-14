@@ -29,8 +29,8 @@ public class TIL_BulletManager : MonoBehaviour
             controller.UpdateHealth(-1 * bullet.damage);
             PlayerInput shooter = bullet.SpawnedFrom.GetComponent<PlayerInput>();
             PlayerInput shootee = recipient.GetComponent<PlayerInput>();
-            stats.PlayerHitPlayer(shooter, shootee);
-            if(controller.Health <= 0) stats.PlayerKilled(shooter, shootee);
+            stats?.PlayerHitPlayer(shooter, shootee);
+            if(controller.Health <= 0) stats?.PlayerKilled(shooter, shootee);
         }
     }
 

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class AIL_UIHealth : MonoBehaviour
 {
-    [SerializeField] private TextMesh textMesh;
-    [SerializeField] private Gradient healthColorGradient;
+    [SerializeField] private GameObject healthParent;
 
-    public void UpdateUI(int currentHealth, int maxHealth)
+    public void UpdateUI(int currentHealth)
     {
-        Color healthColor = healthColorGradient.Evaluate(currentHealth / maxHealth);
-        textMesh.color = healthColor;
-        textMesh.text = currentHealth.ToString("F0");
+        healthParent.SetActive(true);
+        for(int i = 0; i < healthParent.transform.childCount; i++)
+        {
+            var child = healthParent.transform.GetChild(i);
+            child.gameObject.SetActive(i < currentHealth);
+        }
     }
 }

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.Events;
 
 public class AIL_AttackController : MonoBehaviour, PlayerInputScript
 {
     [Header("Needs a AIL_BulletManager")]
     [SerializeField] private float fireDelay = 0.1f;
-    [SerializeField] private AIL_PlayerController controller;
 
     public bool Enabled { get; set; } = false;
+    public UnityEvent onAttack;
 
     private float lastFire;
     private bool isKeyboard = false;
@@ -57,9 +58,11 @@ public class AIL_AttackController : MonoBehaviour, PlayerInputScript
         if (isKeyboard) aimDir = Camera.main.ScreenToWorldPoint(aimDir) - this.transform.position;
         lastFire = Time.time;
 
-        //AIL_BulletManager manager = GameObject.FindObjectOfType<AIL_BulletManager>();
-        //manager?.FireBullet(this.gameObject, aimDir, Vector2.zero);
-        controller?.UpdateHealth(-1);
+        //Bullet Manager
+        TIL_BulletManager manager = GameObject.FindObjectOfType<TIL_BulletManager>();
+        manager.FireBullet(this.gameObject, aimDir, Vector2.zero);
+
+        onAttack?.Invoke();
     }
 
     private void InitializeAim(InputAction action)

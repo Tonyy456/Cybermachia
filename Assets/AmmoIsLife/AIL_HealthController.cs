@@ -18,7 +18,7 @@ public class AIL_HealthController : MonoBehaviour
         set
         {
             health = value;
-            ui.UpdateUI(health, maxHealth);
+            ui?.UpdateUI(health);
         }
     }
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ba48b48ea5d64f9cb2f217baec4026b
+guid: eedaded0ad51c4b2b9ee1da52a2c8128
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -108,10 +108,10 @@ TextureImporter:
       name: WalkUp_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 1
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86fe83990b946499d84258edb2f175e2
-      internalID: -292628806
+      spriteID: 48153f1423820437c8131f3d6668b228
+      internalID: 667691324
       vertices: []
       indices: 
       edges: []
@@ -129,10 +129,10 @@ TextureImporter:
       name: WalkUp_1
       rect:
         serializedVersion: 2
-        x: 26
+        x: 24
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3c02ec99d2b34ceea60a61f436d57a0
-      internalID: -280117400
+      spriteID: c88bddcc7eb7b499b8159f25051c0023
+      internalID: 1231615092
       vertices: []
       indices: 
       edges: []
@@ -150,10 +150,10 @@ TextureImporter:
       name: WalkUp_2
       rect:
         serializedVersion: 2
-        x: 49
+        x: 47
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8cccf10f341b45c3a914be06794a22c
-      internalID: 2067612501
+      spriteID: 66029e73f646d49609d830b4c4c2515a
+      internalID: -2145361035
       vertices: []
       indices: 
       edges: []
@@ -171,10 +171,10 @@ TextureImporter:
       name: WalkUp_3
       rect:
         serializedVersion: 2
-        x: 72
+        x: 70
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b763b45ae4a3a400180bdc65dc395a33
-      internalID: -1586599999
+      spriteID: b3f063042868e4aa48ab72af76e208ae
+      internalID: -1267161378
       vertices: []
       indices: 
       edges: []
@@ -192,10 +192,10 @@ TextureImporter:
       name: WalkUp_4
       rect:
         serializedVersion: 2
-        x: 95
+        x: 93
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17a8ecace84104fc19f179bbdeee0668
-      internalID: 723038371
+      spriteID: dadd17d8c59fd48ecb56217c478d6895
+      internalID: -1356356931
       vertices: []
       indices: 
       edges: []
@@ -213,10 +213,10 @@ TextureImporter:
       name: WalkUp_5
       rect:
         serializedVersion: 2
-        x: 118
+        x: 116
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b4189dfc8ed741d5b89c30d1d475849
-      internalID: -348057363
+      spriteID: edaaf8aa29c1649be927f1da2e30b18e
+      internalID: -13550480
       vertices: []
       indices: 
       edges: []
@@ -234,10 +234,10 @@ TextureImporter:
       name: WalkUp_6
       rect:
         serializedVersion: 2
-        x: 141
+        x: 139
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92077134ee3d8455aa20cae91b4c1107
-      internalID: -430797792
+      spriteID: ef189c8d086d1484492fca85613ea8ed
+      internalID: 71155556
       vertices: []
       indices: 
       edges: []
@@ -255,10 +255,10 @@ TextureImporter:
       name: WalkUp_7
       rect:
         serializedVersion: 2
-        x: 164
+        x: 162
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9dda0001371b84048809c5256f2f3d7e
-      internalID: -1705116536
+      spriteID: daa9d9dce039b4953af6817367579d34
+      internalID: -128647122
       vertices: []
       indices: 
       edges: []
@@ -276,10 +276,10 @@ TextureImporter:
       name: WalkUp_8
       rect:
         serializedVersion: 2
-        x: 187
+        x: 185
         y: 0
-        width: 20
-        height: 24
+        width: 22
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bdf614e5bef04370a851af87dd03836
-      internalID: -2066261627
+      spriteID: 11dcd98fca4c24ec7a7aa1db8902f890
+      internalID: -935603254
       vertices: []
       indices: 
       edges: []
@@ -304,15 +304,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WalkUp_0: -292628806
-      WalkUp_3: -1586599999
-      WalkUp_1: -280117400
-      WalkUp_4: 723038371
-      WalkUp_2: 2067612501
-      WalkUp_7: -1705116536
-      WalkUp_8: -2066261627
-      WalkUp_5: -348057363
-      WalkUp_6: -430797792
+      WalkUp_0: 667691324
+      WalkUp_3: -1267161378
+      WalkUp_1: 1231615092
+      WalkUp_4: -1356356931
+      WalkUp_2: -2145361035
+      WalkUp_7: -128647122
+      WalkUp_8: -935603254
+      WalkUp_5: -13550480
+      WalkUp_6: 71155556
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

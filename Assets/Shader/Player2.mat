@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player1
+  m_Name: Player2
   m_Shader: {fileID: -6465566751694194690, guid: 2257f5db7500f4bc7b559e232ab02d80, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -71,6 +71,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0.17368424, g: 1, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 0.7529412, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

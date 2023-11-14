@@ -108,10 +108,10 @@ TextureImporter:
       name: WalkDown_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 1
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41a501cfaf4e64f7c86667062eefd7f1
-      internalID: -2135404928
+      spriteID: 5bb511345518a4b8ab19bb6974595a57
+      internalID: 1640589329
       vertices: []
       indices: 
       edges: []
@@ -129,10 +129,10 @@ TextureImporter:
       name: WalkDown_1
       rect:
         serializedVersion: 2
-        x: 26
+        x: 24
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a7e8f63f2b3d44c8a0fda9cd114e93a
-      internalID: 1377670241
+      spriteID: 543f72e64e30b40fd805d9c959756dac
+      internalID: 387956009
       vertices: []
       indices: 
       edges: []
@@ -150,10 +150,10 @@ TextureImporter:
       name: WalkDown_2
       rect:
         serializedVersion: 2
-        x: 49
+        x: 47
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc11b4dc5873742da96ee272821b0efb
-      internalID: 219164012
+      spriteID: cf3482286f88f436d9446bd254aeb3df
+      internalID: 908605542
       vertices: []
       indices: 
       edges: []
@@ -171,10 +171,10 @@ TextureImporter:
       name: WalkDown_3
       rect:
         serializedVersion: 2
-        x: 72
+        x: 70
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f712573702b44dd6ae49c3786dc3536
-      internalID: -541183263
+      spriteID: 55b7a377e94a34b978583cc0e60d5e99
+      internalID: -882008230
       vertices: []
       indices: 
       edges: []
@@ -192,10 +192,10 @@ TextureImporter:
       name: WalkDown_4
       rect:
         serializedVersion: 2
-        x: 95
+        x: 93
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0ef72b35b163446f9058fd01697e52e
-      internalID: 2015800035
+      spriteID: c9ad7027befcc4cb892c7685f8c459fc
+      internalID: -1978730648
       vertices: []
       indices: 
       edges: []
@@ -213,10 +213,10 @@ TextureImporter:
       name: WalkDown_5
       rect:
         serializedVersion: 2
-        x: 118
+        x: 116
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc370b8ff0fa64dfa8bb57a5b31cd3c7
-      internalID: 374958242
+      spriteID: bd0017b0e0b1b402fa6544bddc2a006c
+      internalID: 658068487
       vertices: []
       indices: 
       edges: []
@@ -234,10 +234,10 @@ TextureImporter:
       name: WalkDown_6
       rect:
         serializedVersion: 2
-        x: 141
+        x: 139
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d35d590e0da764e5791cd91e1c27151b
-      internalID: 270192891
+      spriteID: d05c62b8d36874343baeee3aae9001d4
+      internalID: -1148162527
       vertices: []
       indices: 
       edges: []
@@ -255,10 +255,10 @@ TextureImporter:
       name: WalkDown_7
       rect:
         serializedVersion: 2
-        x: 164
+        x: 162
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95a5a6ab89ade46c0bb7504884866903
-      internalID: -1748172291
+      spriteID: 1b199b04084314e599e95ba2c6a17b00
+      internalID: 2035684524
       vertices: []
       indices: 
       edges: []
@@ -276,10 +276,10 @@ TextureImporter:
       name: WalkDown_8
       rect:
         serializedVersion: 2
-        x: 187
+        x: 185
         y: 0
-        width: 20
-        height: 26
+        width: 22
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5eb5fd03fba14b37b3226f74919e72e
-      internalID: -920169509
+      spriteID: 905686d0248cd44db878fd0edc0a5d29
+      internalID: -1308919411
       vertices: []
       indices: 
       edges: []
@@ -304,15 +304,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WalkDown_4: 2015800035
-      WalkDown_1: 1377670241
-      WalkDown_3: -541183263
-      WalkDown_2: 219164012
-      WalkDown_8: -920169509
-      WalkDown_6: 270192891
-      WalkDown_5: 374958242
-      WalkDown_0: -2135404928
-      WalkDown_7: -1748172291
+      WalkDown_4: -1978730648
+      WalkDown_1: 387956009
+      WalkDown_3: -882008230
+      WalkDown_2: 908605542
+      WalkDown_8: -1308919411
+      WalkDown_6: -1148162527
+      WalkDown_5: 658068487
+      WalkDown_0: 1640589329
+      WalkDown_7: 2035684524
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
