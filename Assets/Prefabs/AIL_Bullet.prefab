@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3582894681311280721}
   - component: {fileID: 5790802332664607257}
   - component: {fileID: 8913797251303872114}
-  - component: {fileID: 3069155764332248286}
   - component: {fileID: 1712564166}
   - component: {fileID: 7455025494455859395}
+  - component: {fileID: 6935267345923349389}
   m_Layer: 0
   m_Name: AIL_Bullet
   m_TagString: Untagged
@@ -109,22 +109,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3069155764332248286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3222017936251721125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24d8d51d26b4f43a58e604a0d562c131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 400
-  damage: 10
-  aliveTime: 2
-  minTimeAlive: 0.1
 --- !u!114 &1712564166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +139,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.27
+--- !u!114 &6935267345923349389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222017936251721125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35c30a0510580d41848d9e384624eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 400
+  damage: 10
+  aliveTime: 2
+  minTimeAlive: 0.1

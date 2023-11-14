@@ -59,7 +59,7 @@ public class AIL_AttackController : MonoBehaviour, PlayerInputScript
         lastFire = Time.time;
 
         //Bullet Manager
-        TIL_BulletManager manager = GameObject.FindObjectOfType<TIL_BulletManager>();
+        AIL_BulletManager manager = GameObject.FindObjectOfType<AIL_BulletManager>();
         manager.FireBullet(this.gameObject, aimDir, Vector2.zero);
 
         onAttack?.Invoke();

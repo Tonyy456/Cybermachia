@@ -266,19 +266,7 @@ MonoBehaviour:
   fireDelay: 0.1
   onAttack:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2150435511517480484}
-        m_TargetAssemblyTypeName: AIL_PlayerController, Assembly-CSharp
-        m_MethodName: UpdateHealth
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3915807649829744745
 GameObject:
   m_ObjectHideFlags: 0
