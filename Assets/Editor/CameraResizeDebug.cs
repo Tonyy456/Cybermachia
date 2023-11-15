@@ -17,6 +17,18 @@ public class CameraResizeDebug : ButtonScriptHandler<ClampScreenBehavior>
     }
 }
 
+[CustomEditor(typeof(PixelPerfectCameraClamper))]
+public class PixelPerfectCameraResizeEditorDebug : ButtonScriptHandler<PixelPerfectCameraClamper>
+{
+    protected override void InitializeButtons()
+    {
+        if (script)
+        {
+            AddButton("Resize", script.ClampScreen);
+        }
+    }
+}
+
 [CustomEditor(typeof(MaintainPlayerArea))]
 public class CameraPlayerMaintainDebug : ButtonScriptHandler<MaintainPlayerArea>
 {
