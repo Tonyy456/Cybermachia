@@ -52,7 +52,7 @@ public class TIL_SummaryScreenController : MonoBehaviour
         {
             var text = textParentScreenOne.GetChild(i).GetComponent<TMPro.TMP_Text>();
             var statTuple = sortedKills[i];
-            text.text = $"Player {statTuple.player}: {statTuple.kills}";
+            text.text = $"Player {statTuple.player + 1}: {statTuple.kills}";
             text.gameObject.SetActive(true);
         }
     }
@@ -86,6 +86,6 @@ public class TIL_SummaryScreenController : MonoBehaviour
         for (int i = 0; i < textParentScreenOne.childCount; i++) textParentScreenOne.GetChild(i).gameObject.SetActive(false);
         var text = textParentScreenOne.GetChild(0).GetComponent<TMPro.TMP_Text>();
         text.gameObject.SetActive(true);
-        text.text = $"Player {statTracker.getWinner()}";
+        text.text = $"Player {statTracker.getWinner() + 1}";
     }
 }

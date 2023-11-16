@@ -27,7 +27,18 @@ public class TIL_GameStatistics : MonoBehaviour
 
     public int getWinner()
     {
-        return playerStats.Max(x => x.PlayersKilled);
+        int player = -1;
+        int max = 0;
+        for(int i = 0; i < playerStats.Count; i++)
+        {
+            var stat = playerStats[i];
+            if (stat.PlayersKilled > max)
+            {
+                player = i;
+                max = stat.PlayersKilled;
+            }
+        }
+        return player;
     }
 
     public void PlayerHitPlayer(PlayerInput shooter, PlayerInput shootee)
