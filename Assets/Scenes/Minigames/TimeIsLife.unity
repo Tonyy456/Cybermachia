@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45a321f5417843e7b058e66a127c21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultTimeLength: 30
+  defaultTimeLength: 90
   startDelay: 0
   textToUpdate: {fileID: 1124987647}
   onTimerDone:
@@ -382,7 +382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &144689122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -764,10 +764,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.08993477
-    y: 0.081151836
-    width: 0.82013047
-    height: 0.8376963
+    x: 0.041666668
+    y: 0.055555556
+    width: 0.9166667
+    height: 0.8888889
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -13250,7 +13250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503200871ea8d4d94a174b65a7d9221f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumPlayerCount: 2
+  minimumPlayerCount: 1
   clearConnectedPlayers: 0
   playerParent: {fileID: 621735439}
   onGameReady:

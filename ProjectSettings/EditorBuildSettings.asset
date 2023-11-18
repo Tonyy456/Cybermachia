@@ -29,4 +29,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/AmmoIsLife.unity
     guid: 9b68b5debdfe84a8cad037ba20e09f8c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: f407e73a195f50a4cbb84e2da7410338, type: 2}
