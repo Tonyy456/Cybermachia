@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,12 +19,14 @@ public class ChomBombs : MonoBehaviour
     [Header("Target AI")]
     [SerializeField] private GameObject testTarget;
     [SerializeField] private float goalDistanceFromTarget = 0.2f;
+    [SerializeField] private float chaseFactor;
 
     [Header("Raycast Obstacle Detection")]
     [SerializeField] private bool drawRays;
     [SerializeField] private int numRays;
     [SerializeField] private float detectionRadians;
     [SerializeField] private float rayDistance;  
+    [SerializeField] private float avoidanceFactor;
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
@@ -34,40 +37,52 @@ public class ChomBombs : MonoBehaviour
 
     public void Update()
     {
-        if (!AttemptAvoidance())
-        {
-            MoveToPlayer(testTarget);
-        }
+        AttemptAvoidance();
+        SteerToPlayer(testTarget);
+        CapSpeed();
         UpdateAnimation();
+    }
+
+    private void CapSpeed()
+    {
+        Vector2 v = rb.velocity;
+        float speed = v.magnitude;
+        if(speed > movementSpeed)
+        {
+            v = (v / speed) * movementSpeed;
+        }
+        rb.velocity = v;      
     }
 
     private bool AttemptAvoidance()
     {
-        int hitCount = 0;
-
-        for(int rn = 0; rn < numRays; rn++)
+        int numRaysHit = 0;
+        Vector2 dv = Vector2.zero;
+        for (int rn = 0; rn < numRays; rn++)
         {
             float theta = -detectionRadians / 2 + (rn * detectionRadians / (numRays - 1));
             Vector2 ray = RotateVector(this.rb.velocity, theta) * rayDistance;
             
             RaycastHit2D hit = Physics2D.Raycast(this.transform.position, ray, rayDistance);
-            if(hit.distance < rayDistance)
+            if(hit.collider == null)
             {
-                hitCount++;
                 if (drawRays) Debug.DrawRay(this.transform.position, ray, Color.red);
             } else
             {
+                numRaysHit++;
+                //dv += ((Vector2)this.transform.position - hit.point) * ((float)Math.PI - Math.Abs(theta)) * (rayDistance - hit.distance);              
                 if (drawRays) Debug.DrawRay(this.transform.position, ray, Color.green);
             }
         }
-        if(hitCount > 0)
+        if(numRaysHit > 0)
         {
+            rb.velocity += dv * avoidanceFactor * movementSpeed * Time.deltaTime;
             return true;
         }
         return false;
     }
 
-    private void MoveToPlayer(GameObject player)
+    private void SteerToPlayer(GameObject player)
     {
         Vector2 moveTo = player.transform.position - this.transform.position;
         if (moveTo.magnitude < goalDistanceFromTarget)
@@ -76,7 +91,7 @@ public class ChomBombs : MonoBehaviour
         } 
         else
         {
-            rb.velocity = moveTo.normalized * movementSpeed;
+            rb.velocity += moveTo.normalized * movementSpeed * chaseFactor * Time.deltaTime;
         }      
     }
 

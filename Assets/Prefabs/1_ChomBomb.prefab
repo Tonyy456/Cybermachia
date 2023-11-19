@@ -90,10 +90,12 @@ MonoBehaviour:
   movementSpeed: 1
   testTarget: {fileID: 0}
   goalDistanceFromTarget: 0.2
+  chaseFactor: 0
   drawRays: 1
-  numRays: 5
-  detectionRadians: 1
+  numRays: 15
+  detectionRadians: 6
   rayDistance: 1.5
+  avoidanceFactor: 0
   rb: {fileID: 3062399760370524886}
   animator: {fileID: 6312813987939770417}
 --- !u!50 &3062399760370524886
