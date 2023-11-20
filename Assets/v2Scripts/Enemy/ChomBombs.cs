@@ -2,141 +2,69 @@ using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public enum CardinalDirection
-{
-    Up,
-    Down,
-    Left,
-    Right
-}
 public class ChomBombs : MonoBehaviour
 {
     [SerializeField] private float health;
     [SerializeField] private float movementSpeed;
+    [SerializeField] private float passiveSpeed = 1f;
+    [SerializeField] private float goalDistanceToTarget;
+    [SerializeField] private BoidTargeting targetModule;
 
-    [Header("Target AI")]
-    [SerializeField] private GameObject testTarget;
-    [SerializeField] private float goalDistanceFromTarget = 0.2f;
-    [SerializeField] private float chaseFactor;
-
-    [Header("Raycast Obstacle Detection")]
-    [SerializeField] private bool drawRays;
-    [SerializeField] private int numRays;
-    [SerializeField] private float detectionRadians;
-    [SerializeField] private float rayDistance;  
-    [SerializeField] private float avoidanceFactor;
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Animator animator;
+    [SerializeField] private VisionModule vision;
+    [SerializeField] private ChomAnimController chomAnimController;
+    [SerializeField] private float deathAnimationLength = 1f;
 
-    private CardinalDirection movingDirection;
-    private List<GameObject> players;
+    private bool queuedDeath = false;
 
     public void Update()
     {
-        AttemptAvoidance();
-        SteerToPlayer(testTarget);
-        CapSpeed();
-        UpdateAnimation();
     }
 
-    private void CapSpeed()
+    public IEnumerator DeathRoutine()
     {
-        Vector2 v = rb.velocity;
-        float speed = v.magnitude;
-        if(speed > movementSpeed)
-        {
-            v = (v / speed) * movementSpeed;
-        }
-        rb.velocity = v;      
+        yield return new WaitForSeconds(deathAnimationLength);
+        GameObject.Destroy(this.gameObject);
+        yield return null;
     }
 
-    private bool AttemptAvoidance()
+    public void LateUpdate()
     {
-        int numRaysHit = 0;
-        Vector2 dv = Vector2.zero;
-        for (int rn = 0; rn < numRays; rn++)
+        if (queuedDeath)
         {
-            float theta = -detectionRadians / 2 + (rn * detectionRadians / (numRays - 1));
-            Vector2 ray = RotateVector(this.rb.velocity, theta) * rayDistance;
-            
-            RaycastHit2D hit = Physics2D.Raycast(this.transform.position, ray, rayDistance);
-            if(hit.collider == null)
-            {
-                if (drawRays) Debug.DrawRay(this.transform.position, ray, Color.red);
-            } else
-            {
-                numRaysHit++;
-                //dv += ((Vector2)this.transform.position - hit.point) * ((float)Math.PI - Math.Abs(theta)) * (rayDistance - hit.distance);              
-                if (drawRays) Debug.DrawRay(this.transform.position, ray, Color.green);
-            }
+            rb.velocity = Vector2.zero; 
+            return;
         }
-        if(numRaysHit > 0)
-        {
-            rb.velocity += dv * avoidanceFactor * movementSpeed * Time.deltaTime;
-            return true;
-        }
-        return false;
-    }
-
-    private void SteerToPlayer(GameObject player)
-    {
-        Vector2 moveTo = player.transform.position - this.transform.position;
-        if (moveTo.magnitude < goalDistanceFromTarget)
-        {
+        if (vision.targets.Count == 0)
+        { // I aint wandering! too much effort!
             rb.velocity = Vector2.zero;
-        } 
-        else
-        {
-            rb.velocity += moveTo.normalized * movementSpeed * chaseFactor * Time.deltaTime;
-        }      
+        }
+        else if (closeToTarget())
+        { // I am satisfied, made it where I belong.
+            queuedDeath = true;
+            chomAnimController.PlayDeath();
+            StartCoroutine(DeathRoutine());
+            rb.velocity = Vector2.zero;
+        }
+        else if(rb.velocity.magnitude > movementSpeed)
+        { // zoom! slow down buddy!
+            rb.velocity = (rb.velocity / rb.velocity.magnitude) * movementSpeed;
+        }
+
+        if(!queuedDeath) chomAnimController.UpdateAnimation();
+
+
+
     }
 
-    private void UpdateAnimation()
+    private bool closeToTarget()
     {
-        Vector2 dir = rb.velocity;
-        if(dir.x < -0.1)
-        {
-            movingDirection = CardinalDirection.Left;
-        }
-        else if (dir.x > 0.1)
-        {
-            movingDirection= CardinalDirection.Right;
-        }
-        else if (dir.y > 0.01)
-        {
-            movingDirection = CardinalDirection.Up;
-        } 
-        else if (dir.y < -0.01)
-        {
-            movingDirection = CardinalDirection.Down;
-        }
-        else
-        { // not moving any direction
-            
-        }
-
-        if(dir.magnitude > 0.01)
-        {
-            string animationName = $"Run{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
-            animator.Play(animationName);
-        } else
-        {
-            string animationName = $"Idle{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
-            animator.Play(animationName);
-        }
-            
-    }
-
-    private Vector2 RotateVector(Vector2 vec, float angle)
-    {
-        Vector2 result = Vector2.zero;
-        vec.Normalize();
-        result.x = Mathf.Cos(angle) * vec.x + -1 * Mathf.Sin(angle) * vec.y;
-        result.y = Mathf.Sin(angle) * vec.x + Mathf.Cos(angle) * vec.y;
-        return result.normalized;
+        if (targetModule == null) return false;
+        return targetModule.lastPointCheck.distance < goalDistanceToTarget;
     }
 }
