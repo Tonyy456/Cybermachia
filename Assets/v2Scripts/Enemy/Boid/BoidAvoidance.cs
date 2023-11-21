@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoidAvoidance : MonoBehaviour
@@ -27,7 +28,6 @@ public class BoidAvoidance : MonoBehaviour
             Collider2D colliderB = boid.GetComponent<BoxCollider2D>();
             Collider2D colliderA = this.GetComponent<BoxCollider2D>();
             ColliderDistance2D dst = Physics2D.Distance(colliderA, colliderB);
-            Debug.Log(dst.isValid);
             Vector2 dv = (dst.pointA - dst.pointB);
             if (dv.magnitude < 0.01f)
             {
@@ -49,10 +49,12 @@ public class BoidAvoidance : MonoBehaviour
         foreach (var obstacle in visionModule.obstacles)
         {
             // find exact point obstacle is hit.
+            if (obstacle.gameObject.IsDestroyed()) return;
             Collider2D colliderB = obstacle.GetComponent<BoxCollider2D>();
             Collider2D colliderA = this.GetComponent<BoxCollider2D>();
+            if (colliderB == null) continue;
+            if (colliderA == null) continue;
             ColliderDistance2D dst = Physics2D.Distance(colliderA, colliderB);
-            Debug.Log(dst.isValid);
             Vector2 dv = (dst.pointA - dst.pointB);
             if (dv.magnitude < 0.01f) {
                 dv = (playerPos - (Vector2)obstacle.transform.position);

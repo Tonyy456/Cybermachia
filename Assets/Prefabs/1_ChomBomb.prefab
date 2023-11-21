@@ -197,14 +197,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000f4cc08c7757348a80bed0ea03125d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 4
   movementSpeed: 1
   passiveSpeed: 1
   goalDistanceToTarget: 0.3
   targetModule: {fileID: 2005888003197162881}
+  spriteRenderer: {fileID: 0}
   rb: {fileID: 3062399760370524886}
   vision: {fileID: -7806814514986075197}
   chomAnimController: {fileID: 5569436021911170401}
+  deathAnimationLength: 1
 --- !u!61 &-6221619708488263194
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ChomBombs : MonoBehaviour
+public class ChomBombs : MonoBehaviour, IDamageable
 {
     [SerializeField] private float health;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float passiveSpeed = 1f;
     [SerializeField] private float goalDistanceToTarget;
     [SerializeField] private BoidTargeting targetModule;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
 
     [Header("Components")]
@@ -21,7 +22,7 @@ public class ChomBombs : MonoBehaviour
     [SerializeField] private float deathAnimationLength = 1f;
 
     private bool queuedDeath = false;
-
+    private bool hurting = false;
     public void Update()
     {
     }
@@ -35,6 +36,7 @@ public class ChomBombs : MonoBehaviour
 
     public void LateUpdate()
     {
+        if (hurting) return;
         if (queuedDeath)
         {
             rb.velocity = Vector2.zero; 
@@ -46,10 +48,7 @@ public class ChomBombs : MonoBehaviour
         }
         else if (closeToTarget())
         { // I am satisfied, made it where I belong.
-            queuedDeath = true;
-            chomAnimController.PlayDeath();
-            StartCoroutine(DeathRoutine());
-            rb.velocity = Vector2.zero;
+            Die();
         }
         else if(rb.velocity.magnitude > movementSpeed)
         { // zoom! slow down buddy!
@@ -62,9 +61,32 @@ public class ChomBombs : MonoBehaviour
 
     }
 
+    private void Die()
+    {
+        queuedDeath = true;
+        chomAnimController.PlayDeath();
+        StartCoroutine(DeathRoutine());
+        rb.velocity = Vector2.zero;
+    }
+
     private bool closeToTarget()
     {
         if (targetModule == null) return false;
         return targetModule.lastPointCheck.distance < goalDistanceToTarget;
+    }
+
+    public bool TryDamage(int damage)
+    {
+        if (hurting) return false;
+        health -= damage;
+        hurting = true;
+        if (health < 0) Die();
+        else chomAnimController.PlayHurt();
+        return true;
+    }
+
+    public void NotHurtAnymore()
+    {
+        hurting = false;
     }
 }

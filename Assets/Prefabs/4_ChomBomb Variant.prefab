@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5349917407439202775, guid: a3b704033aff1e84ca0e82b5e5fc125d, type: 3}
+      propertyPath: movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6312813987939770416, guid: a3b704033aff1e84ca0e82b5e5fc125d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -57,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: bd5910b22c930894a9b0f68fa2987e10, type: 2}
     - target: {fileID: 6312813987939770419, guid: a3b704033aff1e84ca0e82b5e5fc125d, type: 3}
       propertyPath: m_Name
-      value: 4_ChomBomb
+      value: 4_ChomBomb Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6312813988243841750, guid: a3b704033aff1e84ca0e82b5e5fc125d, type: 3}
       propertyPath: m_Sprite

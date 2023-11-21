@@ -30,6 +30,11 @@ public class ChomAnimController : MonoBehaviour
         string animName = $"Explode{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
         animator.Play(animName);
     }
+    public void PlayHurt()
+    {
+        string animName = $"Hurt{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
+        animator.Play(animName);
+    }
     public void UpdateAnimation()
     {
         Vector2 dir = rb.velocity;
