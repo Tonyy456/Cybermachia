@@ -96,11 +96,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  radius: 1
+  radius: 3
   onExplode:
     m_PersistentCalls:
       m_Calls: []
   attenuationOnDistance: 0
+  ignoreTag: 
 --- !u!114 &5569436021911170401
 MonoBehaviour:
   m_ObjectHideFlags: 0

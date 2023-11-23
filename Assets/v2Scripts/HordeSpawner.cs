@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Windows;
 
 public class HordeSpawner : MonoBehaviour
@@ -14,28 +15,35 @@ public class HordeSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private float minSpawnDelay;
     [SerializeField] private float maxSpawnDelay;
-    [SerializeField] private float minRoundDelay;
-    [SerializeField] private float maxRoundDelay;
 
+    public UnityEvent OnRoundStart;
+    public UnityEvent OnAllEnemiesSpawned;
+    private int currentRound = 0;
+    private List<string> rounds;
+
+    public int roundsLeft { 
+        get
+        {
+            return rounds.Count - currentRound;
+        } 
+    }
     public void Start()
     {
+        if (controlString.Length == 0) return;
+        rounds = new List<string>(controlString.Split('+'));
         SpawnNextRound();
     }
 
     public IEnumerator HandleRoundSpawn()
     {
-        if (controlString.Length == 0) yield return null;
-        List<string>  parts = new List<string>(controlString.Split('+'));      
-        for (int roundIndex = 0; roundIndex < parts.Count; roundIndex++)
+        OnRoundStart?.Invoke();
+        string round = rounds[currentRound++];
+        for (int i = 0; i < round.Length; i++)
         {
-            string round = parts[roundIndex];
-            for (int i = 0; i < round.Length; i++)
-            {
-                spawnEnemy(round.Substring(i, 1));
-                yield return new WaitForSeconds(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
-            }
-            yield return new WaitForSeconds(UnityEngine.Random.Range(minRoundDelay, maxRoundDelay));
+            spawnEnemy(round.Substring(i, 1));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
         }
+        OnAllEnemiesSpawned?.Invoke(); 
         yield return null;
     }
     public void SpawnNextRound()

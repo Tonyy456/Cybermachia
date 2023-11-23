@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Enemy
+  ignoreTag: Player
   speed: 400
-  damage: 2
+  damage: 1
   aliveTime: 5
   minTimeAlive: 0.1

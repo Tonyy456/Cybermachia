@@ -9,25 +9,20 @@ public class Explosion : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] public UnityEvent onExplode;
     [SerializeField] private bool attenuationOnDistance = false;
+    [SerializeField] private string ignoreTag;
 
     public void Explode()
     {
-        
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward);
-        if(attenuationOnDistance)
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, transform.forward);
+        foreach (var hit in hits)
         {
-            foreach (var hit in hits)
+            if (hit.transform.tag == ignoreTag) return;
+            var component = hit.transform.GetComponent<IDamageable>();
+            var actualDamage = attenuationOnDistance ? AttenuatedDamage(hit.distance) : damage;
+            if (component != null)
             {
-                float distanceToObstacle = hit.distance;
-                var component = hit.transform.GetComponent<IDamageable>();
-                component?.TryDamage(AttenuatedDamage(distanceToObstacle));
-            }
-        } else
-        {
-            foreach (var hit in hits)
-            {
-                var component = hit.transform.GetComponent<IDamageable>();
-                component?.TryDamage(damage);
+                Debug.DrawLine(this.transform.position, hit.transform.position, Color.red, 1f);
+                component.TryDamage(actualDamage);
             }
         }
 

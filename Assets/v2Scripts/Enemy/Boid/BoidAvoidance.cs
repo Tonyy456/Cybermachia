@@ -24,6 +24,7 @@ public class BoidAvoidance : MonoBehaviour
         Vector2 playerPos = (Vector2)this.transform.position; 
         foreach (var boid in visionModule.boids)
         {
+            if (boid == null || boid.gameObject.IsDestroyed()) return;
             // find exact point obstacle is hit.
             Collider2D colliderB = boid.GetComponent<BoxCollider2D>();
             Collider2D colliderA = this.GetComponent<BoxCollider2D>();
@@ -49,7 +50,7 @@ public class BoidAvoidance : MonoBehaviour
         foreach (var obstacle in visionModule.obstacles)
         {
             // find exact point obstacle is hit.
-            if (obstacle.gameObject.IsDestroyed()) return;
+            if (obstacle == null || obstacle.gameObject.IsDestroyed()) return;
             Collider2D colliderB = obstacle.GetComponent<BoxCollider2D>();
             Collider2D colliderA = this.GetComponent<BoxCollider2D>();
             if (colliderB == null) continue;

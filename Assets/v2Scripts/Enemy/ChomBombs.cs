@@ -36,12 +36,16 @@ public class ChomBombs : MonoBehaviour, IDamageable
 
     public void LateUpdate()
     {
-        if (hurting) return;
+        if (rb.velocity.magnitude > movementSpeed)
+        { // zoom! slow down buddy!
+            rb.velocity = (rb.velocity / rb.velocity.magnitude) * movementSpeed;
+        }
         if (queuedDeath)
         {
-            rb.velocity = Vector2.zero; 
+            rb.velocity = Vector2.zero;
             return;
         }
+        if (hurting) return;
         if (vision.targets.Count == 0)
         { // I aint wandering! too much effort!
             rb.velocity = Vector2.zero;
@@ -64,6 +68,7 @@ public class ChomBombs : MonoBehaviour, IDamageable
     private void Die()
     {
         queuedDeath = true;
+        rb.isKinematic = true;
         chomAnimController.PlayDeath();
         StartCoroutine(DeathRoutine());
         rb.velocity = Vector2.zero;
@@ -77,10 +82,10 @@ public class ChomBombs : MonoBehaviour, IDamageable
 
     public bool TryDamage(int damage)
     {
-        if (hurting) return false;
+        if (hurting || queuedDeath) return false;
         health -= damage;
         hurting = true;
-        if (health < 0) Die();
+        if (health <= 0) Die();
         else chomAnimController.PlayHurt();
         return true;
     }
