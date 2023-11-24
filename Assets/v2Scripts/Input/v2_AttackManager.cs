@@ -8,6 +8,7 @@ using UnityEngine.Windows;
 
 public class v2_AttackManager : MonoBehaviour, PlayerInputScript
 {
+    [SerializeField] private int maxAmmoCount = 20;
     [SerializeField] private float fireDelay = 0.1f;
     [SerializeField] private GameObject prefab;
 
@@ -20,8 +21,22 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
     private InputAction attack;
     private InputAction aim;
 
+    private int ammo;
+    public int Ammo
+    {
+        get
+        {
+            return ammo;
+        }
+        private set
+        {
+            ammo = value;
+        }
+    }
+
     public void Awake()
     {
+        Ammo = maxAmmoCount;
         lastFire = Time.time - 100f;
     }
 
@@ -51,6 +66,7 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
 
     private void ShootHandler(InputAction.CallbackContext callback)
     {
+        if (Ammo <= 0) return;
         if ((Time.time - lastFire) < fireDelay) return;
 
         //get aim dir
@@ -59,6 +75,7 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
         if (isKeyboard) aimDir = Camera.main.ScreenToWorldPoint(aimDir) - this.transform.position;
         lastFire = Time.time;
 
+        Ammo--;
         //Bullet Manager
         GameObject bullet = GameObject.Instantiate(prefab);
         var script = bullet.GetComponent<v2_bullet>();

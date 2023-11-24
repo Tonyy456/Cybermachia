@@ -13,10 +13,10 @@ public class Explosion : MonoBehaviour
 
     public void Explode()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, transform.forward);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, transform.forward, 0f);
         foreach (var hit in hits)
         {
-            if (hit.transform.tag == ignoreTag) return;
+            if (hit.transform.tag == ignoreTag) continue;
             var component = hit.transform.GetComponent<IDamageable>();
             var actualDamage = attenuationOnDistance ? AttenuatedDamage(hit.distance) : damage;
             if (component != null)

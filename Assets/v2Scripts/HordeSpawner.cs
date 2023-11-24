@@ -11,6 +11,9 @@ public class HordeSpawner : MonoBehaviour
     [Header("number=enemy type, '+' = round divider")]
     [SerializeField] private List<GameObject> ignoreCollisions;
     [SerializeField] private List<GameObject> enemyTypes;
+    [SerializeField] private List<GameObject> dropItems;
+    [Range(0f, 1f)]
+    [SerializeField] private List<float> spawnChance;
     [SerializeField] private string controlString;
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private float minSpawnDelay;
@@ -20,6 +23,18 @@ public class HordeSpawner : MonoBehaviour
     public UnityEvent OnAllEnemiesSpawned;
     private int currentRound = 0;
     private List<string> rounds;
+
+    public void OnValidate()
+    {
+        if (spawnChance.Count < dropItems.Count)
+        {
+            spawnChance.Add(0f);
+        }
+        if (spawnChance.Count > dropItems.Count)
+        {
+            spawnChance.RemoveAt(spawnChance.Count - 1);
+        }
+    }
 
     public int roundsLeft { 
         get
@@ -60,6 +75,16 @@ public class HordeSpawner : MonoBehaviour
             var childIndex = UnityEngine.Random.Range(0, spawnPoints.childCount);
             var spawnPoint = spawnPoints.GetChild(childIndex);
             go.transform.position = spawnPoint.transform.position;
+            for(int i = 0; i < dropItems.Count; i++)
+            {
+                var item = dropItems[i];
+                var chance = spawnChance[i];
+                bool spawn = UnityEngine.Random.Range(0f, 1f) < chance;
+                if(spawn)
+                {
+                    go.AddComponent<SpawnOnDestroy>().SetPrefabToSpawn(item);
+                }
+            }
             foreach (var item in ignoreCollisions)
             {
                 Physics2D.IgnoreCollision(go.GetComponent<BoxCollider2D>(), item.GetComponent<BoxCollider2D>());

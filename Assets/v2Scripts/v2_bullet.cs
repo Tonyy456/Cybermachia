@@ -19,6 +19,13 @@ public class v2_bullet : MonoBehaviour
     private List<Collider2D> hitTargets = new List<Collider2D>();
     public void Initialize(GameObject spawnedFrom, Vector2 movementDirection)
     {
+        GameObject[] ignoreCollisionsFrom = GameObject.FindGameObjectsWithTag("PlayerOnlyCollider");
+        foreach(var item in ignoreCollisionsFrom)
+        {
+            Debug.Log(item.name);
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), item.GetComponent<Collider2D>());
+        }
+        
         this.SpawnedFrom = spawnedFrom;
         this.spawnedTime = Time.time;
         this.rb = this.GetComponent<Rigidbody2D>();
