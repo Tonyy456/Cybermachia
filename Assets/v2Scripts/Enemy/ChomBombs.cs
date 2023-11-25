@@ -19,6 +19,7 @@ public class ChomBombs : MonoBehaviour, IDamageable
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private VisionModule vision;
     [SerializeField] private ChomAnimController chomAnimController;
+
     [SerializeField] private float deathAnimationLength = 1f;
 
     private bool queuedDeath = false;
