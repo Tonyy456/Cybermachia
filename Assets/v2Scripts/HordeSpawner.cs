@@ -9,7 +9,6 @@ using UnityEngine.Windows;
 public class HordeSpawner : MonoBehaviour
 {
     [Header("number=enemy type, '+' = round divider")]
-    [SerializeField] private List<GameObject> ignoreCollisions;
     [SerializeField] private List<GameObject> enemyTypes;
     [SerializeField] private List<GameObject> dropItems;
     [Range(0f, 1f)]
@@ -80,12 +79,15 @@ public class HordeSpawner : MonoBehaviour
                 var item = dropItems[i];
                 var chance = spawnChance[i];
                 bool spawn = UnityEngine.Random.Range(0f, 1f) < chance;
+                Debug.Log(spawn);
                 if(spawn)
                 {
                     go.AddComponent<SpawnOnDestroy>().SetPrefabToSpawn(item);
+
                 }
             }
-            foreach (var item in ignoreCollisions)
+            GameObject[] colliders = GameObject.FindGameObjectsWithTag("PlayerOnlyCollider");
+            foreach (var item in colliders)
             {
                 Physics2D.IgnoreCollision(go.GetComponent<BoxCollider2D>(), item.GetComponent<BoxCollider2D>());
                 Physics2D.IgnoreCollision(go.GetComponent<CircleCollider2D>(), item.GetComponent<BoxCollider2D>());

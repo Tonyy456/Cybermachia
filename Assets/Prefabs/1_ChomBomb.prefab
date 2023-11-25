@@ -150,10 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionModule: {fileID: -7806814514986075197}
   rb: {fileID: 3062399760370524886}
-  obstacleAvoidDistance: 0.2
+  obstacleAvoidDistance: 0.1
   boidAvoidDistance: 0.2
   boidAvoidanceFactor: 3
-  obstacleAvoidanceFactor: 9
+  obstacleAvoidanceFactor: 11.43
 --- !u!114 &2005888003197162881
 MonoBehaviour:
   m_ObjectHideFlags: 0

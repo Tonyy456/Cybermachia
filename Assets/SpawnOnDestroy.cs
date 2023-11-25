@@ -5,16 +5,24 @@ using UnityEngine;
 public class SpawnOnDestroy : MonoBehaviour
 {
     [SerializeField] private GameObject m_SpawnObject;
+
+    private bool isQuitting = false;
     public void SetPrefabToSpawn(GameObject prefab)
     {
         m_SpawnObject = prefab;
     }
 
-    public void OnDestroy()
+    void OnApplicationQuit()
     {
-        if(m_SpawnObject != null)
+        isQuitting = true;
+    }
+
+    void OnDestroy()
+    {
+        if (!isQuitting && m_SpawnObject != null)
         {
-            GameObject.Instantiate(m_SpawnObject);
+            var result = GameObject.Instantiate(m_SpawnObject);
+            result.transform.position = this.transform.position;
         }
     }
 }

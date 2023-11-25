@@ -22,7 +22,6 @@ public class v2_bullet : MonoBehaviour
         GameObject[] ignoreCollisionsFrom = GameObject.FindGameObjectsWithTag("PlayerOnlyCollider");
         foreach(var item in ignoreCollisionsFrom)
         {
-            Debug.Log(item.name);
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), item.GetComponent<Collider2D>());
         }
         
