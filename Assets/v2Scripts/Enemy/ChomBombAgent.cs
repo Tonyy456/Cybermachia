@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ChomBombAgent : MonoBehaviour
+public class ChomBombAgent : MonoBehaviour, IDamageable
 {
+    [SerializeField] private int maxHealth;
     [SerializeField] private ChomVisionModule vision;
     [SerializeField] private Animator animator;
     [Range(0f, 1f)]
@@ -17,9 +18,13 @@ public class ChomBombAgent : MonoBehaviour
 
     private NavMeshAgent agent;
     private CardinalDirection movingDirection = CardinalDirection.Down;
+    public int Health { get; private set; }
+    private bool beingDamaged = false;
+    private bool dying = false;
 
     public void Start()
     {
+        Health = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -35,10 +40,13 @@ public class ChomBombAgent : MonoBehaviour
     {
         while (true)
         {
-            Vector3 target = CurrentTarget();
-            target.z = 0;
-            agent.destination = target;
-            UpdateAnimator();
+            if (!dying)
+            {
+                Vector3 target = CurrentTarget();
+                target.z = 0;
+                agent.destination = target;
+                if (!beingDamaged) UpdateAnimator();
+            }
             yield return new WaitForSeconds(updateDelay);
         }
     }
@@ -94,4 +102,42 @@ public class ChomBombAgent : MonoBehaviour
         animator.Play(animationName);
     }
 
+    public bool TryDamage(int damage)
+    {
+        if (dying) return false;
+        if(Health > 0)
+        {
+            Health -= damage;
+            beingDamaged = true;
+            if(Health <= 0)
+            {
+                Die();
+                return true;
+            }
+            string animationName = $"Hurt{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
+            animator.Play(animationName);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Die()
+    {
+        dying = true;
+        string animationName = $"Explode{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
+        animator.Play(animationName);
+    }
+
+    public void BeingDamagedDone()
+    {
+        beingDamaged = false;
+    }
+
+    public void DestroyObject()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
 }

@@ -13,10 +13,10 @@ TagManager:
   - IgnoreBorder
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Border
+  - IgnoreWalls
+  - Walls
+  - IgnoreBorderAndWalls
   - 
   - 
   - 

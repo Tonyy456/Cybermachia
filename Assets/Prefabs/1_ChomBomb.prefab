@@ -12,14 +12,12 @@ GameObject:
   - component: {fileID: 6312813987939770417}
   - component: {fileID: 3062399760370524886}
   - component: {fileID: 3980026885684976311}
-  - component: {fileID: 5569436021911170401}
   - component: {fileID: -7806814514986075197}
-  - component: {fileID: 5548070502644208125}
-  - component: {fileID: 2005888003197162881}
   - component: {fileID: 5360331056386336486}
-  - component: {fileID: 5349917407439202775}
   - component: {fileID: -6221619708488263194}
-  m_Layer: 0
+  - component: {fileID: 2034001762115593976}
+  - component: {fileID: -3958145975319392078}
+  m_Layer: 3
   m_Name: 1_ChomBomb
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -102,23 +100,6 @@ MonoBehaviour:
       m_Calls: []
   attenuationOnDistance: 0
   ignoreTag: Enemy
---- !u!114 &5569436021911170401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312813987939770419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964b990cea6f84b4da980631d59c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useLateUpdate: 0
-  animator: {fileID: 6312813987939770417}
-  idleSpeedThreshold: 0.204
-  upDownAngleThreshold: 27.6
-  rb: {fileID: 3062399760370524886}
 --- !u!114 &-7806814514986075197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,40 +117,6 @@ MonoBehaviour:
   targets: []
   targetTag: Player
   boidTag: Enemy
---- !u!114 &5548070502644208125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312813987939770419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36e7c0013e6305f4e9615102d8e115f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visionModule: {fileID: -7806814514986075197}
-  rb: {fileID: 3062399760370524886}
-  obstacleAvoidDistance: 0.1
-  boidAvoidDistance: 0.2
-  boidAvoidanceFactor: 3
-  obstacleAvoidanceFactor: 11.43
---- !u!114 &2005888003197162881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312813987939770419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7dd8f3330c37947b5702b48a8419b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visionModule: {fileID: -7806814514986075197}
-  rb: {fileID: 3062399760370524886}
-  targetFactor: 6
-  normalizeVectors: 1
 --- !u!58 &5360331056386336486
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,29 +132,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 25
---- !u!114 &5349917407439202775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312813987939770419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000f4cc08c7757348a80bed0ea03125d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 4
-  movementSpeed: 1
-  passiveSpeed: 1
-  goalDistanceToTarget: 0.3
-  targetModule: {fileID: 2005888003197162881}
-  spriteRenderer: {fileID: 0}
-  rb: {fileID: 3062399760370524886}
-  vision: {fileID: -7806814514986075197}
-  chomAnimController: {fileID: 5569436021911170401}
-  deathAnimationLength: 1
+  m_Radius: 100
 --- !u!61 &-6221619708488263194
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -234,6 +159,46 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.73689324}
   m_EdgeRadius: 0
+--- !u!195 &2034001762115593976
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312813987939770419}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-3958145975319392078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312813987939770419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa90cedaadcf4ad795e987a2f8d3663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  vision: {fileID: -7806814514986075197}
+  animator: {fileID: 6312813987939770417}
+  idleSpeedThreshold: 0.05
+  upDownAngleThreshold: 45
+  updateDelay: 0.5
 --- !u!1 &6312813988243841744
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6312813988243841745}
   - component: {fileID: 6312813988243841750}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
