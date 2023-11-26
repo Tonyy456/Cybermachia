@@ -499,7 +499,7 @@ MonoBehaviour:
   dropItems:
   - {fileID: 4766066858504881401, guid: 9518003577e8e4097a21f4e4706685a6, type: 3}
   spawnChance:
-  - 1
+  - 0
   controlString: 1234
   spawnPoints: {fileID: 1252730847}
   minSpawnDelay: 0.5

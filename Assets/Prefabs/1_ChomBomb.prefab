@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa90cedaadcf4ad795e987a2f8d3663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 4
   vision: {fileID: -7806814514986075197}
   animator: {fileID: 6312813987939770417}
   idleSpeedThreshold: 0.05
