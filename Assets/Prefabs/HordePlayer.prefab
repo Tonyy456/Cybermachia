@@ -485,9 +485,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a216697b2d9343418cda669e339c046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableInput: 1
+  EnableInput: 0
   maxHealth: 10
   healthBar: {fileID: 1547746347202562270}
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2387014473995178058
 GameObject:
   m_ObjectHideFlags: 0

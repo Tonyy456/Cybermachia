@@ -98,4 +98,9 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
         if (Enabled) attack.Enable();
         else attack.Disable();
     }
+
+    public void ResetAmmo()
+    {
+        Ammo = maxAmmoCount;
+    }
 }

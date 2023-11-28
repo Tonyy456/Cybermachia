@@ -65,8 +65,10 @@ namespace Tony
         [SerializeField] private int minimumPlayerCount = 0;
         [SerializeField] private bool clearConnectedPlayers = false;
         [SerializeField] private Transform playerParent;
+        [SerializeField] private bool InitPlayerScene = false; 
         public UnityEvent onGameReady;
         public UnityEvent onPlayerGained;
+        public UnityEvent onPlayerRemoved;
 
         private PlayerInputManager manager;
         private bool readyToInvoke = false;
@@ -80,12 +82,20 @@ namespace Tony
         }
         private void Awake()
         {
-            if (clearConnectedPlayers) ConnectedPlayerHolder.Instance.Reset();
+            Init();
+        }
 
+        public void Init()
+        {
+            if (clearConnectedPlayers) ConnectedPlayerHolder.Instance.Reset();
             manager = this.GetComponent<PlayerInputManager>();
             manager.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
             manager.onPlayerJoined += onPlayerJoined;
             manager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
+            manager.onPlayerLeft += (PlayerInput p) => {
+                onPlayerRemoved?.Invoke();
+                Reset();
+            };
 
             // join all players that were connected in previous scenes.
             foreach (var player in ConnectedPlayerHolder.Instance.connectedPlayers)
@@ -94,11 +104,21 @@ namespace Tony
             }
 
             // allow for individual scene testing.
-            
+
             if (ConnectedPlayerHolder.Instance.connectedPlayers.Count < minimumPlayerCount)
-                manager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
-            else {
+                manager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenJoinActionIsTriggered;
+            else
+            {
                 readyToInvoke = true;
+            }
+        }
+
+        public void Reset()
+        {
+            ConnectedPlayerHolder.Instance.Reset();
+            foreach(var input in GameObject.FindObjectsOfType<PlayerInput>(true))
+            {
+                GameObject.Destroy(input.gameObject);
             }
         }
 
@@ -108,12 +128,22 @@ namespace Tony
                 onGameReady?.Invoke();
         }
 
+        private void Refresh()
+        {
+            ConnectedPlayerHolder.Instance.Reset();
+            foreach (var input in GameObject.FindObjectsOfType<PlayerInput>())
+            {
+                AddPlayerToSingleton(input);
+            }
+        }
+
         private void onPlayerJoined(PlayerInput input)
         {
+            Debug.Log(input);
             if (input == null) return; //just in case.
             AddPlayerToSingleton(input);
             onPlayerGained?.Invoke();
-            if(manager.joinBehavior == PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed &&
+            if(manager.joinBehavior == PlayerJoinBehavior.JoinPlayersWhenJoinActionIsTriggered &&
                 ConnectedPlayerHolder.Instance.connectedPlayers.Count >= minimumPlayerCount)
             {
                 onGameReady?.Invoke();

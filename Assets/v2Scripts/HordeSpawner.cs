@@ -11,12 +11,14 @@ public class HordeSpawner : MonoBehaviour
     [Header("number=enemy type, '+' = round divider")]
     [SerializeField] private List<GameObject> enemyTypes;
     [SerializeField] private List<GameObject> dropItems;
+    [SerializeField] private TMPro.TMP_Text CurrentRound;
     [Range(0f, 1f)]
     [SerializeField] private List<float> spawnChance;
     [SerializeField] private string controlString;
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private float minSpawnDelay;
     [SerializeField] private float maxSpawnDelay;
+    [SerializeField] private Transform enemyParent;
 
     public UnityEvent OnRoundStart;
     public UnityEvent OnAllEnemiesSpawned;
@@ -45,13 +47,13 @@ public class HordeSpawner : MonoBehaviour
     {
         if (controlString.Length == 0) return;
         rounds = new List<string>(controlString.Split('+'));
-        SpawnNextRound();
     }
 
     public IEnumerator HandleRoundSpawn()
     {
         OnRoundStart?.Invoke();
         string round = rounds[currentRound++];
+        if (CurrentRound) CurrentRound.text = $"{currentRound}";
         for (int i = 0; i < round.Length; i++)
         {
             spawnEnemy(round.Substring(i, 1));
@@ -71,15 +73,19 @@ public class HordeSpawner : MonoBehaviour
         {
             var enemyPrefab = enemyTypes[result - 1];
             var go = GameObject.Instantiate(enemyPrefab);
+            go.transform.SetParent(enemyParent);
             var childIndex = UnityEngine.Random.Range(0, spawnPoints.childCount);
             var spawnPoint = spawnPoints.GetChild(childIndex);
-            go.transform.position = spawnPoint.transform.position;
+            Debug.Log(spawnPoint.name);
+            var spawnLocation = spawnPoint.transform.localPosition;
+            spawnLocation.z = 0;
+            go.transform.localPosition = spawnLocation;
+            Debug.Log(go.transform.position);
             for(int i = 0; i < dropItems.Count; i++)
             {
                 var item = dropItems[i];
                 var chance = spawnChance[i];
                 bool spawn = UnityEngine.Random.Range(0f, 1f) < chance;
-                Debug.Log(spawn);
                 if(spawn)
                 {
                     go.AddComponent<SpawnOnDestroy>().SetPrefabToSpawn(item);

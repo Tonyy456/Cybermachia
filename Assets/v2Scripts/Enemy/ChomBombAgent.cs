@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class ChomBombAgent : MonoBehaviour, IDamageable
@@ -10,6 +11,7 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
     [SerializeField] private int maxHealth;
     [SerializeField] private ChomVisionModule vision;
     [SerializeField] private Animator animator;
+    [SerializeField] private float explodeWhenWithinDistance = 2f;
     [Range(0f, 1f)]
     [SerializeField] private float idleSpeedThreshold = 0.05f;
     [Range(0f, 90f)]
@@ -42,19 +44,31 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
         {
             if (!dying)
             {
-                Vector3 target = CurrentTarget();
-                target.z = 0;
-                agent.destination = target;
-                if (!beingDamaged) UpdateAnimator();
+                Transform player = CurrentTarget();
+                if (player != null)
+                {
+                    Vector3 target = player.position;
+                    target.z = 0;
+                    agent.destination = target;
+                    float distance = (target - this.transform.position).magnitude;
+                    if(distance < explodeWhenWithinDistance)
+                    {
+                        Die();
+                    }
+                }
+                else if (!beingDamaged)
+                {
+                    UpdateAnimator();
+                }
             }
             yield return new WaitForSeconds(updateDelay);
         }
     }
 
-    private Vector3 CurrentTarget()
+    private Transform CurrentTarget()
     {
         var targets = vision.targets;
-        if (targets.Count == 0) return this.transform.position;
+        if (targets.Count == 0) return null;
         float minDistance = 10000000f;
         var target = targets[0];
         foreach(var item in targets)
@@ -66,7 +80,7 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
                 minDistance = distance;
             }
         }
-        return target.transform.position;
+        return target.transform;
     }
 
     private void UpdateAnimator()

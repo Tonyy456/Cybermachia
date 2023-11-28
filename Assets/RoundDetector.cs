@@ -13,10 +13,14 @@ public class RoundDetector : MonoBehaviour
     [Header("Insert a {0} for the seconds")]
     [SerializeField] private string formatString;
     public List<GameObject> enemies;
+    public List<HordePlayer> alivePlayers;
     public UnityEvent OnDownTimeStarted;
     public UnityEvent OnUpTimeStarted;
     public UnityEvent OnNoEnemiesLeft;
+    public UnityEvent OnGameOver;
+    [SerializeField] private float timeBetweenChecks = 0.5f;
 
+    private bool gameOver = false;
     public void Start()
     {
         if (HordeSpawner == null) return;
@@ -30,19 +34,37 @@ public class RoundDetector : MonoBehaviour
     public IEnumerator EnemyDetectionRoutine()
     {
         enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(enemyTag));
+        alivePlayers = new List<HordePlayer>(GameObject.FindObjectsOfType<HordePlayer>(true));
+        alivePlayers = alivePlayers.FindAll(x => !x.Dead);
         int i = 0;
-        while(enemies.Count > 0)
+        int j = 0;
+        while(enemies.Count > 0 && !gameOver)
         {
             GameObject enemy = enemies[i];
+            HordePlayer player = alivePlayers[j];
             if (enemy.IsDestroyed() || !enemy.activeSelf)
             {
                 enemies.Remove(enemy);
             }
+            if (player.Dead)
+            {
+                alivePlayers.Remove(player);
+            }
+            if (alivePlayers.Count == 0)
+            {
+                gameOver = true;
+                OnGameOver?.Invoke();
+                yield return null;
+            }
             i = enemies.Count == 0 ? -1 : i % enemies.Count;
-            yield return new WaitForEndOfFrame();
+            j = alivePlayers.Count == 0 ? -1 : j % alivePlayers.Count;
+            yield return new WaitForSeconds(timeBetweenChecks);
         }
-        OnNoEnemiesLeft?.Invoke();
-        StartCoroutine(DownTimeRoutine());
+        if (!gameOver)
+        {
+            OnNoEnemiesLeft?.Invoke();
+            StartCoroutine(DownTimeRoutine());
+        }
         yield return null;
     }
     public IEnumerator DownTimeRoutine()

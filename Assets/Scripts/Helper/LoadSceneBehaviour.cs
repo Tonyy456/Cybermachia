@@ -8,9 +8,19 @@ using Tony;
     */
 public class LoadSceneBehaviour : MonoBehaviour
 {
+    [SerializeField] private string sceneName; 
     public void Load(string name)
     {
         Helper.LoadScene(name);
+    }
+    public void LoadIfPlayerCount(int count)
+    {
+        int num = PlayerConnector.numPlayers;
+        Debug.Log(num);
+        if (num >= count)
+        {        
+            Helper.LoadScene(sceneName);
+        }
     }
 }
 
