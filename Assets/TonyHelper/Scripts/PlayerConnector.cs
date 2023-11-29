@@ -47,6 +47,17 @@ namespace Tony
                 if (!PlayerIsConnected(player))
                     connectedPlayers.Add(player);
             }
+            public void RemovePlayer(PlayerInput input)
+            {
+                if (input.devices.Count == 0) return;
+                var match = connectedPlayers.Find(x => x.targetDevice == input.devices[0]);
+                Debug.Log("Attempted to remove player by index: " + input.playerIndex);
+                if (match != null)
+                {
+                    Debug.Log("success!");
+                    connectedPlayers.Remove(match);
+                }
+            }
             public void Reset()
             {
                 connectedPlayers = new List<ConnectedPlayer>();
@@ -94,7 +105,6 @@ namespace Tony
             manager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
             manager.onPlayerLeft += (PlayerInput p) => {
                 onPlayerRemoved?.Invoke();
-                Reset();
             };
 
             // join all players that were connected in previous scenes.
@@ -104,13 +114,17 @@ namespace Tony
             }
 
             // allow for individual scene testing.
-
             if (ConnectedPlayerHolder.Instance.connectedPlayers.Count < minimumPlayerCount)
                 manager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenJoinActionIsTriggered;
             else
             {
                 readyToInvoke = true;
             }
+        }
+
+        public void RemovePlayer(PlayerInput input)
+        {
+            ConnectedPlayerHolder.Instance.RemovePlayer(input);
         }
 
         public void Reset()
@@ -139,7 +153,6 @@ namespace Tony
 
         private void onPlayerJoined(PlayerInput input)
         {
-            Debug.Log(input);
             if (input == null) return; //just in case.
             AddPlayerToSingleton(input);
             onPlayerGained?.Invoke();

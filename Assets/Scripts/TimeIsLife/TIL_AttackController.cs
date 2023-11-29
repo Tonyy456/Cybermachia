@@ -9,10 +9,15 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
     [Header("Needs a TIL_BulletManager")]
     [SerializeField] private float fireDelay = 0.1f;
 
+    [SerializeField] private bool usingRenderTextureAsCamera = false;
+    [SerializeField] private string RenderTextureCameraTag = "";
+    [SerializeField] private RenderTexture texture;
+
     public bool Enabled { get; set; } = false;
 
     private float lastFire;
     private bool isKeyboard = false;
+    private Camera renderCam;
     private PlayerInput input;
     private InputAction attack;
     private InputAction aim;
@@ -28,6 +33,22 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
         isKeyboard = input.currentControlScheme.Contains("Keyboard");
         InitializeAttack(input.currentActionMap.FindAction("Attack"));
         InitializeAim(input.currentActionMap.FindAction("Aim"));
+        if (usingRenderTextureAsCamera)
+        {
+            var cams = Camera.allCameras;
+            foreach (var cam in cams)
+            {
+                if (cam.tag == RenderTextureCameraTag)
+                {
+                    renderCam = cam;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            renderCam = Camera.main;
+        }
     }
 
     public void DisableInput()
@@ -53,7 +74,21 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
         //get aim dir
         Vector2 aimDir = aim.ReadValue<Vector2>();
         if (aimDir.magnitude <= 0.1) return;
-        if (isKeyboard) aimDir = Camera.main.ScreenToWorldPoint(aimDir) - this.transform.position;
+        if (isKeyboard && usingRenderTextureAsCamera)
+        {
+            GameObject renderTextureObject = GameObject.FindGameObjectWithTag("RenderTexture");
+            Canvas canvas = renderTextureObject.GetComponentInParent<Canvas>();
+            RectTransform gameObjectRectTransform = renderTextureObject.GetComponent<RectTransform>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(gameObjectRectTransform, aimDir, Camera.main, out Vector2 localPoint);
+            Rect rect = gameObjectRectTransform.rect;
+            Vector2 normalizedOnRenderTexture = (localPoint / rect.size) + new Vector2(0.5f, 0.5f);
+            Vector2 renderCamScreenPoint = normalizedOnRenderTexture * new Vector2(renderCam.pixelWidth, renderCam.pixelHeight);
+            aimDir = renderCam.ScreenToWorldPoint(renderCamScreenPoint) - this.transform.position;
+        }
+        else if (isKeyboard)
+        {
+            aimDir = renderCam.ScreenToWorldPoint(aimDir) - this.transform.position;
+        }
         lastFire = Time.time;
 
         TIL_BulletManager manager = GameObject.FindObjectOfType<TIL_BulletManager>();

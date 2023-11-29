@@ -36,28 +36,18 @@ public class RoundDetector : MonoBehaviour
         enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(enemyTag));
         alivePlayers = new List<HordePlayer>(GameObject.FindObjectsOfType<HordePlayer>(true));
         alivePlayers = alivePlayers.FindAll(x => !x.Dead);
-        int i = 0;
-        int j = 0;
-        while(enemies.Count > 0 && !gameOver)
+        while (enemies.Count > 0 && !gameOver)
         {
-            GameObject enemy = enemies[i];
-            HordePlayer player = alivePlayers[j];
-            if (enemy.IsDestroyed() || !enemy.activeSelf)
-            {
-                enemies.Remove(enemy);
-            }
-            if (player.Dead)
-            {
-                alivePlayers.Remove(player);
-            }
+            var enemies_dead = enemies.FindAll(x => x.IsDestroyed() || !x.activeSelf);
+            foreach (var x in enemies_dead) enemies.Remove(x);
+            var dead_players = alivePlayers.FindAll(x => x.Dead);
+            foreach (var x in dead_players) alivePlayers.Remove(x);
             if (alivePlayers.Count == 0)
             {
                 gameOver = true;
                 OnGameOver?.Invoke();
                 yield return null;
             }
-            i = enemies.Count == 0 ? -1 : i % enemies.Count;
-            j = alivePlayers.Count == 0 ? -1 : j % alivePlayers.Count;
             yield return new WaitForSeconds(timeBetweenChecks);
         }
         if (!gameOver)

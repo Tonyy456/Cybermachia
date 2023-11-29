@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619453308140775825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.68, z: 0}
+  m_LocalPosition: {x: 0, y: 0.975, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54,7 +54,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: f447e881a56c231438c6a5afb6821d77, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,10 +91,10 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 60
+  m_FontSize: 49
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 12800000, guid: f447e881a56c231438c6a5afb6821d77, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278255396
@@ -304,6 +304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireDelay: 0.1
+  usingRenderTextureAsCamera: 1
+  RenderTextureCameraTag: RenderTextureCamera
+  texture: {fileID: 8400000, guid: c76da6e038ff74b54a7934ef43dc33bd, type: 2}
 --- !u!114 &404194332796797245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +413,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2007411644, guid: b754deee7298a4dd48b53c3bbfd2a1a8, type: 3}
+  m_Sprite: {fileID: 1575742274, guid: 60c4c9aa9d6634d5ea0963aa50cb3cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

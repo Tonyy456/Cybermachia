@@ -12,6 +12,7 @@ public class HordePlayer : MonoBehaviour, IDamageable
     [SerializeField] private UnityEvent onDead;
 
     private int currentHealth = 0;
+    private bool enabledBeforeStart = false;
     public int Health {
         get
         {
@@ -99,11 +100,12 @@ public class HordePlayer : MonoBehaviour, IDamageable
     {
         Respawn();
         PlaceOnRespawnPoint();
-        EnableAllInputs(EnableInput);
+        if(!enabledBeforeStart) EnableAllInputs(EnableInput);
     }
 
     public void EnableAllInputs(bool enable = true)
     {
+        enabledBeforeStart = true;
         var comps = GetComponents<PlayerInputScript>();
         foreach (var comp in comps)
         {

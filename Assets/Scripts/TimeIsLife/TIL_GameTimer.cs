@@ -7,6 +7,7 @@ public class TIL_GameTimer : MonoBehaviour
 {
     [SerializeField] private UnityEvent onTimerDone;
     [SerializeField] private TMPro.TMP_Text textToUpdate;
+    [SerializeField] private string formatString = "{0:00}:{1:00}";
 
     private bool active = true;
     private IEnumerator routine;
@@ -47,7 +48,7 @@ public class TIL_GameTimer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(totalSeconds / 60f);
         int seconds = Mathf.FloorToInt(totalSeconds % 60f);
-        string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+        string formattedTime = string.Format(formatString, minutes, seconds);
         return formattedTime;
     }
 }

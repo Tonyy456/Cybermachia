@@ -54,9 +54,10 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
                     if(distance < explodeWhenWithinDistance)
                     {
                         Die();
+                        yield return null;
                     }
                 }
-                else if (!beingDamaged)
+                if (!beingDamaged && !dying)
                 {
                     UpdateAnimator();
                 }
@@ -140,8 +141,10 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        agent.isStopped = true;
         dying = true;
         string animationName = $"Explode{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
+        Debug.Log(animationName);
         animator.Play(animationName);
     }
 

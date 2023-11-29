@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tony;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -63,6 +64,8 @@ namespace CyberMachia
 
         private void OnCancelAction(InputAction.CallbackContext context)
         {
+            var item = GameObject.FindObjectOfType<PlayerConnector>();
+            if (item) item.RemovePlayer(input);
             Destroy(this.gameObject);
             //if (ready)
             //{

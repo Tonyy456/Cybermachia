@@ -4,10 +4,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class v2_AttackManager : MonoBehaviour, PlayerInputScript
 {
+    [SerializeField] private bool usingRenderTextureAsCamera = false;
+    [SerializeField] private string RenderTextureCameraTag = "";
+    [SerializeField] private RenderTexture texture;
     [SerializeField] private int maxAmmoCount = 20;
     [SerializeField] private float fireDelay = 0.1f;
     [SerializeField] private GameObject prefab;
@@ -22,6 +26,7 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
     private InputAction aim;
 
     private int ammo;
+    private Camera renderCam;
     public int Ammo
     {
         get
@@ -38,14 +43,33 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
     {
         Ammo = maxAmmoCount;
         lastFire = Time.time - 100f;
+
+
     }
 
     public void Start()
     {
+        
         input = this.GetComponent<PlayerInput>();
         isKeyboard = input.currentControlScheme.Contains("Keyboard");
         InitializeAttack(input.currentActionMap.FindAction("Attack"));
         InitializeAim(input.currentActionMap.FindAction("Aim"));
+        if (usingRenderTextureAsCamera)
+        {
+            var cams = Camera.allCameras;
+            foreach(var cam in cams)
+            {
+                if (cam.tag == RenderTextureCameraTag)
+                {
+                    renderCam = cam;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            renderCam = Camera.main;
+        }
     }
 
     public void DisableInput()
@@ -72,7 +96,36 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
         //get aim dir
         Vector2 aimDir = aim.ReadValue<Vector2>();
         if (aimDir.magnitude <= 0.1) return;
-        if (isKeyboard) aimDir = Camera.main.ScreenToWorldPoint(aimDir) - this.transform.position;
+        
+        if(isKeyboard && usingRenderTextureAsCamera)
+        {
+            GameObject renderTextureObject = GameObject.FindGameObjectWithTag("RenderTexture");
+            Canvas canvas = renderTextureObject.GetComponentInParent<Canvas>();
+            RectTransform gameObjectRectTransform = renderTextureObject.GetComponent<RectTransform>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(gameObjectRectTransform, aimDir, Camera.main, out Vector2 localPoint);
+            Rect rect = gameObjectRectTransform.rect;
+            Vector2 normalizedOnRenderTexture = (localPoint / rect.size) + new Vector2(0.5f, 0.5f);
+            Vector3 pixelCoord = normalizedOnRenderTexture * new Vector2(texture.width, texture.height);
+            Ray ray = renderCam.ScreenPointToRay(pixelCoord);
+            // Example: Cast a ray and get the world point
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 worldPoint = hit.point;
+
+                // Now 'worldPoint' contains the world coordinates in the scene
+                Debug.Log("World Point: " + worldPoint);
+                aimDir = worldPoint - this.transform.position;
+            }
+            Vector2 renderCamScreenPoint = normalizedOnRenderTexture * new Vector2(renderCam.pixelWidth, renderCam.pixelHeight);
+            Debug.Log($"{aimDir} --> {renderCamScreenPoint}");
+
+            aimDir = renderCam.ScreenToWorldPoint(renderCamScreenPoint) - this.transform.position;
+        }
+        else if (isKeyboard)
+        {
+            aimDir = renderCam.ScreenToWorldPoint(aimDir) - this.transform.position;
+        }
         lastFire = Time.time;
 
         Ammo--;

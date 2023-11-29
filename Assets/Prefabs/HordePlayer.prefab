@@ -455,6 +455,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ddce8e11916d66468ad5253513c6fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usingRenderTextureAsCamera: 1
+  RenderTextureCameraTag: RenderTextureCamera
+  texture: {fileID: 8400000, guid: 0af8aef2c99434d13acfe7c2f928752f, type: 2}
   maxAmmoCount: 50
   fireDelay: 0.1
   prefab: {fileID: 3222017936251721125, guid: c7f9a2b9c8acb634daf9c830ac1d22af, type: 3}
@@ -686,7 +689,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2007411644, guid: b754deee7298a4dd48b53c3bbfd2a1a8, type: 3}
+  m_Sprite: {fileID: 1575742274, guid: 60c4c9aa9d6634d5ea0963aa50cb3cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
