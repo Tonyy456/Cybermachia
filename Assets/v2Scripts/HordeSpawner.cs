@@ -1,95 +1,129 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.Windows;
 
+[Serializable]
+public class ItemDrop
+{
+    public string itemName;
+    public GameObject item;
+    [Range(0, 1)]
+    public float dropChance;
+}
+
+
 public class HordeSpawner : MonoBehaviour
 {
-    [Header("number=enemy type, '+' = round divider")]
+    [Header("Enemy Data")]
+    [SerializeField] private string enemyTag;
     [SerializeField] private List<GameObject> enemyTypes;
-    [SerializeField] private List<GameObject> dropItems;
-    [SerializeField] private TMPro.TMP_Text CurrentRound;
-    [SerializeField] private int maxEnemies;
-    [Range(0f, 1f)]
-    [SerializeField] private List<float> spawnChance;
-    [SerializeField] private List<string> rounds;
+    [SerializeField] private List<ItemDrop> itemDrops;
+    [SerializeField] private int maxEnemiesAllowedAlive;
+    public List<GameObject> enemies;
+
+    [Header("Player Data")]
+    [SerializeField] private string playerTag;
+    public List<HordePlayer> alivePlayers;
+
+    [Header("Spawning Mechanics")]
+    [SerializeField] private Transform enemyParent;
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private float minSpawnDelay;
     [SerializeField] private float maxSpawnDelay;
-    [SerializeField] private Transform enemyParent;
-    [SerializeField] private float sqrtCountGrowthConstant;
-    [SerializeField] private float linearConstant;
 
-    [Header("Lol jus tryna get this done. combined two scripts to make life easier")]
-    [SerializeField] private float timeBetweenRounds = 10f;
-    [SerializeField] private string enemyTag;
-    [SerializeField] private TMPro.TMP_Text downTimeText;
-    [Header("Insert a {0} for the seconds")]
+    [Header("Round Data")]
+    [SerializeField] private TMPro.TMP_Text CurrentRoundText;
     [SerializeField] private string formatString;
-    public List<GameObject> enemies;
-    public List<HordePlayer> alivePlayers;
-    public UnityEvent OnDownTimeStarted;
-    public UnityEvent OnUpTimeStarted;
-    public UnityEvent OnNoEnemiesLeft;
-    public UnityEvent OnGameOver;
+    [SerializeField] private List<string> rounds;
+    [SerializeField] private float timeBetweenRounds = 3f;
+
+    [Header("Text Objects")]
+    [SerializeField] private TMPro.TMP_Text downTimeText;
+    [SerializeField] private string downTimeFormatString;
+
+    [Header("Technical")]
     [SerializeField] private float timeBetweenChecks = 0.5f;
 
-    public UnityEvent OnRoundStart;
-    public UnityEvent OnAllEnemiesSpawned;
-    private int currentRound = 0;
-    private bool gameOver = false;
-
-    public void OnValidate()
-    {
-        if (spawnChance.Count < dropItems.Count)
-        {
-            spawnChance.Add(0f);
-        }
-        if (spawnChance.Count > dropItems.Count)
-        {
-            spawnChance.RemoveAt(spawnChance.Count - 1);
-        }
-    }
+    [Header("Events")]
+    [SerializeField] private UnityEvent OnDownTimeStarted;
+    [SerializeField] private UnityEvent OnNoEnemiesLeft;
+    [SerializeField] private UnityEvent OnGameOver;
+    [SerializeField] private UnityEvent OnRoundStart;
+    [SerializeField] private UnityEvent OnAllEnemiesSpawned;
 
     public int Round => currentRound;
-
     public int roundsLeft { 
         get
         {
             return rounds.Count - currentRound;
         } 
     }
-    public void Start()
+
+    private int currentRound = 0;
+    private bool gameOver = false;
+    private bool enemiesAllSpawned = false;
+    private IEnumerator checkAliveRoutine;
+
+    public void SpawnNextRound()
     {
+        enemiesAllSpawned = false;
+        StopAllCoroutines();
+        StartCoroutine(SpawningRoutine());
+        checkAliveRoutine = CheckAliveRoutine();
+        StartCoroutine(checkAliveRoutine);
     }
 
-    public IEnumerator HandleRoundSpawn()
+    public IEnumerator CheckAliveRoutine()
+    {
+        alivePlayers = new List<HordePlayer>(GameObject.FindObjectsOfType<HordePlayer>(true));
+        while(true)
+        {
+            if (enemies.Count == 0 && enemiesAllSpawned) break;
+            if (gameOver) break;
+
+            enemies.RemoveAll(x => x.IsDestroyed() || !x.activeSelf);
+            alivePlayers.RemoveAll(x => x.Dead);
+            if (alivePlayers.Count == 0)
+            {
+                gameOver = true;
+                OnGameOver?.Invoke();
+                yield return null;          
+            }
+            yield return new WaitForSeconds(timeBetweenChecks);
+        }
+        if (!gameOver)
+        {
+            OnNoEnemiesLeft?.Invoke();
+            StartCoroutine(DownTimeRoutine());
+        }
+        yield return null;
+    }
+
+    public IEnumerator SpawningRoutine()
     {
         OnRoundStart?.Invoke();
         string round = rounds[currentRound++];
-        if (CurrentRound) CurrentRound.text = $"{currentRound}".PadLeft(4, '0');
+        if (CurrentRoundText) CurrentRoundText.text = String.Format(formatString, currentRound);
+
         int i = 0;
         while(i < round.Length)
         {
             int numEnemies =  enemies.Count;
-            if (numEnemies < maxEnemies)
+            if (numEnemies < maxEnemiesAllowedAlive)
             {
                 spawnEnemy(round.Substring(i++, 1));           
             }
             yield return new WaitForSeconds(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
         }
-        noMoreEnmiesToSpawn = true;
+        enemiesAllSpawned = true;
         OnAllEnemiesSpawned?.Invoke(); 
         yield return null;
-    }
-    public void SpawnNextRound()
-    {
-        noMoreEnmiesToSpawn = false;
-        StartCoroutine(HandleRoundSpawn());
-        StartCoroutine(EnemyDetectionRoutine());
     }
 
     private void spawnEnemy(string type)
@@ -102,13 +136,24 @@ public class HordeSpawner : MonoBehaviour
             enemies.Add(go);
             var childIndex = UnityEngine.Random.Range(0, spawnPoints.childCount);
             var spawnPoint = spawnPoints.GetChild(childIndex);
-            var spawnLocation = spawnPoint.transform.localPosition;
-            spawnLocation.z = 0;
-            go.transform.localPosition = spawnLocation;
-            for(int i = 0; i < dropItems.Count; i++)
+            var spawnLocation = spawnPoint.transform.position;
+            var agent = go.GetComponent<NavMeshAgent>();
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(spawnLocation, out hit, float.MaxValue, NavMesh.AllAreas))
             {
-                var item = dropItems[i];
-                var chance = spawnChance[i];
+                // Set the NavMeshAgent's destination to the closest valid position
+                bool worked = agent.Warp(hit.position);
+                if (worked) Debug.Log("spawned at: " + hit.position);
+                else Debug.Log("[failed to] spawned at: " + hit.position);
+            }
+            else
+            {
+                bool worked = agent.Warp(spawnLocation);
+            }
+            for(int i = 0; i < itemDrops.Count; i++)
+            {
+                var item = itemDrops[i].item;
+                var chance = itemDrops[i].dropChance;
                 bool spawn = UnityEngine.Random.Range(0f, 1f) < chance;
                 if(spawn)
                 {
@@ -125,33 +170,6 @@ public class HordeSpawner : MonoBehaviour
         }
     }
 
-    private IEnumerator detectionRoutine;
-    private bool noMoreEnmiesToSpawn = false;
-    public IEnumerator EnemyDetectionRoutine()
-    {
-        alivePlayers = new List<HordePlayer>(GameObject.FindObjectsOfType<HordePlayer>(true));
-        alivePlayers = alivePlayers.FindAll(x => !x.Dead);
-        while (!noMoreEnmiesToSpawn || (enemies.Count > 0 && !gameOver))
-        {
-            var enemies_dead = enemies.FindAll(x => x.IsDestroyed() || !x.activeSelf);
-            foreach (var x in enemies_dead) enemies.Remove(x);
-            var dead_players = alivePlayers.FindAll(x => x.Dead);
-            foreach (var x in dead_players) alivePlayers.Remove(x);
-            if (alivePlayers.Count == 0)
-            {
-                gameOver = true;
-                OnGameOver?.Invoke();
-                yield return null;
-            }
-            yield return new WaitForSeconds(timeBetweenChecks);
-        }
-        if (!gameOver)
-        {
-            OnNoEnemiesLeft?.Invoke();
-            StartCoroutine(DownTimeRoutine());
-        }
-        yield return null;
-    }
     public IEnumerator DownTimeRoutine()
     {
         OnDownTimeStarted?.Invoke();
@@ -165,16 +183,16 @@ public class HordeSpawner : MonoBehaviour
                 SetText((timeBetweenRounds - (Time.time - startTime)));
                 yield return new WaitForEndOfFrame();
             }
+        }       
+        if (roundsLeft > 0)
+        {
+            SpawnNextRound();
         }
-
-        OnUpTimeStarted?.Invoke();
-        if (roundsLeft > 0) SpawnNextRound();
         yield return null;
     }
 
     public void SetText(float seconds)
     {
-        downTimeText.text = string.Format(formatString, (int)seconds);
-
+        downTimeText.text = string.Format(downTimeFormatString, (int)seconds);
     }
 }

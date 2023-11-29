@@ -7,14 +7,27 @@ using UnityEngine.InputSystem;
 public class PlayerSpawnHandler : IPlayerConnectedHandler
 {
     [SerializeField] private Transform spawnPoints;
+    [SerializeField] private bool onlySpawnOnce;
     public override void ConnectPlayer(PlayerInput input)
     {
-
         SpawnPlayer(input);
+    }
+
+    public void SpawnPlayerPt2(PlayerInput input)
+    {
+        int child = Random.Range(0, spawnPoints.childCount);
+        Transform childTransform = spawnPoints.GetChild(child);
+        input.gameObject.transform.position = childTransform.position;
+        GameObject.Destroy(childTransform.gameObject);
     }
 
     public void SpawnPlayer(PlayerInput input)
     {
+        if (onlySpawnOnce)
+        {
+            SpawnPlayerPt2(input);
+            return;
+        }
         //Find Best Match.. Best minimum distance from all targets.
         PlayerInput[] allPlayers = GameObject.FindObjectsOfType<PlayerInput>();
         Transform bestSpawn = null;

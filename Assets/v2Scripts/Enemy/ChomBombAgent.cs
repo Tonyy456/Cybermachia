@@ -144,7 +144,6 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
         agent.isStopped = true;
         dying = true;
         string animationName = $"Explode{Enum.GetName(typeof(CardinalDirection), movingDirection)}";
-        Debug.Log(animationName);
         animator.Play(animationName);
     }
 

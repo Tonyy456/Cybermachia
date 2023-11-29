@@ -11,6 +11,7 @@ public class v2_bullet : MonoBehaviour
     [SerializeField] public int damage;
     [SerializeField] private float aliveTime = 5f;
     [SerializeField] private float minTimeAlive = 0.1f;
+    [SerializeField] private int numHitsPossible = 2;
     public GameObject SpawnedFrom { get; set; }
 
     private Rigidbody2D rb;
@@ -36,16 +37,21 @@ public class v2_bullet : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D collision)
     {
+        if (hitTargets.Contains(collision)) return;
+        if (collision.tag == ignoreTag) return;
         if (collision.isTrigger) return;
         if (collision.gameObject == SpawnedFrom) return;
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-        if (damageable != null && collision.tag == targetTag && !hitTargets.Contains(collision))
+        if (damageable != null && collision.tag == targetTag)
         {
             hitTargets.Add(collision);
             damageable.TryDamage(damage);
+            if (hitTargets.Count >= numHitsPossible)
+            {
+                Explode();
+            }
             return;
         }
-        if (collision.tag == ignoreTag) return;
         if ((Time.time - spawnedTime) > minTimeAlive)
         {
             Explode();

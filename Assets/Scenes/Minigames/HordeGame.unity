@@ -502,7 +502,6 @@ GameObject:
   - component: {fileID: 179203832}
   - component: {fileID: 179203831}
   - component: {fileID: 179203829}
-  - component: {fileID: 179203828}
   m_Layer: 0
   m_Name: RENDERTEXTURE
   m_TagString: RenderTextureCamera
@@ -510,21 +509,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &179203828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179203827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee5dbe6a13a6c4b6f836927600d4e3ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetWidth: 37.8
-  targetHeight: 19.6
-  clampOnStart: 0
 --- !u!114 &179203829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,7 +981,6 @@ GameObject:
   m_Component:
   - component: {fileID: 242055972}
   - component: {fileID: 242055971}
-  - component: {fileID: 242055973}
   - component: {fileID: 242055974}
   m_Layer: 0
   m_Name: Spawner
@@ -1018,29 +1001,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99372b9a0fc49174a8929d3f2436b28c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyTag: Enemy
   enemyTypes:
   - {fileID: 6312813987939770419, guid: a3b704033aff1e84ca0e82b5e5fc125d, type: 3}
   - {fileID: 1829940329161059041, guid: d86bf762d3290d6428ec6bac5de8ac4f, type: 3}
   - {fileID: 7169446153915035576, guid: 4f3837784cf391e43be06ec2e2d7ec92, type: 3}
   - {fileID: 5570622970825569754, guid: 50f451880f8a9f14196241b45c01695a, type: 3}
-  dropItems:
-  - {fileID: 2195995159687301399, guid: f9f8e2738de0642abaa9532a3b7c0b16, type: 3}
-  - {fileID: 2195995159687301399, guid: f0e15efdb037f40a69f678b3b0cfb420, type: 3}
-  - {fileID: 2195995159687301399, guid: 36fc22200e822462d9a5a63acc9b2b5d, type: 3}
-  - {fileID: 2195995159687301399, guid: 69fd7eb1502194557bc5b86a3d1114e0, type: 3}
-  - {fileID: 2195995159687301399, guid: e13e770159fb540a48e6d65ed257e1dc, type: 3}
-  - {fileID: 2195995159687301399, guid: 921185b885c23424dba462b2d64e5be9, type: 3}
-  CurrentRound: {fileID: 4390470223095707861}
-  maxEnemies: 10
-  spawnChance:
-  - 0.136
-  - 0.135
-  - 0.132
-  - 0.132
-  - 0.132
-  - 0.02
+  itemDrops:
+  - itemName: MaxAmmo
+    item: {fileID: 2195995159687301399, guid: 921185b885c23424dba462b2d64e5be9, type: 3}
+    dropChance: 0.02
+  - itemName: HealthDrop(1)
+    item: {fileID: 2195995159687301399, guid: f9f8e2738de0642abaa9532a3b7c0b16, type: 3}
+    dropChance: 0.02
+  - itemName: HealthDrop(2)
+    item: {fileID: 2195995159687301399, guid: f0e15efdb037f40a69f678b3b0cfb420, type: 3}
+    dropChance: 0.02
+  - itemName: HealthDrop(3)
+    item: {fileID: 2195995159687301399, guid: 36fc22200e822462d9a5a63acc9b2b5d, type: 3}
+    dropChance: 0.02
+  - itemName: HealthDrop(4)
+    item: {fileID: 2195995159687301399, guid: 69fd7eb1502194557bc5b86a3d1114e0, type: 3}
+    dropChance: 0.02
+  - itemName: HealthDrop(5)
+    item: {fileID: 2195995159687301399, guid: e13e770159fb540a48e6d65ed257e1dc, type: 3}
+    dropChance: 0.02
+  maxEnemiesAllowedAlive: 10
+  enemies: []
+  playerTag: Player
+  alivePlayers: []
+  enemyParent: {fileID: 1642473412}
+  spawnPoints: {fileID: 1252730847}
+  minSpawnDelay: 0.5
+  maxSpawnDelay: 0.5
+  CurrentRoundText: {fileID: 4390470223095707861}
+  formatString: '{0:D4}'
   rounds:
-  - 1111
+  - 111
   - 111111111111111111111112
   - 2222222111111122221111
   - 22222222222222222233
@@ -1055,18 +1052,10 @@ MonoBehaviour:
   - 44444444444444444444444444444444
   - 44444444444444444444444444444444
   - 44444444444444444444444444444444
-  spawnPoints: {fileID: 1252730847}
-  minSpawnDelay: 0.5
-  maxSpawnDelay: 0.5
-  enemyParent: {fileID: 1642473412}
-  sqrtCountGrowthConstant: 0
-  linearConstant: 0
   timeBetweenRounds: 3
-  enemyTag: Enemy
   downTimeText: {fileID: 1954038671}
-  formatString: '{0:0}'
-  enemies: []
-  alivePlayers: []
+  downTimeFormatString: '{0:0}'
+  timeBetweenChecks: 0.5
   OnDownTimeStarted:
     m_PersistentCalls:
       m_Calls:
@@ -1094,21 +1083,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  OnUpTimeStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2115635977}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnNoEnemiesLeft:
     m_PersistentCalls:
       m_Calls: []
@@ -1127,10 +1101,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  timeBetweenChecks: 0.5
   OnRoundStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2115635977}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnAllEnemiesSpawned:
     m_PersistentCalls:
       m_Calls: []
@@ -1149,86 +1134,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &242055973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242055970}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba3f5b215450c4f46af46145eb0b0600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HordeSpawner: {fileID: 242055971}
-  timeBetweenRounds: 3
-  enemyTag: Enemy
-  downTimeText: {fileID: 1954038671}
-  formatString: '{0}'
-  enemies: []
-  alivePlayers: []
-  OnDownTimeStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 242055974}
-        m_TargetAssemblyTypeName: RespawnAllPlayers, Assembly-CSharp
-        m_MethodName: RespawnPlayers
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2115635977}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnUpTimeStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2115635977}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnNoEnemiesLeft:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGameOver:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1364310664}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  timeBetweenChecks: 0.5
 --- !u!114 &242055974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1914,7 +1819,6 @@ GameObject:
   - component: {fileID: 435668961}
   - component: {fileID: 435668960}
   - component: {fileID: 435668958}
-  - component: {fileID: 435668963}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1986,7 +1890,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -0.12
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -2014,28 +1918,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435668956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 100, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &435668963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435668956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee5dbe6a13a6c4b6f836927600d4e3ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetWidth: 37.8
-  targetHeight: 19.6
-  clampOnStart: 0
 --- !u!1 &486823188
 GameObject:
   m_ObjectHideFlags: 0
@@ -24820,7 +24709,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956135696}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.6184156, y: -2.5498645, z: 10.10751}
+  m_LocalPosition: {x: 3.6184156, y: -2.5498645, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36358,7 +36247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45a321f5417843e7b058e66a127c21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultTimeLength: 9
+  defaultTimeLength: 1
   startDelay: 1
   textToUpdate: {fileID: 1954038671}
   onTimerDone:

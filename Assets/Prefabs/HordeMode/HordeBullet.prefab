@@ -157,3 +157,4 @@ MonoBehaviour:
   damage: 2
   aliveTime: 5
   minTimeAlive: 0.1
+  numHitsPossible: 3

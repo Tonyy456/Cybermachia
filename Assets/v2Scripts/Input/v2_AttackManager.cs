@@ -105,20 +105,7 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
             RectTransformUtility.ScreenPointToLocalPointInRectangle(gameObjectRectTransform, aimDir, Camera.main, out Vector2 localPoint);
             Rect rect = gameObjectRectTransform.rect;
             Vector2 normalizedOnRenderTexture = (localPoint / rect.size) + new Vector2(0.5f, 0.5f);
-            Vector3 pixelCoord = normalizedOnRenderTexture * new Vector2(texture.width, texture.height);
-            Ray ray = renderCam.ScreenPointToRay(pixelCoord);
-            // Example: Cast a ray and get the world point
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                Vector3 worldPoint = hit.point;
-
-                // Now 'worldPoint' contains the world coordinates in the scene
-                Debug.Log("World Point: " + worldPoint);
-                aimDir = worldPoint - this.transform.position;
-            }
             Vector2 renderCamScreenPoint = normalizedOnRenderTexture * new Vector2(renderCam.pixelWidth, renderCam.pixelHeight);
-            Debug.Log($"{aimDir} --> {renderCamScreenPoint}");
 
             aimDir = renderCam.ScreenToWorldPoint(renderCamScreenPoint) - this.transform.position;
         }
