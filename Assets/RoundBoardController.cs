@@ -29,6 +29,7 @@ public class RoundBoardController : MonoBehaviour
     {
         get
         {
+            if (player == null) return -1;
             return player.playerIndex + 1;
         }
     }

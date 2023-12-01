@@ -55,7 +55,7 @@ public class TargetShooterPlayer : MonoBehaviour
         }
         private set
         {
-            bullets = value;
+            bullets = Mathf.Clamp(value, 0, maxBullets);
             for(int i = 0; i < BulletUIParent.childCount; i++)
             {
                 BulletUIParent.GetChild(i).gameObject.SetActive(i < bullets);

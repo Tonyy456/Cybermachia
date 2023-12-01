@@ -8,6 +8,8 @@ using UnityEngine.Events;
 public class TargetShooterGameController : IPlayerConnectedHandler
 {
     [Header("Score")]
+    [SerializeField] private TMPro.TMP_Text winnerText;
+    [SerializeField] private string formatString;
     [SerializeField] private List<RoundBoardController> scoreControllers;
 
     [Header("Events")]
@@ -18,6 +20,7 @@ public class TargetShooterGameController : IPlayerConnectedHandler
 
     public void TriggerGameOver()
     {
+        HandleGameOver();
         onGameOver?.Invoke();
     }
     public override void ConnectPlayer(PlayerInput input)
@@ -25,6 +28,7 @@ public class TargetShooterGameController : IPlayerConnectedHandler
         players.Add(input);
         if (input.playerIndex < scoreControllers.Count)
         {
+            scoreControllers[input.playerIndex].gameObject.SetActive(true);
             scoreControllers[input.playerIndex].AssignToPlayer(input);
         }
         else
@@ -33,8 +37,28 @@ public class TargetShooterGameController : IPlayerConnectedHandler
         }
     }
 
-    private void OnPlayerScore(PlayerInput player, int difference)
+    public void OnPlayerScore(PlayerInput player, int difference)
     {
         scoreControllers[player.playerIndex].AddToScore(difference);
+    }
+
+    public void HandleGameOver()
+    {
+        TargetShooterPlayer[] players = GameObject.FindObjectsOfType<TargetShooterPlayer>();
+        foreach(var x in players)
+        {
+            x.AllowedToShoot = false;
+        }
+        int winnerIndex = -1;
+        int winningScore = -1;
+        foreach(var board in scoreControllers)
+        {
+            if (board.PlayerNumber < 0) continue;
+            if (board.Score > winningScore)
+            {
+                winnerIndex = board.PlayerNumber;
+            }
+        }
+        winnerText.text = string.Format(formatString, winnerIndex);
     }
 }

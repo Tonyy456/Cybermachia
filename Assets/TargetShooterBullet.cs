@@ -15,10 +15,15 @@ public class TargetShooterBullet : MonoBehaviour
         StartCoroutine(moveRoutine());
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        StopAllCoroutines();
-        Destroy(this.gameObject);
+        var comp = collision.GetComponent<TargetBehaviour>();
+        if (comp != null)
+        {
+            comp.GiveScore(spawnedFrom);
+            StopAllCoroutines();
+            Destroy(this.gameObject);
+        }
     }
 
     public IEnumerator moveRoutine()
