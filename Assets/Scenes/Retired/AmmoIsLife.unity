@@ -243,6 +243,7 @@ MonoBehaviour:
           m_StringArgument: summarize
           m_BoolArgument: 0
         m_CallState: 2
+  formatString: '{0:00}:{1:00}'
 --- !u!1 &31567589
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,23 +456,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statTracker: {fileID: 0}
-  title: {fileID: 1124207624}
-  textParentScreenOne: {fileID: 125127605}
-  onMenusExhausted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 144689127}
-        m_TargetAssemblyTypeName: LoadSceneBehaviour, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: MinigameSelecter
-          m_BoolArgument: 0
-        m_CallState: 2
+  KillCountTextParent: {fileID: 0}
+  HitCountTextParent: {fileID: 0}
+  WinnerTextParent: {fileID: 0}
 --- !u!114 &144689127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +471,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f732b8919d64852b0b13ec894883ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: 
+  onError:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &153909492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2931,6 +2922,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  formatString: '{0:00}:{1:00}'
 --- !u!1 &1649115417
 GameObject:
   m_ObjectHideFlags: 0
@@ -12946,6 +12938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3222017936251721125, guid: 00246ae772e6b47adbb09a7234966de0, type: 3}
   stats: {fileID: 859013879}
+  damageOnCompleteMiss: 1
 --- !u!1 &2003021350
 GameObject:
   m_ObjectHideFlags: 0
@@ -12980,6 +12973,7 @@ MonoBehaviour:
   minimumPlayerCount: 2
   clearConnectedPlayers: 0
   playerParent: {fileID: 621735439}
+  InitPlayerScene: 0
   onGameReady:
     m_PersistentCalls:
       m_Calls:
@@ -12998,6 +12992,9 @@ MonoBehaviour:
   onPlayerGained:
     m_PersistentCalls:
       m_Calls: []
+  onPlayerRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2003021352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13010,10 +13007,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -13023,13 +13020,29 @@ MonoBehaviour:
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: a9fe5c1c-324d-4bdb-933f-d2c1ad2da63a
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 46c9a3bc-ea1b-4335-8cee-6894bf20f083
+        m_Path: <Keyboard>/j
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 04926499-02a1-44b1-9536-012503c2f85a
+        m_Path: <Gamepad>/buttonSouth
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 2150435511517480490, guid: 94fe8d564926a4f08903d743342dcd1b, type: 3}
@@ -13069,6 +13082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0711bb0f290d4436d8b591ae1469a891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handleType: 0
   playerMaterials:
   - {fileID: 2100000, guid: 6a20b6978c980423782db6d2cd7b25af, type: 2}
   - {fileID: 2100000, guid: 3043fdbc8ebcd8d4289b627ff0f6c3b1, type: 2}

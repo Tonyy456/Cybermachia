@@ -38,11 +38,32 @@ public class ChomBombAgent : MonoBehaviour, IDamageable
 
     }
 
+    private bool isPaused = false;
+    public bool Pause
+    {
+        get
+        {
+            return isPaused;
+        }
+        set
+        {
+            isPaused = value;
+            if (isPaused)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+
     public IEnumerator DelayedReupdatingRoutine()
     {
         while (true)
         {
-            if (!dying)
+            if (!dying && !isPaused)
             {
                 Transform player = CurrentTarget();
                 if (player != null)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96796381b0be84d3c91f021486e34dcb
+guid: 78ac61a93fc5d4410b7dd60952d9c44d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,139 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: xbox_style1_0
+      name: "Screenshot 2023-12-01 at 3.25.02\u202FPM_0"
       rect:
         serializedVersion: 2
-        x: 1
-        y: 37
-        width: 10
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e9850dbc1c08c4c5ab1720138ddc4ff2
-      internalID: 81216245
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_style1_1
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 25
-        width: 10
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9518e635b2a8d4afb8c9771bc521585d
-      internalID: -1995927323
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_style1_2
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 13
-        width: 10
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2fd362e38a368405c89cd34035b12c5b
-      internalID: -1324363219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_style1_3
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 49
-        width: 10
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 20ad48eebb1cb491c91eab9ed93418f6
-      internalID: -1955089312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_style1_4
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 24
-        width: 8
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 095b6f8d893fb4fe2aedd6b1476b6e0c
-      internalID: -701502602
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_style1_5
-      rect:
-        serializedVersion: 2
-        x: 62
-        y: 24
-        width: 8
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e4fd71bf4b9045dab244c8c3a01d308
-      internalID: -1623762785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_style1_6
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 61
-        width: 10
-        height: 11
+        x: 314
+        y: 180
+        width: 412
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53b5dc55c541e407bb2d5306edf567b1
-      internalID: -1655008300
+      spriteID: db9a89510d79343be9dd523e8cccb31f
+      internalID: -60311705
       vertices: []
       indices: 
       edges: []
@@ -286,13 +160,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      xbox_style1_6: -1655008300
-      xbox_style1_0: 81216245
-      xbox_style1_1: -1995927323
-      xbox_style1_4: -701502602
-      xbox_style1_2: -1324363219
-      xbox_style1_5: -1623762785
-      xbox_style1_3: -1955089312
+      "Screenshot 2023-12-01 at 3.25.02\u202FPM_0": -60311705
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

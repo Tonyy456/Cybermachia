@@ -58,11 +58,35 @@ public class TargetShooterGameController : IPlayerConnectedHandler
             if (board.Score > winningScore)
             {
                 winnerIndex = board.PlayerNumber;
+                winningScore = board.Score;
             }
         }
         winnerText.text = string.Format(formatString, winnerIndex, winningScore);
         Color toUse = playerColors.playerMaterials[winnerIndex - 1].GetColor("_OutlineColor");
         toUse.a = 1;
         winnerText.color = toUse;
+    }
+    public void Pause(bool pause)
+    {
+        if (pause)
+        {
+            TargetShooterPlayer[] players = GameObject.FindObjectsOfType<TargetShooterPlayer>();
+            foreach(var player in players)
+            {
+                player.AllowedToShoot = false;
+                player.RegenerateBullets = false;
+            }
+            Time.timeScale = 0;
+        }
+        else
+        {
+            TargetShooterPlayer[] players = GameObject.FindObjectsOfType<TargetShooterPlayer>();
+            foreach (var player in players)
+            {
+                player.AllowedToShoot = true;
+                player.RegenerateBullets = true;
+            }
+            Time.timeScale = 1;
+        }
     }
 }

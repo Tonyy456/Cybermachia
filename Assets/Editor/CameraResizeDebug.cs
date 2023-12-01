@@ -68,3 +68,15 @@ public class PlayerControllerPauseUnPause : ButtonScriptHandler<PlayerController
         }
     }
 }
+
+[CustomEditor(typeof(TargetSpawner))]
+public class TargetSpawnerDebugButton : ButtonScriptHandler<TargetSpawner>
+{
+    protected override void InitializeButtons()
+    {
+        if (script)
+        {
+            AddButton("Log Game Time", script.LogEstimatedGameTime);
+        }
+    }
+}

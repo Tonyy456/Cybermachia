@@ -6,7 +6,9 @@ using UnityEngine;
 [Serializable]
 public class PhasePart
 {
+    [Range(1,4)]
     public int prefab;
+    [Range(1,10)]
     public int spawn;
     public float startDelay;
 }
@@ -14,6 +16,7 @@ public class PhasePart
 [Serializable]
 public class Phase
 {
+    public string title;
     public List<PhasePart> parts;
 }
 
@@ -83,6 +86,28 @@ public class TargetSpawner : MonoBehaviour
         var item = spawnPoints[row];
         var prefab = targetPrefabs[prefabNum];
         item.Spawn(prefab);
+    }
+
+    public void LogEstimatedGameTime()
+    {
+        float time = 0;
+        for (int i = 0; i < phaseEvents.Count - 1; i++)
+        {
+            var phaseEvent = phaseEvents[i];
+            time += phaseEvent.startDelay;
+        }
+        if (phaseEvents.Count > 0)
+        {
+            var finalPhase = phaseEvents[phaseEvents.Count - 1];
+            time += finalPhase.startDelay;
+            Phase phase = phases[finalPhase.phase - 1];
+            foreach (var part in phase.parts)
+            {
+                time += part.startDelay;
+            }
+            time += gameTimePadding;
+        }
+        Debug.Log(time);
     }
     //private float HandlePart(string partString)
     //{

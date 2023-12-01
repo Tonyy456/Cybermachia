@@ -78,13 +78,14 @@ public class TargetShooterPlayer : MonoBehaviour
             {
                 if(bulletRegenRoutine == null)
                 {
+                    StopAllCoroutines();
                     var bulletRegenRoutine = BulletRegenerationRoutine();
                     StartCoroutine(bulletRegenRoutine);
                 }
             }
             else
             {
-                StopCoroutine(bulletRegenRoutine);
+                StopAllCoroutines();
             }
         }
     }
