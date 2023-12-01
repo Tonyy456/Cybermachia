@@ -215,8 +215,8 @@ MonoBehaviour:
   RenderTextureCameraTag: RenderTextureCamera
   texture: {fileID: 8400000, guid: 0af8aef2c99434d13acfe7c2f928752f, type: 2}
   regenerateByDefault: 1
-  delayBetweenShots: 0.5
-  bulletRegenerationTime: 2
+  delayBetweenShots: 0.1
+  bulletRegenerationTime: 1
   bulletPrefab: {fileID: -6648252425072221344, guid: f1304667240ef44c8801e2b432b43a7f, type: 3}
   allowedToShootByDefault: 1
   animator: {fileID: 2396598411815518791}

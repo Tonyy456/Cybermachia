@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numHits: 2
-  points: 3
+  points: 5
   maxDifference: {x: 30, y: 0}
   currentLerpValue: 0
   turnsTillDelete: 1

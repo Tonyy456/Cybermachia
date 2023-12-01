@@ -10,8 +10,10 @@ namespace CyberMachia
     [RequireComponent(typeof(PlayerInput))]
     public class SlotController : MonoBehaviour
     {
-        [SerializeField] GameObject textPrefab;
+        [SerializeField] MaterialHolder playerColorMaterial;
         [SerializeField] private string parentTag;
+        [Tooltip("{0} for player index and {1} for control scheme name")]
+        [SerializeField] private string formatString;
         private PlayerInput input;
         private InputAction confirm;
         private InputAction cancel;
@@ -33,13 +35,18 @@ namespace CyberMachia
             var parent = GameObject.FindGameObjectWithTag(parentTag);
             if (parent)
             {
-                var go = GameObject.Instantiate(textPrefab);
+                var go = parent.transform.GetChild(input.playerIndex);
                 slot1ToChange = go.GetComponent<TMPro.TMP_Text>();
-                go.transform.SetParent(parent.transform);
             }
 
-            if(slot1ToChange)
-                slot1ToChange.text = $"Player {input.playerIndex} - {input.currentControlScheme}";
+            if (slot1ToChange)
+            {
+                slot1ToChange.gameObject.SetActive(true);
+                slot1ToChange.text = string.Format(formatString, input.playerIndex + 1, input.currentControlScheme);
+                Color toUse = playerColorMaterial.playerMaterials[input.playerIndex].GetColor("_OutlineColor");
+                toUse.a = 1;
+                slot1ToChange.color = toUse;
+            }
         }
 
         private void InitializeInput()
@@ -54,7 +61,7 @@ namespace CyberMachia
             if (instance != null) instance.RemoveSlot(this);
             confirm.performed -= OnConfirmAction;
             cancel.performed -= OnCancelAction;
-            if (slot1ToChange) Destroy(slot1ToChange.gameObject);
+            if (slot1ToChange) slot1ToChange.gameObject.SetActive(false);
         }
 
         private void OnConfirmAction(InputAction.CallbackContext context)

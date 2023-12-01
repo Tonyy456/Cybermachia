@@ -84,5 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce345695e09448a693035bf4faca237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPrefab: {fileID: 1162617018900842459, guid: c4add926e83c74543b1362c9e2ea0a5f, type: 3}
+  playerColorMaterial: {fileID: 11400000, guid: 8e18eef40950e497bb8887da51552f02, type: 2}
   parentTag: PlayerSpawn
+  formatString: Player {0} - {1}

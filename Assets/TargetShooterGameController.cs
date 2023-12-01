@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class TargetShooterGameController : IPlayerConnectedHandler
 {
     [Header("Score")]
+    [SerializeField] private MaterialHolder playerColors;
     [SerializeField] private TMPro.TMP_Text winnerText;
     [SerializeField] private string formatString;
     [SerializeField] private List<RoundBoardController> scoreControllers;
@@ -59,6 +60,9 @@ public class TargetShooterGameController : IPlayerConnectedHandler
                 winnerIndex = board.PlayerNumber;
             }
         }
-        winnerText.text = string.Format(formatString, winnerIndex);
+        winnerText.text = string.Format(formatString, winnerIndex, winningScore);
+        Color toUse = playerColors.playerMaterials[winnerIndex - 1].GetColor("_OutlineColor");
+        toUse.a = 1;
+        winnerText.color = toUse;
     }
 }
