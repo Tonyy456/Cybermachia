@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class TargetBehaviour : MonoBehaviour
     [SerializeField] private int direction = 1;
     [Range(0.01f,100f)]
     [SerializeField] private float secondsToTurnAround;
+    [SerializeField] private UnityEvent onHit;
 
     private Vector3 startPosition;
     private Vector3 endPosition;
@@ -53,6 +55,19 @@ public class TargetBehaviour : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        TextPopUpManager2 manager = GameObject.FindObjectOfType<TextPopUpManager2>();
+        SpriteRenderer renderer = input.GetComponentInChildren<SpriteRenderer>();
+        Debug.Log(manager);
+        if (renderer)
+        {
+            Color outlineColor = renderer.material.GetColor("_OutlineColor");
+            manager?.HandlePopup($"+{points}", this.transform.position, outlineColor);
+        }
+        else
+        {
+            manager?.HandlePopup($"+{points}", this.transform.position);
+        }
+        onHit?.Invoke();
     }
 
     public void OnDestroy()

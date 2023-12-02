@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.Events;
 public class TargetShooterPlayer : MonoBehaviour
 {
     [Header("Scripts")]
@@ -19,6 +19,7 @@ public class TargetShooterPlayer : MonoBehaviour
     [SerializeField] private float bulletRegenerationTime;
     [SerializeField] private TargetShooterBullet bulletPrefab;
     [SerializeField] private bool allowedToShootByDefault = false;
+    [SerializeField] private UnityEvent onShoot;
 
     [Header("UI")]
     [SerializeField] private Animator animator;
@@ -143,6 +144,7 @@ public class TargetShooterPlayer : MonoBehaviour
             aimDir = renderCam.ScreenToWorldPoint(aimDir) - this.transform.position;
         }
         lastShotTime = Time.time;
+        onShoot?.Invoke();
         BulletCount -= 1;
         TargetShooterBullet go = GameObject.Instantiate(bulletPrefab);
         go.gameObject.transform.position = this.gameObject.transform.position;

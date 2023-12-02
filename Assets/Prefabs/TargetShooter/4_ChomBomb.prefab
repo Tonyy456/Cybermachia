@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6312813987939770417}
   - component: {fileID: -6221619708488263194}
   - component: {fileID: -4608859543419123644}
+  - component: {fileID: 7084203671746450592}
   m_Layer: 3
   m_Name: 4_ChomBomb
   m_TagString: Enemy
@@ -100,6 +101,34 @@ MonoBehaviour:
   turnsTillDelete: 1
   direction: 1
   secondsToTurnAround: 3.75
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2911502137162207436, guid: 031413fb1b21b47caae6079c4092613a, type: 3}
+        m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7084203671746450592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312813987939770419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cd5cbef8d4b408d83099085ad22bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName: hitTarget
 --- !u!1 &6312813988243841744
 GameObject:
   m_ObjectHideFlags: 0

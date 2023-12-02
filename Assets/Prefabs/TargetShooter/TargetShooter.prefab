@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6874873561051978822}
   - component: {fileID: 6296193522057704052}
   - component: {fileID: 504700686786421984}
+  - component: {fileID: 5943051700112800339}
   m_Layer: 0
   m_Name: TargetShooter
   m_TagString: Player
@@ -219,9 +220,37 @@ MonoBehaviour:
   bulletRegenerationTime: 1
   bulletPrefab: {fileID: -6648252425072221344, guid: f1304667240ef44c8801e2b432b43a7f, type: 3}
   allowedToShootByDefault: 1
+  onShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5943051700112800339}
+        m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   animator: {fileID: 2396598411815518791}
   animationToPlay: IdleUp
   BulletUIParent: {fileID: 5271456464588347018}
+--- !u!114 &5943051700112800339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150435511517480490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cd5cbef8d4b408d83099085ad22bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName: shoot1
 --- !u!1 &3915807649829744745
 GameObject:
   m_ObjectHideFlags: 0

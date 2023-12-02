@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
             AmmoUIController.SetAmmo(state.Health);
             var textPfb = GameObject.Instantiate(textPrefab);
             var behavior = textPfb.GetComponent<TextPopUpBehaviour>();
-            behavior.Initialize($"-{damage}", this.transform.position);
+            behavior.Initialize($"-{damage}", this.transform.position, Color.red);
             if(state.Health <= 0)
             {
                 HandleDeath();
