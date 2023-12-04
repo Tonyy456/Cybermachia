@@ -3222,121 +3222,112 @@ MonoBehaviour:
   - {fileID: -4608859543419123644, guid: 5d1e40c54252e4f59ad36ed103c80391, type: 3}
   - {fileID: -4608859543419123644, guid: d932ccadf105d4ba28c74f6ec6e6fefe, type: 3}
   - {fileID: -4608859543419123644, guid: 044bb1fff636444d38fb1c3034e7a1fa, type: 3}
+  - {fileID: -4608859543419123644, guid: f49d14f896c4a4ec7a4dba42f9fdf88d, type: 3}
+  - {fileID: -4608859543419123644, guid: 000016adf17c74f7595a8a003cbdf46d, type: 3}
+  - {fileID: -4608859543419123644, guid: 44052590edba0478199382aad79cf597, type: 3}
+  - {fileID: -4608859543419123644, guid: ba0c278794d1d47779cf05342e684e8b, type: 3}
   phases:
-  - title: (1) Pyramid of easy
+  - title: (1) two 1s
     parts:
-    - prefab: 1
-      spawn: 5
-      startDelay: 0
-    - prefab: 1
-      spawn: 10
-      startDelay: 0
-    - prefab: 1
-      spawn: 4
-      startDelay: 1
     - prefab: 1
       spawn: 9
       startDelay: 0
     - prefab: 1
-      spawn: 3
-      startDelay: 1
+      spawn: 4
+      startDelay: 0
+  - title: (2) two 2s
+    parts:
+    - prefab: 2
+      spawn: 10
+      startDelay: 0
+    - prefab: 2
+      spawn: 5
+      startDelay: 0
+  - title: (3) wall stack
+    parts:
     - prefab: 1
+      spawn: 10
+      startDelay: 0
+    - prefab: 1
+      spawn: 5
+      startDelay: 0
+    - prefab: 2
+      spawn: 4
+      startDelay: 0
+    - prefab: 2
+      spawn: 9
+      startDelay: 0
+    - prefab: 3
       spawn: 8
       startDelay: 0
-    - prefab: 1
+    - prefab: 3
+      spawn: 3
+      startDelay: 0
+    - prefab: 4
       spawn: 2
-      startDelay: 1
-    - prefab: 1
+      startDelay: 0
+    - prefab: 4
       spawn: 7
       startDelay: 0
-    - prefab: 1
+    - prefab: 4
       spawn: 1
-      startDelay: 1
-    - prefab: 1
+      startDelay: 0
+    - prefab: 4
       spawn: 6
       startDelay: 0
-  - title: (2) Top row 3 pointers
+  - title: (4) Random 2s with quick 4s in
     parts:
     - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-    - prefab: 2
-      spawn: 1
-      startDelay: 1
-  - title: (3) Quick 10 pointers. Close row
-    parts:
-    - prefab: 4
       spawn: 10
-      startDelay: 5
-    - prefab: 4
-      spawn: 10
-      startDelay: 5
-    - prefab: 4
-      spawn: 10
-      startDelay: 5
-    - prefab: 4
-      spawn: 10
-      startDelay: 5
-  - title: (4) Barage of random
-    parts:
-    - prefab: 1
+      startDelay: 4
+    - prefab: 2
       spawn: 3
-      startDelay: 2
-    - prefab: 2
-      spawn: 6
-      startDelay: 2
+      startDelay: 4
+    - prefab: 4
+      spawn: 1
+      startDelay: 0
     - prefab: 2
       spawn: 8
-      startDelay: 2
+      startDelay: 4
     - prefab: 2
-      spawn: 2
-      startDelay: 2
+      spawn: 4
+      startDelay: 4
+    - prefab: 4
+      spawn: 6
+      startDelay: 0
+    - prefab: 2
+      spawn: 7
+      startDelay: 4
+    - prefab: 2
+      spawn: 1
+      startDelay: 4
+    - prefab: 4
+      spawn: 5
+      startDelay: 0
+    - prefab: 2
+      spawn: 6
+      startDelay: 4
+    - prefab: 4
+      spawn: 10
+      startDelay: 0
     - prefab: 2
       spawn: 10
-      startDelay: 2
-    - prefab: 3
+      startDelay: 4
+    - prefab: 2
       spawn: 1
-      startDelay: 2
-    - prefab: 3
-      spawn: 7
-      startDelay: 2
-    - prefab: 3
-      spawn: 3
-      startDelay: 2
+      startDelay: 4
   phaseEvents:
   - phase: 1
     startDelay: 0
   - phase: 2
-    startDelay: 12
+    startDelay: 10
   - phase: 3
-    startDelay: 0
+    startDelay: 10
   - phase: 4
-    startDelay: 0
-  gameTimePadding: 7
+    startDelay: 10
+  - phase: 1
+    startDelay: 36
+  gameTimePadding: 10
   onGameOver:
     m_PersistentCalls:
       m_Calls:

@@ -75,6 +75,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _IgnoreColor: {r: 0.20000002, g: 0.36078432, b: 0.23529413, a: 0.5019608}
-    - _OutlineColor: {r: 0, g: 1, b: 0.20392156, a: 0}
+    - _OutlineColor: {r: 1, g: 0.020209502, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

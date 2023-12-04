@@ -63,14 +63,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaThreshold: 0.4
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _CornerSample: 0
     - _EnableExternalAlpha: 0
     - _OutlineThickness: 1
+    - _RemoveAlpha: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
+    - _OutlineColor: {r: 1, g: 0, b: 0.97576284, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

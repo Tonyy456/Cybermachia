@@ -94,13 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b7ed52f16ae4de7b51d2103299165c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numHits: 2
+  numHits: 200
   points: 1
   maxDifference: {x: 30, y: 0}
   currentLerpValue: 0
   turnsTillDelete: 1
   direction: 1
-  secondsToTurnAround: 15
+  secondsToTurnAround: 10
   onHit:
     m_PersistentCalls:
       m_Calls:

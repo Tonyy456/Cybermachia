@@ -11865,6 +11865,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 32767
       objectReference: {fileID: 0}
+    - target: {fileID: 4390470221651394691, guid: 56b0e2203336447afac4f238b58e143a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1079001723
+      objectReference: {fileID: 0}
     - target: {fileID: 4390470221651394692, guid: 56b0e2203336447afac4f238b58e143a, type: 3}
       propertyPath: m_Name
       value: Canvas

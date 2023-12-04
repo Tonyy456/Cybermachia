@@ -769,7 +769,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.95
+  m_fontSize: 6.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1120,6 +1120,7 @@ MonoBehaviour:
   OnAllEnemiesSpawned:
     m_PersistentCalls:
       m_Calls: []
+  finalScoreText: {fileID: 1182504159}
 --- !u!4 &242055972
 Transform:
   m_ObjectHideFlags: 0
@@ -2626,7 +2627,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.75
+  m_fontSize: 28.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -36310,7 +36311,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.75
+  m_fontSize: 28.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

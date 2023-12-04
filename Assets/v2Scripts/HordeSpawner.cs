@@ -57,6 +57,8 @@ public class HordeSpawner : MonoBehaviour
     [SerializeField] private UnityEvent OnRoundStart;
     [SerializeField] private UnityEvent OnAllEnemiesSpawned;
 
+    [SerializeField] private TMPro.TMP_Text finalScoreText;
+
     public int Round => currentRound;
     public int roundsLeft { 
         get
@@ -93,6 +95,7 @@ public class HordeSpawner : MonoBehaviour
             {
                 gameOver = true;
                 OnGameOver?.Invoke();
+                if (finalScoreText) finalScoreText.text = $"{Round}";
                 yield return null;          
             }
             yield return new WaitForSeconds(timeBetweenChecks);

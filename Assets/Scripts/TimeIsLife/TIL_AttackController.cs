@@ -25,7 +25,7 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
         }
         private set
         {
-            _currentBullets = value;
+            _currentBullets = Mathf.Clamp(value, 0, bulletUIParent.childCount);
             for(int i = 0; i < bulletUIParent.childCount; i++)
             {
                 bulletUIParent.GetChild(i).gameObject.SetActive(i < value);
