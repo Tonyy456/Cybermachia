@@ -13,4 +13,17 @@ public class TIL_Manager : MonoBehaviour
             script.EnableHealthTick();
         }
     }
+    public void Pause(bool pause)
+    {
+        if (pause)
+        {
+            Time.timeScale = 0;
+            EnablePlayers(false);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            EnablePlayers(true);
+        }
+    }
 }

@@ -146,6 +146,8 @@ public class TargetShooterPlayer : MonoBehaviour
         lastShotTime = Time.time;
         onShoot?.Invoke();
         BulletCount -= 1;
+        SoundEffectManager.TryPlay("shoot1");
+
         TargetShooterBullet go = GameObject.Instantiate(bulletPrefab);
         go.gameObject.transform.position = this.gameObject.transform.position;
         go.Init(input, aimDir);

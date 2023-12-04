@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafddee09ed8b4aa0ae1ac69eade984d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableInput: 1
+  enableInput: 0
   enableHealthLoss: 1
   useSpawnPoints: 1
   movement: {fileID: 6296193522057704053}

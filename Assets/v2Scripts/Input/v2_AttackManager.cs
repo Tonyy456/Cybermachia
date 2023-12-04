@@ -114,7 +114,7 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
             aimDir = renderCam.ScreenToWorldPoint(aimDir) - this.transform.position;
         }
         lastFire = Time.time;
-
+        SoundEffectManager.TryPlay("shoot1");
         Ammo--;
         //Bullet Manager
         GameObject bullet = GameObject.Instantiate(prefab);
@@ -142,5 +142,10 @@ public class v2_AttackManager : MonoBehaviour, PlayerInputScript
     public void ResetAmmo()
     {
         Ammo = maxAmmoCount;
+    }
+
+    public void OnDestroy()
+    {
+        attack.performed -= ShootHandler;
     }
 }

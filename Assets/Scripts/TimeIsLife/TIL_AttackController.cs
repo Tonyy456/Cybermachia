@@ -7,6 +7,8 @@ using UnityEngine.InputSystem.XR;
 public class TIL_AttackController : MonoBehaviour, PlayerInputScript
 {
     [Header("Needs a TIL_BulletManager")]
+    [SerializeField] private Transform bulletUIParent;
+    [SerializeField] private float bulletRegenTime = 1f;
     [SerializeField] private float fireDelay = 0.1f;
 
     [SerializeField] private bool usingRenderTextureAsCamera = false;
@@ -15,6 +17,21 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
 
     public bool Enabled { get; set; } = false;
 
+    private int _currentBullets = 0;
+    public int CurrentBulletCount {
+        get
+        {
+            return _currentBullets;
+        }
+        private set
+        {
+            _currentBullets = value;
+            for(int i = 0; i < bulletUIParent.childCount; i++)
+            {
+                bulletUIParent.GetChild(i).gameObject.SetActive(i < value);
+            }
+        }
+    }
     private float lastFire;
     private bool isKeyboard = false;
     private Camera renderCam;
@@ -25,6 +42,7 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
     public void Awake()
     {
         lastFire = Time.time - 100f;
+        _currentBullets = bulletUIParent.childCount;
     }
 
     public void Start()
@@ -57,6 +75,7 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
         if (attack == null || aim == null) return;
         attack.Disable();
         aim.Disable();
+        StopAllCoroutines();
     }
 
     public void EnableInput()
@@ -65,10 +84,13 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
         if (attack == null || aim == null) return;
         attack.Enable();
         aim.Enable();
+        StartCoroutine(RegenBullets());
+
     }
 
     private void ShootHandler(InputAction.CallbackContext callback)
     {
+        if (CurrentBulletCount == 0) return;
         if ((Time.time - lastFire) < fireDelay) return;
 
         //get aim dir
@@ -90,9 +112,20 @@ public class TIL_AttackController : MonoBehaviour, PlayerInputScript
             aimDir = renderCam.ScreenToWorldPoint(aimDir) - this.transform.position;
         }
         lastFire = Time.time;
+        CurrentBulletCount -= 1;
+        SoundEffectManager.TryPlay("shoot1");
 
         TIL_BulletManager manager = GameObject.FindObjectOfType<TIL_BulletManager>();
         manager?.FireBullet(this.gameObject, aimDir, Vector2.zero);
+    }
+
+    private IEnumerator RegenBullets()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(bulletRegenTime);
+            CurrentBulletCount += 1;
+        }
     }
 
     private void InitializeAim(InputAction action)

@@ -143,8 +143,6 @@ public class HordeSpawner : MonoBehaviour
             {
                 // Set the NavMeshAgent's destination to the closest valid position
                 bool worked = agent.Warp(hit.position);
-                if (worked) Debug.Log("spawned at: " + hit.position);
-                else Debug.Log("[failed to] spawned at: " + hit.position);
             }
             else
             {

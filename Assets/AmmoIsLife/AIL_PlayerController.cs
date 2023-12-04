@@ -43,9 +43,10 @@ public class AIL_PlayerController : MonoBehaviour
         if (enableHealthLoss) EnableHealth();
     }
 
-    public void EnableHealth()
+    public void EnableHealth(bool enable = true)
     {
-        health.Enable();
+        if (enable) health.Enable();
+        else health.Enable(false);
     }
 
     public void PlayerRespawn()
